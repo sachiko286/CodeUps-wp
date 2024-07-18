@@ -1,0 +1,62 @@
+@use "global" as *;
+
+
+.page-blog__inner {
+  max-width: rem(580);
+  @include mq(md) {
+      display: flex;
+  }
+}
+
+.page-blog__main {
+  max-width: rem(706);
+}
+
+.page-blog__main-inner {
+  padding: 0 rem(6);
+  @include mq(md) {
+      padding: 0;
+  }
+}
+
+.page-blog__aside {
+  margin-top: rem(80);
+  @include mq(md) {
+    max-width: rem(374); 
+    margin-top: rem(0);  
+  }
+}
+
+.page-blog__aside--sub {
+  @include mq(md) {
+    max-width: rem(380);
+    margin-top: rem(6);
+  }
+}
+
+.page-blog__aside-inner {
+  padding: 0 rem(25);
+  @include mq(md) {
+    padding: 0;
+    margin-left: rem(80);
+  }
+}
+
+.page-blog__aside-inner--sub {
+  @include mq(md) {
+    margin-left: rem(86);
+  }
+}
+
+.page-blog__aside-content--voice {
+  margin-top: rem(80);
+}
+
+.page-blog__aside-content--campaign {
+  margin-top: rem(84);
+}
+
+.page-blog__aside-content--archive {
+  margin-top: rem(82);
+}
+

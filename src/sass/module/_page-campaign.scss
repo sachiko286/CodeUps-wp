@@ -1,0 +1,41 @@
+@use "global" as *;
+
+.page-campaign__inner {
+  max-width: rem(580);
+}
+
+.page-campaign__wrapper {
+  margin-top: rem(40);
+  @include mq(md) {
+      
+  }
+}
+
+.page-campaign__items {
+  padding: 0 rem(32.5);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: rem(40);
+  @include mq(md) {
+      padding: 0;
+      grid-template-columns: 1fr 1fr;
+      row-gap: rem(80);
+  }
+}
+
+
+.page-campaign__items--page-voice {
+  padding: 0;
+}
+
+.page-campaign__item{
+  // max-width: rem(280);
+  width: 100%;
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.25);
+  height: auto;
+  @include mq(md) {
+    max-width: rem(520);
+  }
+}
+
+

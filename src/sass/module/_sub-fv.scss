@@ -1,0 +1,107 @@
+@use "global" as *;
+
+.sub-fv {
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  position: relative;
+  height: rem(460);
+  // background-image: url(../images/common/sub-fv-sp.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  @include mq(md){
+      height: rem(548);
+      // background-image: url(../images/common/sub-fv-pc.jpg);
+  }
+}
+
+.sub-fv--campaign {
+  background-image: url(../images/common/sub-fv-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-pc.jpg);
+  }
+}
+
+.sub-fv--about {
+  background-image: url(../images/common/sub-fv-aboutus-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-aboutus-pc.jpg);
+  }
+}
+
+.sub-fv--information {
+  background-image: url(../images/common/sub-fv-info-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-info-pc.jpg);
+  }
+}
+
+.sub-fv--voice {
+  background-image: url(../images/common/sub-fv-voice-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-voice-pc.jpg);
+  }
+}
+
+.sub-fv--price {
+  background-image: url(../images/common/sub-fv-price-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-price-pc.jpg);
+  }
+}
+
+
+.sub-fv--faq {
+  background-image: url(../images/common/sub-fv-faq-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-faq-pc.jpg);
+  }
+}
+
+.sub-fv--sitemap{
+  background-image: url(../images/common/sub-fv-sitemap-etc-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-sitemap-etc-pc.jpg);
+  }
+}
+
+.sub-fv--contact {
+  background-image: url(../images/common/sub-fv-contact-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-contact-pc.jpg);
+  }
+}
+
+.sub-fv--blog {
+  background-image: url(../images/common/sub-fv-blog-sp.jpg);
+  @include mq(md) {
+    background-image: url(../images/common/sub-fv-blog-pc.jpg);
+  }
+}
+
+
+
+.sub-fv--price .sub-fv__title {
+  @include mq(md) {
+    letter-spacing: -0.02em;
+
+  }
+}
+
+.sub-fv__title {
+  font-size: rem(40);
+  color: $white;
+  font-weight: $regular;
+  font-family: $font-family-la;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include mq(md) {
+    top: 59%;
+    font-size: rem(80);
+  }
+}
+
+

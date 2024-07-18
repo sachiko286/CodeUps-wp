@@ -1,0 +1,42 @@
+@use "global" as *;
+
+.filter-content__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: rem(16) rem(21);
+  position: relative;
+  z-index: 1;
+  @include mq(md) {
+    grid-template-columns: repeat(4, #{rem(162)});
+    gap: rem(0) rem(32)
+
+  }
+}
+.filter-content__list-title {
+  height: rem(34);
+  text-align: center;
+  border: 1px solid $green;
+  
+  cursor: pointer;
+  transition: all 0.3s;
+  color: $green;
+  background-color: #fff ;
+  font-size: rem(14);
+}
+
+.filter-content__list-title a {
+  display: block;
+  padding: rem(6) 0;
+
+}
+.filter-content__list-title:hover {
+  background: $green;
+  color: #fff;
+}
+
+.filter-content__list-title.is-active {
+  background: $green;
+  color: #fff;
+}
+
+

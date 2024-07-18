@@ -1,0 +1,22 @@
+@use "global" as *;
+
+
+.page-price__inner {
+  max-width: rem(580);
+  @include mq(md) {
+      max-width: rem(750);
+  }
+}
+
+.page-price__content {
+  @include mq(md) {
+      display: flex;
+  }
+}
+
+.page-price__content + .page-price__content {
+  margin-top: rem(40);
+  @include mq(md) {
+      margin-top: rem(80);
+  }
+}

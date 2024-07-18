@@ -1,0 +1,17 @@
+@use "global" as *;
+
+.page-thanks__inner {
+  max-width: rem(580);
+  width: 100%;
+  text-align: center;
+  @include mq(md) {
+      max-width: rem(750);
+  }
+}
+
+.page-thanks__sub-text {
+  margin-top: rem(38);
+  line-height: 1.42;
+}
+
+

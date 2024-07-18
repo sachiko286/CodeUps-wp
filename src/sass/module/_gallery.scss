@@ -1,0 +1,49 @@
+@use "global" as *;
+
+.gallery__inner {
+  max-width: rem(580);
+}
+.gallery__list {
+  margin-top: rem(40);
+}
+
+.gallery-list__item  {
+  @include mq(md) {
+    cursor: pointer;
+  }
+}
+  
+  
+/* モーダル */
+.gallery__modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(20, 20, 20, 0.80);
+  z-index: 1010;
+
+}
+
+
+.gallery__modal img {
+  display: block;
+  max-width: rem(920);
+  width: 100%;
+  object-fit: contain;
+  z-index: 1010;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100vh;
+  padding-top: rem(20);
+  padding-bottom: rem(20); 
+}
+
+
+
+html.is-fixed {
+  overflow: hidden;
+}

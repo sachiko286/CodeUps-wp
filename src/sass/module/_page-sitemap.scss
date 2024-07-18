@@ -1,0 +1,18 @@
+@use "global" as *;
+
+.page-sitemap__inner {
+  max-width: rem(580);
+}
+
+.page-sitemap__content {
+  color: $darkgreen;
+  margin-top: rem(52);
+  column-count: 2;
+  column-gap: rem(9);
+  @include mq(md) {
+      margin-top: rem(150);
+      column-count: 4;
+      column-gap: rem(20);
+  }
+}
+
