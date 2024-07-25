@@ -7,14 +7,8 @@
   </section>
 
 
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__list-item"><a href="/">TOP</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">お客様の声</a></li>
-      </ol>
-    </div>
-  </div>
+<!-- パンくず -->
+<?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-voice top-page-voice">
     <div class="page-voice__inner inner">
@@ -28,131 +22,38 @@
       </div>
       <div class="page-voice__wrapper">
         <ul class="page-voice__items voice-list ">
+        <?php if (have_posts()) :
+            while (have_posts()) :
+              the_post(); ?>
           <li class="voice-list__item voice-card">
             <div class="voice-card__inner">
               <div class="voice-card__header">
                 <div class="voice-card__lead">
                   <div class="voice-card__meta">
-                    <p class="voice-card__age">20代(女性)</p>
-                    <p class="voice-card__category">ライセンス講習</p>
-                  </div>
-                  <h3 class="voice-card__subtitle">ここにタイトルが入ります。ここにタイトル</h3>
-                </div>
-                <div class="voice-card__img colorbox">
-                  <img src="./assets/images/common/voice1.jpg" alt="女性の写真">
-                </div>
-              </div>
-              <p class="voice-card__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。
-              </p>
-            </div>
-          </li>
-          <li class="voice-list__item voice-card">
-            <div class="voice-card__inner">
-              <div class="voice-card__header">
-                <div class="voice-card__lead">
-                  <div class="voice-card__meta">
-                    <p class="voice-card__age">30代(男性)</p>
-                    <p class="voice-card__category">ファンダイビング</p>
-                  </div>
-                  <h3 class="voice-card__subtitle">ここにタイトルが入ります。ここにタイトル</h3>
-                </div>
-                <div class="voice-card__img colorbox">
-                  <img src="./assets/images/common/voice2.jpg" alt="男性の写真">
-                </div>
-              </div>
-              <p class="voice-card__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。
-              </p>
-            </div>
-          </li>
-          <li class="voice-list__item voice-card">
-            <div class="voice-card__inner">
-              <div class="voice-card__header">
-                <div class="voice-card__lead">
-                  <div class="voice-card__meta">
-                    <p class="voice-card__age">30代(女性)</p>
-                    <p class="voice-card__category">体験ダイビング</p>
-                  </div>
-                  <h3 class="voice-card__subtitle">ここにタイトルが入ります。ここにタイトル</h3>
-                </div>
-                <div class="voice-card__img colorbox">
-                  <img src="./assets/images/common/voice3.jpg" alt="女性の写真">
-                </div>
-              </div>
-              <p class="voice-card__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。
-              </p>
-            </div>
+                  <?php $age = get_field('age'); ?>
+                  <?php if ($age) : ?>
+                    <p class="voice-card__age"><?php echo $age; ?></p>
+                    <?php endif; ?>
 
-          </li>
-          <li class="voice-list__item voice-card">
-            <div class="voice-card__inner">
-              <div class="voice-card__header">
-                <div class="voice-card__lead">
-                  <div class="voice-card__meta">
-                    <p class="voice-card__age">20代(女性)</p>
-                    <p class="voice-card__category">体験ダイビング</p>
+                    <p class="voice-card__category"><?php echo get_the_terms(get_the_ID(), 'campaign')[0]->name; ?></p>
                   </div>
-                  <h3 class="voice-card__subtitle">ここにタイトルが入ります。ここにタイトル</h3>
+                  <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
                 </div>
                 <div class="voice-card__img colorbox">
-                  <img src="./assets/images/common/voice4.jpg" alt="女性の写真">
+                <?php if (get_the_post_thumbnail()) : ?>
+                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                    <?php else : ?>
+                      <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                    <?php endif; ?>
+                  <!-- <img src="./assets/images/common/voice1.jpg" alt="女性の写真"> -->
                 </div>
               </div>
-              <p class="voice-card__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。
+              <p class="voice-card__text"><?php the_content(); ?>
               </p>
             </div>
-
           </li>
-          <li class="voice-list__item voice-card">
-            <div class="voice-card__inner">
-              <div class="voice-card__header">
-                <div class="voice-card__lead">
-                  <div class="voice-card__meta">
-                    <p class="voice-card__age">30代(カップル)</p>
-                    <p class="voice-card__category">ファンダイビング</p>
-                  </div>
-                  <h3 class="voice-card__subtitle">ここにタイトルが入ります。ここにタイトル</h3>
-                </div>
-                <div class="voice-card__img colorbox">
-                  <img src="./assets/images/common/voice5.jpg" alt="カップルの写真">
-                </div>
-              </div>
-              <p class="voice-card__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。
-              </p>
-            </div>
-
-          </li>
-          <li class="voice-list__item voice-card">
-            <div class="voice-card__inner">
-              <div class="voice-card__header">
-                <div class="voice-card__lead">
-                  <div class="voice-card__meta">
-                    <p class="voice-card__age">20代(女性)</p>
-                    <p class="voice-card__category">ライセンス講習</p>
-                  </div>
-                  <h3 class="voice-card__subtitle">ここにタイトルが入ります。ここにタイトル</h3>
-                </div>
-                <div class="voice-card__img colorbox">
-                  <img src="./assets/images/common/voice6.jpg" alt="女性の写真">
-                </div>
-              </div>
-              <p class="voice-card__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。
-              </p>
-            </div>
-
-          </li>
-
+          <?php endwhile;
+          endif; ?>
         </ul>
 
         <div class="pagenavi">

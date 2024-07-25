@@ -1,4 +1,21 @@
 <?php get_header(); ?>
+
+<?php
+$home = esc_url(home_url('/'));
+$blog = esc_url(home_url('/blog/'));
+$aboutus = esc_url(home_url('/about-us/'));
+$campaign = esc_url(home_url('/campaign/'));
+$company = esc_url(home_url('/company/'));
+$voice = esc_url(home_url('/voice/'));
+$faq = esc_url(home_url('/faq/'));
+$price = esc_url(home_url('/price/'));
+$privacypolicy = esc_url(home_url('/privacypolicy/'));
+$sitemap = esc_url(home_url('/sitemap/'));
+$terms = esc_url(home_url('/terms-of-servic/'));
+$information = esc_url(home_url('/information/'));
+$contact = esc_url(home_url('/contact/'));
+?>
+
   <main>
     <section class="fv top-fv">
       <div class="fv__inner">
@@ -145,7 +162,7 @@
 
         </div>
         <div class="campaign__button">
-          <a href="" class="button slide">View more<span class="button__arrow"></span></a>
+          <a href="<?php echo $campaign; ?>" class="button slide">View more<span class="button__arrow"></span></a>
         </div>
       </div>
     </section>
@@ -173,7 +190,7 @@
                 ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
               </p>
               <div class="about-us__button">
-                <a href="" class="button slide">View more<span class="button__arrow"></span></a>
+                <a href="<?php echo $aboutus; ?>" class="button slide">View more<span class="button__arrow"></span></a>
               </div>
             </div>
           </div>
@@ -197,7 +214,7 @@
               正規登録店として、安心安全に初めての方でも安心安全にライセンス取得をサポート致します。
             </p>
             <div class="information__button">
-              <a href="" class="button slide">View more<span class="button__arrow"></span></a>
+              <a href="<?php echo $information; ?>" class="button slide">View more<span class="button__arrow"></span></a>
             </div>
           </div>
         </div>
@@ -261,7 +278,7 @@
         </ul>
 
         <div class="blog__button">
-          <a href="" class="button slide">View more<span class="button__arrow"></span></a>
+          <a href="<?php echo $blog; ?>" class="button slide">View more<span class="button__arrow"></span></a>
         </div>
       </div>
     </section>
@@ -316,7 +333,7 @@
 
         </ul>
         <div class="voice__button">
-          <a href="" class="button slide">View more<span class="button__arrow"></span></a>
+          <a href="<?php echo $voice; ?>" class="button slide">View more<span class="button__arrow"></span></a>
         </div>
       </div>
     </section>
@@ -402,7 +419,7 @@
           </div>
         </div>
         <div class="price__button">
-          <a href="" class="button slide">View more<span class="button__arrow"></span></a>
+          <a href="<?php echo $price; ?>" class="button slide">View more<span class="button__arrow"></span></a>
         </div>
       </div>
     </section>

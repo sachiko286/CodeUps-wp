@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 
+
 <main>
 
   <section class="sub-fv sub-fv--blog">
@@ -8,197 +9,67 @@
   </section>
 
 
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__list-item"><a href="/">TOP</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">ブログ一覧</a></li>
-      </ol>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-blog top-page-blog">
     <div class="page-blog__inner inner">
       <div class="page-blog__main">
         <div class="page-blog__main-inner">
           <ul class="page-blog__list blog-list blog-list--page">
-            <li class="blog-list__item">
-              <a href="page-sub-blog.html" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog1.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">ライセンス取得</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog2.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">ウミガメと泳ぐ</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog3.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">カクレクマノミ</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog4.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">ライセンス取得</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog5.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">ウミガメと泳ぐ</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog6.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">カクレクマノミ</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog3.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">カクレクマノミ</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog4.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">ライセンス取得</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog5.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">ウミガメと泳ぐ</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="blog-list__item">
-              <a href="#" class="blog-card">
-                <div class="blog-card__inner">
-                  <div class="blog-card__img">
-                    <img src="./assets/images/common/blog6.jpg" alt="省略">
-                  </div>
-                  <div class="blog-card__content">
-                    <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time>
-                    <p class="blog-card__title">カクレクマノミ</p>
-                    <p class="blog-card__text">
-                      ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>ここにテキストが入ります。ここにテキストが入ります。ここにテキスト</p>
-                  </div>
-                </div>
-              </a>
-            </li>
+            <?php if (have_posts()) :
+              while (have_posts()) :
+                the_post(); ?>
+                <li class="blog-list__item">
+                  <a href="<?php the_permalink(); ?>" class="blog-card">
+                    <div class="blog-card__inner">
+                      <div class="blog-card__img">
+                        <?php if (get_the_post_thumbnail()) : ?>
+                          <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                        <?php else : ?>
+                          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                        <?php endif; ?>
+                      </div>
+                      <div class="blog-card__content">
+                        <!-- <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time> -->
+                        <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m/d'); ?></time>
+                        <p class="blog-card__title"><?php the_title(); ?></p>
+                        <p class="blog-card__text">
+                          <?php the_content(); ?></p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+            <?php endwhile;
+            endif; ?>
           </ul>
-        </div>
-
-        <div class="pagenavi">
-          <div class="pagenavi__inner">
-            <!-- WP-PageNaviで出力される部分 ここから -->
-            <div class="wp-pagenavi" role="navigation">
-              <a class="previouspostslink" rel="prev" href="#"></a>
-              <div class="pagenavi__numbers">
-                <span class="current pagenavi__number">1</span>
-                <a class="pagenavi__number" href="#">2</a>
-                <a class="pagenavi__number" href="#">3</a>
-                <a class="pagenavi__number" href="#">4</a>
-                <a class="pagenavi__number u-desktop" href="#">5</a>
-                <a class="pagenavi__number u-desktop" href="#">6</a>
+          <div class="pagenavi">
+            <div class="pagenavi__inner">
+              <!-- WP-PageNaviで出力される部分 ここから -->
+              <?php wp_pagenavi(); ?>
+              <div class="wp-pagenavi" role="navigation">
+                <a class="previouspostslink" rel="prev" href="#"></a>
+                <div class="pagenavi__numbers">
+                  <span class="current pagenavi__number">1</span>
+                  <a class="pagenavi__number" href="#">2</a>
+                  <a class="pagenavi__number" href="#">3</a>
+                  <a class="pagenavi__number" href="#">4</a>
+                  <a class="pagenavi__number u-desktop" href="#">5</a>
+                  <a class="pagenavi__number u-desktop" href="#">6</a>
+                </div>
+                <a class="nextpostslink" rel="next" href="#"></a>
               </div>
-              <a class="nextpostslink" rel="next" href="#"></a>
+              <!-- WP-PageNaviで出力される部分 ここまで -->
             </div>
-            <!-- WP-PageNaviで出力される部分 ここまで -->
+
           </div>
+
+
         </div>
       </div>
 
       <div class="page-blog__aside">
         <div class="page-blog__aside-inner">
-
           <div class="page-blog__aside-content blog-aside">
             <h2 class="blog-aside__title">人気記事</h2>
             <ul class="blog-aside__popular-post post-list">
@@ -241,7 +112,6 @@
                   </div>
                 </a>
               </li>
-
             </ul>
           </div>
 
@@ -340,7 +210,6 @@
           </div>
         </div>
       </div>
-    </div>
   </section>
 </main>
 

@@ -7,94 +7,64 @@
   </section>
 
 
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__list-item"><a href="/">TOP</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">料金一覧</a></li>
-      </ol>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <div class="page-price top-page-price">
     <div class="page-price__inner inner">
-      <div class="page-price__content price-table">
+
+    <div class="page-price__content price-table">
         <div class="price-table__title">ライセンス講習</div>
         <table class="price-table__body">
+        <?php $licenses = SCF::get('license'); ?>
+        <?php foreach ($licenses as $license) : ?>
           <tr>
-            <td class="price-table__course">オープンウォーター<br class="u-mobile">ダイバーコース</td>
-            <td class="price-table__fee">¥50,000</td>
+            <td class="price-table__course"><?php echo $license['course1']; ?></td>
+            <td class="price-table__fee">¥<?php echo number_format($license['price1']); ?></td>
           </tr>
-          <tr>
-            <td class="price-table__course">アドバンスド<br class="u-mobile">オープンウォーターコース</td>
-            <td class="price-table__fee">¥60,000</td>
-          </tr>
-          <tr>
-            <td class="price-table__course">レスキュー＋EFRコース</td>
-            <td class="price-table__fee">¥70,000</td>
-          </tr>
+          <?php endforeach; ?>
         </table>
       </div>
+
 
       <div class="page-price__content price-table">
         <div class="price-table__title">体験ダイビング</div>
         <table class="price-table__body">
+        <?php $trials = SCF::get('trial-diving'); ?>
+        <?php foreach ($trials as $trial) : ?>
           <tr>
-            <td class="price-table__course">ビーチ体験ダイビング<br class="u-mobile">(半日)</td>
-            <td class="price-table__fee">¥7,000</td>
+            <td class="price-table__course"><?php echo $trial['course2']; ?></td>
+            <td class="price-table__fee">¥<?php echo number_format($trial['price2']); ?></td>
           </tr>
-          <tr>
-            <td class="price-table__course">ビーチ体験ダイビング<br class="u-mobile">(1日)</td>
-            <td class="price-table__fee">¥14,000</td>
-          </tr>
-          <tr>
-            <td class="price-table__course">ボート体験ダイビング<br class="u-mobile">(半日)</td>
-            <td class="price-table__fee">¥10,000</td>
-          </tr>
-          <tr>
-            <td class="price-table__course">ボート体験ダイビング<br class="u-mobile">(1日)</td>
-            <td class="price-table__fee">¥18,000</td>
-          </tr>
+          <?php endforeach; ?>
         </table>
+
       </div>
 
-      <div class="page-price__content">
+      <div class="page-price__content price-table">
         <div class="price-table__title">ファンダイビング</div>
         <table class="price-table__body">
+        <?php $funs = SCF::get('fun-diving'); ?>
+        <?php foreach ($funs as $fun) : ?>
           <tr>
-            <td class="price-table__course">ビーチダイビング<br class="u-mobile">(2ダイブ)</td>
-            <td class="price-table__fee">¥14,000</td>
+            <td class="price-table__course"><?php echo $fun['course3']; ?></td>
+            <td class="price-table__fee">¥<?php echo number_format($fun['price3']); ?></td>
           </tr>
-          <tr>
-            <td class="price-table__course">ボートダイビング<br class="u-mobile">(2ダイブ)</td>
-            <td class="price-table__fee">¥18,000</td>
-          </tr>
-          <tr>
-            <td class="price-table__course">スペシャルダイビング<br class="u-mobile">(2ダイブ)</td>
-            <td class="price-table__fee">¥14,000</td>
-          </tr>
-          <tr>
-            <td class="price-table__course">ナイトダイビング<br class="u-mobile">(1ダイブ)</td>
-            <td class="price-table__fee">¥10,000</td>
-          </tr>
+          <?php endforeach; ?>
         </table>
       </div>
 
-      <div class="page-price__content">
+      <div class="page-price__content price-table">
         <div class="price-table__title">スペシャルダイビング</div>
         <table class="price-table__body">
+        <?php $specials = SCF::get('special-diving'); ?>
+        
+        <?php foreach ($specials as $special) : ?>
           <tr>
-            <td class="price-table__course">貸切ダイビング<br class="u-mobile">(2ダイブ)</td>
-            <td class="price-table__fee">¥24,000</td>
+            <td class="price-table__course"><?php echo $special['course4']; ?></td>
+            <td class="price-table__fee">¥<?php echo number_format($special['price4']); ?></td>
           </tr>
-          <tr>
-            <td class="price-table__course">1日ダイビング<br class="u-mobile">(3ダイブ)</td>
-            <td class="price-table__fee">¥32,000</td>
-          </tr>
-          <tr>
-            <td class="price-table__course">ナイトダイビング<br class="u-mobile">(2ダイブ)</td>
-            <td class="price-table__fee">¥14,000</td>
-          </tr>
+          <?php endforeach; ?>
         </table>
       </div>
     </div>

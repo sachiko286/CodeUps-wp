@@ -1,9 +1,25 @@
+<?php
+$home = esc_url(home_url('/'));
+$blog = esc_url(home_url('/blog/'));
+$aboutus = esc_url(home_url('/about-us/'));
+$campaign = esc_url(home_url('/campaign/'));
+$company = esc_url(home_url('/company/'));
+$voice = esc_url(home_url('/voice/'));
+$faq = esc_url(home_url('/faq/'));
+$price = esc_url(home_url('/price/'));
+$privacypolicy = esc_url(home_url('/privacypolicy/'));
+$sitemap = esc_url(home_url('/sitemap/'));
+$terms = esc_url(home_url('/terms-of-servic/'));
+$information = esc_url(home_url('/information/'));
+$contact = esc_url(home_url('/contact/'));
+?>
+
 <section class="contact sub-contact">
     <div class="contact__inner inner">
       <div class="contact__content">
         <div class="contact__access">
           <div class="contact__company">
-            <img src="./assets/images/common/CodeUps-gr.svg" alt="社名ロゴ">
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-gr.svg" alt="社名ロゴ">
           </div>
           <div class="contact__address">
             <div class="contact__text">
@@ -26,7 +42,7 @@
           </div>
           <div class="contact__info-text">ご予約・お問い合わせはコチラ</div>
           <div class="contact__info-button">
-            <a href="" class="button slide">Contact us<span class="button__arrow"></span></a>
+            <a href="<?php echo $contact; ?>" class="button slide">Contact us<span class="button__arrow"></span></a>
           </div>
         </div>
       </div>
@@ -47,7 +63,7 @@
       </div>
       <nav class="footer__nav sp-nav">
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-campaign.html">キャンペーン</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">キャンペーン</a></p>
           <ul class="sp-nav__list-items">
             <li class="sp-nav__list-item"><a href="page-campaign.html?filter=cat1">ライセンス取得</a></li>
             <li class="sp-nav__list-item"><a href="page-campaign.html?filter=cat2">貸切体験ダイビング</a></li>
@@ -56,24 +72,24 @@
 
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-about-us.html">私たちについて</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $aboutus; ?>">私たちについて</a></p>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-information.html">ダイビング情報</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $information; ?>">ダイビング情報</a></p>
           <ul class="sp-nav__list-items">
-            <li class="sp-nav__list-item"><a href="page-information.html?tab=tab01">ライセンス講習</a></li>
-            <li class="sp-nav__list-item"><a href="page-information.html?tab=tab03">体験ダイビング</a></li>
-            <li class="sp-nav__list-item"><a href="page-information.html?tab=tab02">ファンダイビング</a></li>
+            <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab01">ライセンス講習</a></li>
+            <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab03">体験ダイビング</a></li>
+            <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab02">ファンダイビング</a></li>
           </ul>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-blog.html">ブログ</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $blog; ?>">ブログ</a></p>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-voice.html">お客様の声</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $voice; ?>">お客様の声</a></p>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-price.html">料金一覧</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $price; ?>">料金一覧</a></p>
           <ul class="sp-nav__list-items">
             <li class="sp-nav__list-item"><a href="#">ライセンス講習</a></li>
             <li class="sp-nav__list-item"><a href="#">体験ダイビング</a></li>
@@ -82,20 +98,20 @@
           </ul>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-faq.html">よくある質問</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $faq; ?>">よくある質問</a></p>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-site-map.html">サイトマップ</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $sitemap; ?>">サイトマップ</a></p>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category "><a href="page-privacy.html">プライバシー<br class="u-mobile">ポリシー</a>
+          <p class="sp-nav__list-category "><a href="<?php echo $privacypolicy; ?>">プライバシー<br class="u-mobile">ポリシー</a>
           </p>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-terms.html">利用規約</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $terms; ?>">利用規約</a></p>
         </div>
         <div class="sp-nav__list-box">
-          <p class="sp-nav__list-category"><a href="page-contact.html">お問い合わせ</a></p>
+          <p class="sp-nav__list-category"><a href="<?php echo $contact; ?>">お問い合わせ</a></p>
         </div>
       </nav>
     </div>

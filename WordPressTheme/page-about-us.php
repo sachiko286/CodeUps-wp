@@ -13,21 +13,15 @@
     <!-- </div> -->
   </section>
 
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__list-item"><a href="/">TOP</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">私たちについて</a></li>
-      </ol>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-about-us--sp about-us u-mobile">
     <div class="about-us__inner inner">
       <div class="about-us__wrapper">
         <div class="about-us__images">
           <div class="about-us__image2">
-            <img src="./assets/images/common/about2.jpg" alt="シーサー写真">
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/about2.jpg" alt="シーサー写真">
           </div>
         </div>
         <div class="about-us__content">
@@ -49,10 +43,10 @@
       <div class="about-us__wrapper">
         <div class="about-us__images">
           <div class="about-us__image1 u-desktop">
-            <img src="./assets/images/common/about1.jpg" alt="シーサー写真">
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/about1.jpg" alt="シーサー写真">
           </div>
           <div class="about-us__image2">
-            <img src="./assets/images/common/about2.jpg" alt="シーサー写真">
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/about2.jpg" alt="シーサー写真">
           </div>
         </div>
         <div class="about-us__content">
@@ -77,24 +71,19 @@
       </div>
 
       <ul class="gallery__list gallery-list">
-        <li class="gallery-list__item js-photo">
-          <img src="./assets/images/common/gallery1.jpg" alt="省略">
-        </li>
-        <li class="gallery-list__item js-photo">
-          <img src="./assets/images/common/gallery2.jpg" alt="省略">
-        </li>
-        <li class="gallery-list__item js-photo">
-          <img src="./assets/images/common/gallery3.jpg" alt="省略">
-        </li>
-        <li class="gallery-list__item js-photo">
-          <img src="./assets/images/common/gallery4.jpg" alt="省略">
-        </li>
-        <li class="gallery-list__item js-photo">
-          <img src="./assets/images/common/gallery5.jpg" alt="省略">
-        </li>
-        <li class="gallery-list__item js-photo">
-          <img src="./assets/images/common/gallery6.jpg" alt="省略">
-        </li>
+      
+        <?php $fields = SCF::get('gallery'); ?>
+        <!-- 繰り返し -->
+        <?php foreach ($fields as $field) : ?>
+          <li class="gallery-list__item js-photo">
+          <?php if ($field['gallery-img1']) : ?>
+            <img src="<?php echo wp_get_attachment_url($field['gallery-img1']); ?>" alt="<?php the_title(); ?>">
+          <?php else : ?>
+            <img src="<?php echo esc_url(get_theme_file_uri('assets/images/common/noimage.jpg')); ?>" alt="noimage">
+          <?php endif; ?>
+          </li>
+        <?php endforeach; ?>
+        <!-- / 繰り返し -->
       </ul>
     </div>
   </section>

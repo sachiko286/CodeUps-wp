@@ -8,64 +8,20 @@
   </section>
 
 
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__list-item"><a href="/">TOP</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">よくある質問</a></li>
-      </ol>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-faq top-page-faq">
     <div class="page-faq__inner inner">
-
       <ul class="page-faq__list faq-list">
-        <li class="faq-list__item">
-          <h3 class="faq-list__item-question js-faq-question">ここに質問が入ります。</h3>
-          <p class="faq-list__item-answer">
-            ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-          </p>
-        </li>
-        <li class="faq-list__item">
-          <h3 class="faq-list__item-question js-faq-question">ここに質問が入ります。</h3>
-          <p class="faq-list__item-answer">
-            ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-          </p>
-        </li>
-        <li class="faq-list__item">
-          <h3 class="faq-list__item-question js-faq-question">ここに質問が入ります。</h3>
-          <p class="faq-list__item-answer">
-            ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-          </p>
-        </li>
-        <li class="faq-list__item">
-          <h3 class="faq-list__item-question js-faq-question">ここに質問が入ります。</h3>
-          <p class="faq-list__item-answer">
-            ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-          </p>
-        </li>
-        <li class="faq-list__item">
-          <h3 class="faq-list__item-question js-faq-question">ここに質問が入ります。</h3>
-          <p class="faq-list__item-answer">
-            ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-          </p>
-        </li>
-        <li class="faq-list__item">
-          <h3 class="faq-list__item-question js-faq-question">ここに質問が入ります。</h3>
-          <p class="faq-list__item-answer">
-            ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-          </p>
-        </li>
-        <li class="faq-list__item">
-          <h3 class="faq-list__item-question js-faq-question">ここに質問が入ります。</h3>
-          <p class="faq-list__item-answer">
-            ここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入りますここに質問の答えが入ります
-          </p>
-        </li>
+        <?php $faqs = SCF::get('faq'); ?>
+        <?php foreach ($faqs as $faq) : ?>
+          <li class="faq-list__item">
+            <h3 class="faq-list__item-question js-faq-question"><?php echo $faq['question']; ?></h3>
+            <p class="faq-list__item-answer"><?php echo $faq['answer']; ?></p>
+          </li>
+        <?php endforeach; ?>
       </ul>
-
-
     </div>
   </section>
 </main>

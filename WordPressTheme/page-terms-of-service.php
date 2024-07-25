@@ -1,4 +1,13 @@
 <?php get_header(); ?>
+
+<section class="sub-fv sub-fv--sitemap">
+      <!-- <div class="sub-fv__inner"> -->
+      <h2 class="sub-fv__title">Terms of Service</h2>
+    </section>
+
+<!-- パンくず -->
+<?php get_template_part('parts/breadcrumb') ?>
+
 <section class="page-teams top-page-teams">
   <div class="page-teams__inner inner">
     <h2 class="page-teams__title">

@@ -7,14 +7,8 @@
   </section>
 
 
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__list-item"><a href="/">TOP</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">ダイビング情報</a></li>
-      </ol>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <div class="page-information top-page-information">
     <div class="page-information__inner inner">
@@ -41,7 +35,7 @@
                 </p>
               </div>
               <div class="information-tab__content-img">
-                <img src="./assets/images/common/info-license.jpg" alt="#">
+                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/info-license.jpg" alt="#">
               </div>
 
             </div>
@@ -57,7 +51,7 @@
                 </p>
               </div>
               <div class="information-tab__content-img">
-                <img src="./assets/images/common/info-fundiving.jpg" alt="#">
+                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/info-fundiving.jpg" alt="#">
               </div>
             </div>
           </li>
@@ -72,7 +66,7 @@
                 </p>
               </div>
               <div class="information-tab__content-img">
-                <img src="./assets/images/common/info-diving.jpg" alt="#">
+                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/info-diving.jpg" alt="#">
               </div>
             </div>
           </li>
