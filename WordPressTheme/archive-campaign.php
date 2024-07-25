@@ -1,5 +1,22 @@
 <?php get_header(); ?>
 
+<?php
+$home = esc_url(home_url('/'));
+$blog = esc_url(home_url('/blog/'));
+$aboutus = esc_url(home_url('/about-us/'));
+$campaign = esc_url(home_url('/campaign/'));
+$company = esc_url(home_url('/company/'));
+$voice = esc_url(home_url('/voice/'));
+$faq = esc_url(home_url('/faq/'));
+$price = esc_url(home_url('/price/'));
+$privacypolicy = esc_url(home_url('/privacypolicy/'));
+$sitemap = esc_url(home_url('/sitemap/'));
+$terms = esc_url(home_url('/terms-of-servic/'));
+$information = esc_url(home_url('/information/'));
+$contact = esc_url(home_url('/contact/'));
+?>
+
+
 <main>
 
   <section class="sub-fv sub-fv--campaign">
@@ -15,14 +32,8 @@
   </section>
 
 
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__list-item"><a href="/">TOP</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">キャンペーン</a></li>
-      </ol>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-campaign top-page-campaign">
     <div class="page-campaign__inner inner">
@@ -36,119 +47,49 @@
       </div>
       <div class="page-campaign__wrapper">
         <ul class="page-campaign__items">
-          <li class="page-campaign__item campaign-card">
-            <div class="campaign-card__item">
-              <div class="campaign-card__img">
-                <img src="./assets/images/common/campaign1.jpg" alt="省略">
-              </div>
-              <div class="campaign-card__body campaign-card__body--sub">
-                <div class="campaign-card__category">
-                  <p>ライセンス講習</p>
-                </div>
-                <h3 class="campaign-card__title campaign-card__title--sub">ライセンス取得</h3>
-                <p class="campaign-card__text campaign-card__text--sub">全部コミコミ(お一人様)</p>
-                <div class="campaign-card__price campaign-card__price--sub">
-                  <p class="campaign-card__price-original"><span>¥56,000</span></p>
-                  <p class="campaign-card__price-discount campaign-card__price-discount--sub">¥46,000</p>
-                </div>
-              </div>
-              <div class="campaign__wrapper u-desktop">
-                <p class="campaign__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                  ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                </p>
+          <?php if (have_posts()) :
+            while (have_posts()) :
+              the_post(); ?>
+              <li class="page-campaign__item campaign-card">
+                <div class="campaign-card__item">
+                  <div class="campaign-card__img">
+                    <?php if (get_the_post_thumbnail()) : ?>
+                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
+                    <?php else : ?>
+                      <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                    <?php endif; ?>
+                  </div>
+                  <div class="campaign-card__body campaign-card__body--sub">
+                    <div class="campaign-card__category">
+                      <p><?php echo get_the_terms(get_the_ID(), 'campaign')[0]->name; ?> </p>
+                    </div>
+                    <h3 class="campaign-card__title campaign-card__title--sub"><?php the_title(); ?></h3>
+                    <p class="campaign-card__text campaign-card__text--sub">全部コミコミ(お一人様)</p>
+                    <div class="campaign-card__price campaign-card__price--sub">
+                      <?php $price_1 = get_field('price_1'); ?>
+                      <?php if ($price_1) : ?>
+                        <p class="campaign-card__price-original"><span>¥<?php echo number_format($price_1); ?></span></p>
+                      <?php endif; ?>
+                      <?php $price_2 = get_field('price_2'); ?>
+                      <?php if ($price_2) : ?>
+                        <p class="campaign-card__price-discount campaign-card__price-discount--sub">¥<?php echo number_format($price_2); ?></p>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                  <div class="campaign__wrapper u-desktop">
+                    <p class="campaign__text"><?php the_content(); ?>
+                    </p>
 
-                <p class="campaign__date">2023/6/1-9/30</p>
-                <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
-                <div class="campaign__info-button">
-                  <a href="page-contact.html" class="button slide">Contact us<span class="button__arrow"></span></a>
+                    <p class="campaign__date">2023/6/1-9/30</p>
+                    <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
+                    <div class="campaign__info-button">
+                      <a href="<?php echo $contact; ?>" class="button slide">Contact us<span class="button__arrow"></span></a>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </li>
-          <li class="page-campaign__item campaign-card">
-            <div class="campaign-card__item">
-              <div class="campaign-card__img">
-                <img src="./assets/images/common/campaign2.jpg" alt="省略">
-              </div>
-              <div class="campaign-card__body campaign-card__body--sub">
-                <div class="campaign-card__category">
-                  <p>体験ダイビング</p>
-                </div>
-                <h3 class="campaign-card__title campaign-card__title--sub">貸切体験ダイビング</h3>
-                <p class="campaign-card__text">全部コミコミ(お一人様)</p>
-                <div class="campaign-card__price">
-                  <p class="campaign-card__price-original"><span>¥24,000</span></p>
-                  <p class="campaign-card__price-discount">¥18,000</p>
-                </div>
-              </div>
-              <div class="campaign__wrapper u-desktop">
-                <p class="campaign__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                  ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                </p>
-                <p class="campaign__date">2023/6/1-9/30</p>
-                <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
-                <div class="campaign__info-button">
-                  <a href="page-contact.html" class="button slide">Contact us<span class="button__arrow"></span></a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="page-campaign__item campaign-card">
-            <div class="campaign-card__item">
-              <div class="campaign-card__img">
-                <img src="./assets/images/common/campaign3.jpg" alt="省略">
-              </div>
-              <div class="campaign-card__body campaign-card__body--sub">
-                <div class="campaign-card__category">
-                  <p>体験ダイビング</p>
-                </div>
-                <h3 class="campaign-card__title campaign-card__title--sub">ナイトダイビング</h3>
-                <p class="campaign-card__text">全部コミコミ(お一人様)</p>
-                <div class="campaign-card__price">
-                  <p class="campaign-card__price-original"><span>¥10,000</span></p>
-                  <p class="campaign-card__price-discount">¥8,000</p>
-                </div>
-              </div>
-              <div class="campaign__wrapper u-desktop">
-                <p class="campaign__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                  ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                </p>
-                <p class="campaign__date">2023/6/1-9/30</p>
-                <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
-                <div class="campaign__info-button">
-                  <a href="page-contact.html" class="button slide">Contact us<span class="button__arrow"></span></a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="page-campaign__item campaign-card">
-            <div class="campaign-card__item">
-              <div class="campaign-card__img">
-                <img src="./assets/images/common/campaign4.jpg" alt="省略">
-              </div>
-              <div class="campaign-card__body campaign-card__body--sub">
-                <div class="campaign-card__category">
-                  <p>ファンダイビング</p>
-                </div>
-                <h3 class="campaign-card__title campaign-card__title--sub">貸切ファンダイビング</h3>
-                <p class="campaign-card__text">全部コミコミ(お一人様)</p>
-                <div class="campaign-card__price">
-                  <p class="campaign-card__price-original"><span>¥20,000</span></p>
-                  <p class="campaign-card__price-discount">¥16,000</p>
-                </div>
-              </div>
-              <div class="campaign__wrapper u-desktop">
-                <p class="campaign__text">ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                  ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                </p>
-                <p class="campaign__date">2023/6/1-9/30</p>
-                <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
-                <div class="campaign__info-button">
-                  <a href="page-contact.html" class="button slide">Contact us<span class="button__arrow"></span></a>
-                </div>
-              </div>
-            </div>
-          </li>
+              </li>
+          <?php endwhile;
+          endif; ?>
         </ul>
 
         <div class="pagenavi">
