@@ -2,79 +2,104 @@
 <main>
 
   <section class="sub-fv sub-fv--voice">
-    <!-- <div class="sub-fv__inner"> -->
     <h2 class="sub-fv__title">Voice</h2>
   </section>
 
 
-<!-- パンくず -->
-<?php get_template_part('parts/breadcrumb') ?>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-voice top-page-voice">
     <div class="page-voice__inner inner">
       <div class="page-voice__folter filter-content">
         <ul class="filter-content__list">
-          <li class="filter-content__list-title is-active"><a href="#">ALL</a></li>
-          <li class="filter-content__list-title "><a href="#">ライセンス講習</a></li>
-          <li class="filter-content__list-title "><a href="#">ファンダイビング</a></li>
-          <li class="filter-content__list-title "><a href="#">体験ダイビング</a></li>
+          <li class="filter-content__list-title <?php echo !isset($_GET['category']) || $_GET['category'] == 'all' ? 'is-active' : ''; ?>">
+            <a href="?category=all&paged=1">ALL</a>
+          </li>
+          <li class="filter-content__list-title <?php echo isset($_GET['category']) && $_GET['category'] == 'license' ? 'is-active' : ''; ?>">
+            <a href="?category=license&paged=1">ライセンス講習</a>
+          </li>
+          <li class="filter-content__list-title <?php echo isset($_GET['category']) && $_GET['category'] == 'fundiving' ? 'is-active' : ''; ?>">
+            <a href="?category=fundiving&paged=1">ファンダイビング</a>
+          </li>
+          <li class="filter-content__list-title <?php echo isset($_GET['category']) && $_GET['category'] == 'experience' ? 'is-active' : ''; ?>">
+            <a href="?category=experience&paged=1">体験ダイビング</a>
+          </li>
         </ul>
       </div>
       <div class="page-voice__wrapper">
         <ul class="page-voice__items voice-list ">
-        <?php if (have_posts()) :
-            while (have_posts()) :
-              the_post(); ?>
-          <li class="voice-list__item voice-card">
-            <div class="voice-card__inner">
-              <div class="voice-card__header">
-                <div class="voice-card__lead">
-                  <div class="voice-card__meta">
-                  <?php $age = get_field('age'); ?>
-                  <?php if ($age) : ?>
-                    <p class="voice-card__age"><?php echo $age; ?></p>
-                    <?php endif; ?>
+          <?php
+          // カテゴリーに基づいてクエリを作成
+          $category = isset($_GET['category']) ? $_GET['category'] : 'all';
+          $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // 現在のページを取得
 
-                    <p class="voice-card__category"><?php echo get_the_terms(get_the_ID(), 'campaign')[0]->name; ?></p>
+          $args = array(
+            'post_type' => 'voice', // カスタム投稿タイプを指定
+            'posts_per_page' => 10,     // 表示件数を指定
+            'paged' => $paged,         // ページ番号を指定
+          );
+
+          if ($category != 'all') {
+            $args['tax_query'] = array(
+              array(
+                'taxonomy' => 'campaign_category', // タクソノミー名を指定
+                'field' => 'slug',
+                'terms' => $category,
+              ),
+            );
+          }
+
+          $query = new WP_Query($args);
+
+          // 有効なページ番号でない場合は最初のページにリダイレクト
+          if ($paged > $query->max_num_pages && $query->max_num_pages > 0) {
+            wp_redirect(get_pagenum_link(1));
+            exit;
+          }
+
+          if ($query->have_posts()) :
+            while ($query->have_posts()) : $query->the_post(); ?>
+              <li class="voice-list__item voice-card">
+                <div class="voice-card__inner">
+                  <div class="voice-card__header">
+                    <div class="voice-card__lead">
+                      <div class="voice-card__meta">
+                        <?php $age = get_field('age'); ?>
+                        <?php if ($age) : ?>
+                          <p class="voice-card__age"><?php echo $age; ?></p>
+                        <?php endif; ?>
+
+                        <p class="voice-card__category"><?php echo get_the_terms(get_the_ID(), 'campaign_category')[0]->name; ?></p>
+                      </div>
+                      <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
+                    </div>
+                    <div class="voice-card__img colorbox">
+                      <?php if (get_the_post_thumbnail()) : ?>
+                        <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php echo $age; ?>のアイキャッチ画像">
+                      <?php else : ?>
+                        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                      <?php endif; ?>
+                    </div>
                   </div>
-                  <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
+                  <div class="voice-card__text"><?php the_content(); ?>
+                  </div>
                 </div>
-                <div class="voice-card__img colorbox">
-                <?php if (get_the_post_thumbnail()) : ?>
-                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
-                    <?php else : ?>
-                      <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
-                    <?php endif; ?>
-                  <!-- <img src="./assets/images/common/voice1.jpg" alt="女性の写真"> -->
-                </div>
-              </div>
-              <p class="voice-card__text"><?php the_content(); ?>
-              </p>
-            </div>
-          </li>
-          <?php endwhile;
-          endif; ?>
+              </li>
+            <?php endwhile; ?>
+            <?php wp_reset_postdata(); ?>
+          <?php else : ?>
+            <p>該当する口コミがありません。</p>
+          <?php endif; ?>
         </ul>
-
-        <div class="pagenavi">
-          <div class="pagenavi__inner">
-            <!-- WP-PageNaviで出力される部分 ここから -->
-            <div class="wp-pagenavi" role="navigation">
-              <a class="previouspostslink" rel="prev" href="#"></a>
-              <div class="pagenavi__numbers">
-                <span class="current pagenavi__number">1</span>
-                <a class="pagenavi__number" href="#">2</a>
-                <a class="pagenavi__number" href="#">3</a>
-                <a class="pagenavi__number" href="#">4</a>
-                <a class="pagenavi__number u-desktop" href="#">5</a>
-                <a class="pagenavi__number u-desktop" href="#">6</a>
-              </div>
-              <a class="nextpostslink" rel="next" href="#"></a>
-            </div>
-            <!-- WP-PageNaviで出力される部分 ここまで -->
-          </div>
+      </div>
+      <!-- ページナビゲーション -->
+      <div class="pagenavi">
+        <div class="pagenavi__inner">
+          <?php wp_pagenavi(array('query' => $query)); ?>
         </div>
       </div>
+
     </div>
   </section>
 </main>

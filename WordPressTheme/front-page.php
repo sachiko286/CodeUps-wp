@@ -28,32 +28,33 @@ $contact = esc_url(home_url('/contact/'));
             <div class="fv__slide swiper-slide">
               <div class="fv__slide-image swiper-img">
                 <picture>
-                  <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/pc-fv1.jpg" media="(min-width: 768px)">
-                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/sp-fv1.jpg" alt="省略">
+                  <source srcset="<?php the_field('pc_fv1'); ?>" media="(min-width: 768px)">
+                  
+                  <img src="<?php the_field('sp_fv1'); ?>" alt="省略">
                 </picture>
               </div>
             </div>
             <div class="fv__slide swiper-slide">
               <div class="fv__slide-image swiper-img">
                 <picture>
-                  <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/pc-fv2.jpg" media="(min-width: 768px)">
-                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/sp-fv2.jpg" alt="省略">
+                  <source srcset="<?php the_field('pc_fv2'); ?>" media="(min-width: 768px)">
+                  <img src="<?php the_field('sp_fv2'); ?>" alt="省略">
                 </picture>
               </div>
             </div>
             <div class="fv__slide swiper-slide">
               <div class="fv__slide-image swiper-img">
                 <picture>
-                  <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/pc-fv3.jpg" media="(min-width: 768px)">
-                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/sp-fv3.jpg" alt="省略">
+                  <source srcset="<?php the_field('pc_fv3'); ?>" media="(min-width: 768px)">
+                  <img src="<?php the_field('sp_fv3'); ?>" alt="省略">
                 </picture>
               </div>
             </div>
             <div class="fv__slide swiper-slide">
               <div class="fv__slide-image swiper-img">
                 <picture>
-                  <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/pc-fv4.jpg" media="(min-width: 768px)">
-                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/sp-fv4.jpg" alt="省略">
+                  <source srcset="<?php the_field('pc_fv4'); ?>" media="(min-width: 768px)">
+                  <img src="<?php the_field('sp_fv4'); ?>" alt="省略">
                 </picture>
               </div>
             </div>

@@ -50,22 +50,19 @@ function my_setup()
 }
 add_action('after_setup_theme', 'my_setup');
 
-//アーカイブの表示件数設定
+// アーカイブの表示件数設定
 function change_posts_per_page($query)
 {
-  // 管理画面ではなく、メインクエリであることを確認
-  if (is_admin() || !$query->is_main_query())
-    return;
-
-  // 'campaign' カスタム投稿タイプのアーカイブページの場合
-  if ($query->is_post_type_archive('campaign')) {
-    $query->set('posts_per_page', 4); // 表示件数を4に設定
-  }
-
-  // 'voice' カスタム投稿タイプのアーカイブページの場合
-  if ($query->is_post_type_archive('voice')) {
-    $query->set('posts_per_page', 6); // 表示件数を6に設定
-  }
+	// 管理画面ではなく、メインクエリであることを確認
+	if (!is_admin() && $query->is_main_query()) {
+		// 'campaign' カスタム投稿タイプのアーカイブページの場合
+		if ($query->is_post_type_archive('campaign')) {
+			$query->set('posts_per_page', 4); // 表示件数を4に設定
+		}
+		// 'voice' カスタム投稿タイプのアーカイブページの場合
+		if ($query->is_post_type_archive('voice')) {
+			$query->set('posts_per_page', 6); // 表示件数を6に設定
+		}
+	}
 }
 add_action('pre_get_posts', 'change_posts_per_page');
-
