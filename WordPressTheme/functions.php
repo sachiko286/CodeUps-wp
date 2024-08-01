@@ -66,3 +66,38 @@ function change_posts_per_page($query)
 	}
 }
 add_action('pre_get_posts', 'change_posts_per_page');
+
+
+/* ---------- 「投稿」の表記変更 ---------- */
+function Change_menulabel() {
+  global $menu;
+  global $submenu;
+  $name = 'ブログ';
+  $menu[5][0] = $name;
+  $submenu['edit.php'][5][0] = $name.'一覧';
+  $submenu['edit.php'][10][0] = '新規'.$name.'投稿';
+}
+function Change_objectlabel() {
+  global $wp_post_types;
+  $name = 'ブログ';
+  $labels = &$wp_post_types['post']->labels;
+  $labels->name = $name;
+  $labels->singular_name = $name;
+  $labels->add_new = _x('追加', $name);
+  $labels->add_new_item = $name.'の新規追加';
+  $labels->edit_item = $name.'の編集';
+  $labels->new_item = '新規'.$name;
+  $labels->view_item = $name.'を表示';
+  $labels->search_items = $name.'を検索';
+  $labels->not_found = $name.'が見つかりませんでした';
+  $labels->not_found_in_trash = 'ゴミ箱に'.$name.'は見つかりませんでした';
+}
+add_action( 'init', 'Change_objectlabel' );
+add_action( 'admin_menu', 'Change_menulabel' );
+
+
+// Contact Form 7で自動挿入されるPタグ、brタグを削除
+add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
+function wpcf7_autop_return_false() {
+  return false;
+}

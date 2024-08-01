@@ -62,18 +62,6 @@ $contact = esc_url(home_url('/contact/'));
             <div class="pagenavi__inner">
               <!-- WP-PageNaviで出力される部分 ここから -->
               <?php wp_pagenavi(); ?>
-              <div class="wp-pagenavi" role="navigation">
-                <a class="previouspostslink" rel="prev" href="#"></a>
-                <div class="pagenavi__numbers">
-                  <span class="current pagenavi__number">1</span>
-                  <a class="pagenavi__number" href="#">2</a>
-                  <a class="pagenavi__number" href="#">3</a>
-                  <a class="pagenavi__number" href="#">4</a>
-                  <a class="pagenavi__number u-desktop" href="#">5</a>
-                  <a class="pagenavi__number u-desktop" href="#">6</a>
-                </div>
-                <a class="nextpostslink" rel="next" href="#"></a>
-              </div>
               <!-- WP-PageNaviで出力される部分 ここまで -->
             </div>
 

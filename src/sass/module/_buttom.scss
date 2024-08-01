@@ -5,7 +5,7 @@
   background: $green;
   border: 1px solid $green;
   color: #fff;
-  display:inline-block;
+  display: inline-block;
   font-size: rem(14);
   font-family: $font-family-en;
   max-width: rem(202);
@@ -25,7 +25,7 @@
   border: 1px solid $green;
   position: absolute;
   bottom: rem(-4);
-  right:rem(-4);
+  right: rem(-4);
   z-index: -2;
 }
 
@@ -37,6 +37,7 @@
   position: relative;
   z-index: 1;
 }
+
 .button.slide::after {
   background: #fff;
   position: absolute;
@@ -50,9 +51,19 @@
   transition: .2s cubic-bezier(0.45, 0, 0.55, 1);
   z-index: -1;
 }
+
 .button.slide:hover {
   color: $green;
 }
+
+.button.slide input {
+  color: #fff;
+}
+
+.button.slide:hover input{
+  color: $green;
+}
+
 .button.slide:hover::after {
   transform: scale(1, 1);
 }
@@ -90,7 +101,7 @@
   background: #fff;
   border: 1px solid #fff;
   color: $green;
-  display:inline-block;
+  display: inline-block;
   font-size: rem(14);
   font-family: $font-family-en;
   max-width: rem(202);
@@ -109,7 +120,7 @@
   border: 1px solid #fff;
   position: absolute;
   bottom: rem(-4);
-  right:rem(-4);
+  right: rem(-4);
   z-index: -2;
 }
 
@@ -121,6 +132,7 @@
   position: relative;
   z-index: 1;
 }
+
 .button--white.slide::after {
   background: $green;
   position: absolute;
@@ -134,9 +146,11 @@
   transition: .2s cubic-bezier(0.45, 0, 0.55, 1);
   z-index: -1;
 }
+
 .button--white.slide:hover {
   color: #fff;
 }
+
 .button--white.slide:hover::after {
   transform: scale(1, 1);
 }

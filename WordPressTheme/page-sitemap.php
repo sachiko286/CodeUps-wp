@@ -70,40 +70,6 @@
   </div>
 
 
-  <section class="contact sub-contact">
-    <div class="contact__inner inner">
-      <div class="contact__content">
-        <div class="contact__access">
-          <div class="contact__company">
-            <img src="./assets/images/common/CodeUps-gr.svg" alt="社名ロゴ">
-          </div>
-          <div class="contact__address">
-            <div class="contact__text">
-              <address>
-                <p class="contact__text-item">沖縄県那覇市1-1</p>
-                <p class="contact__text-item">TEL:0120-000-0000</p>
-              </address>
-              <p class="contact__text-item">営業時間:8:30-19:00</p>
-              <p class="contact__text-item">定休日:毎週火曜日</p>
-            </div>
-            <div class="contact__map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57273.02319561895!2d127.6435022806094!3d26.210859430275388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e5697141a6b58b%3A0x2cd8aff616585e98!2z5rKW57iE55yM6YKj6KaH5biC!5e0!3m2!1sja!2sjp!4v1707313584106!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-          </div>
-        </div>
-        <div class="contact__info">
-          <div class="contact__info-header section-header">
-            <p class="section-header__engtitle"><span>C</span>ontact</p>
-            <h2 class="section-header__jatitle">お問い合わせ</h2>
-          </div>
-          <div class="contact__info-text">ご予約・お問い合わせはコチラ</div>
-          <div class="contact__info-button">
-            <a href="" class="button slide">Contact us<span class="button__arrow"></span></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <?php get_footer(); ?>

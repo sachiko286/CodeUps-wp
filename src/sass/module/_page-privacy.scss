@@ -6,24 +6,45 @@
   }
 } 
 
-.page-privacy__lists {
-// list-style: auto;
-list-style-type: decimal;
+// .page-privacy__lists {
+// // list-style: auto;
+// list-style-type: decimal;
+// list-style-position: inside;
+// }
+
+// .page-privacy__lists li {
+//   text-indent: -1em;
+//   padding-left: 1em;
+// }
+// .page-privacy__read,
+// .page-privacy__text,
+// .page-privacy__lists {
+//   line-height: 2;
+  
+// }
+
+// .page-privacy__read,
+// .page-privacy__item {
+//   margin-top: rem(40);
+// }
+
+.page-privacy__body {
+  margin-top: rem(40);//ワードプレス調整
+  line-height: 2;
+}
+
+.page-privacy__body ol{
+  list-style-type: decimal;
 list-style-position: inside;
 }
 
-.page-privacy__lists li {
+.page-privacy__body li {
   text-indent: -1em;
   padding-left: 1em;
 }
-.page-privacy__read,
-.page-privacy__text,
-.page-privacy__lists {
-  line-height: 2;
-  
-}
 
-.page-privacy__read,
-.page-privacy__item {
+.page-privacy__body br {
+  display: block;
+  content: "";
   margin-top: rem(40);
 }

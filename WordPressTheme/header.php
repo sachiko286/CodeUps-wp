@@ -94,7 +94,7 @@ $contact = esc_url(home_url('/contact/'));
       <div class="header__drawer js-drawer">
         <nav class="header__drawer-nav sp-nav">
           <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="page-campaign.html">キャンペーン</a></p>
+            <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">キャンペーン</a></p>
             <ul class="sp-nav__list-items">
               <li class="sp-nav__list-item"><a href="#">ライセンス取得</a></li>
               <li class="sp-nav__list-item"><a href="#">貸切体験ダイビング</a></li>

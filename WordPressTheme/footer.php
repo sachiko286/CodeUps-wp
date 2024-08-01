@@ -19,7 +19,7 @@ $contact = esc_url(home_url('/contact/'));
       <div class="contact__content">
         <div class="contact__access">
           <div class="contact__company">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-gr.svg" alt="社名ロゴ">
+            <img src="<?php echo get_theme_file_uri(); ?>./assets/images/common/CodeUps-gr.svg" alt="社名ロゴ">
           </div>
           <div class="contact__address">
             <div class="contact__text">

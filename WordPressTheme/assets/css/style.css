@@ -759,6 +759,14 @@ a {
 	color: #408F95;
 }
 
+.button.slide input {
+	color: #fff;
+}
+
+.button.slide:hover input {
+	color: #408F95;
+}
+
 .button.slide:hover::after {
 	transform: scale(1, 1);
 }
@@ -1524,7 +1532,7 @@ a {
 .form__privacyCheck-wrapper input {
 	display: block;
 	height: 1.375rem;
-	left: -0.1875rem;
+	left: -2.125rem;
 	position: absolute;
 	top: -0.125rem;
 	width: 1.375rem;
@@ -1536,7 +1544,7 @@ a {
 	content: "";
 	display: block;
 	height: 1.375rem;
-	left: 0;
+	left: -1.875rem;
 	position: absolute;
 	top: 0.6875rem;
 	transform: translateY(-50%);
@@ -1549,7 +1557,7 @@ a {
 	content: "";
 	display: block;
 	height: 0.5rem;
-	left: 0.3125rem;
+	left: -1.5625rem;
 	opacity: 0;
 	position: absolute;
 	top: 0.5625rem;
@@ -1581,8 +1589,8 @@ a {
 .form__input.error input,
 .form__textarea.error textarea,
 .form__checkbox.error input {
-	background-color: rgba(201, 72, 0, 0.2); /* ピンクの塗りつぶし */
-	border: 1px solid #C94800;
+	background-color: rgba(201, 72, 0, 0.2);
+	border: 1px solid #C94800; /* ピンクの塗りつぶし */
 }
 
 .form__input.error input::-moz-placeholder {
@@ -1595,8 +1603,17 @@ a {
 
 .form__checkbox.error input + span::before,
 .form__privacyCheck-wrapper.error input + span::before {
-	background-color: rgba(201, 72, 0, 0.2); /* ピンクの塗りつぶし */
-	border: 1px solid #C94800;
+	background-color: rgba(201, 72, 0, 0.2);
+	border: 1px solid #C94800; /* ピンクの塗りつぶし */
+}
+
+.wpcf7-spinner {
+	display: none !important;
+}
+
+.wpcf7-list-item {
+	display: block !important;
+	margin: 0 !important;
 }
 
 .fv__title-wrap {
@@ -2114,24 +2131,24 @@ html.is-fixed {
 	margin-top: 2.5rem;
 }
 
-.page-privacy__lists {
+.page-privacy__body {
+	line-height: 2;
+	margin-top: 2.5rem;
+}
+
+.page-privacy__body ol {
 	list-style-position: inside;
 	list-style-type: decimal;
 }
 
-.page-privacy__lists li {
+.page-privacy__body li {
 	padding-left: 1em;
 	text-indent: -1em;
 }
 
-.page-privacy__read,
-.page-privacy__text,
-.page-privacy__lists {
-	line-height: 2;
-}
-
-.page-privacy__read,
-.page-privacy__item {
+.page-privacy__body br {
+	content: "";
+	display: block;
 	margin-top: 2.5rem;
 }
 
@@ -2381,6 +2398,7 @@ html.is-fixed {
 .wp-pagenavi {
 	clear: both;
 	display: flex;
+	gap: 0.75rem;
 	justify-content: center;
 	text-align: center;
 }
@@ -2454,6 +2472,14 @@ html.is-fixed {
 	top: 0.4375rem;
 	transform: rotate(45deg);
 	width: 0.625rem;
+}
+
+.previouspostslink {
+	margin-right: 1.75rem;
+}
+
+.nextpostslink {
+	margin-left: 1.75rem;
 }
 
 .pc-nav__items {
@@ -2761,8 +2787,10 @@ html.is-fixed {
 	font-weight: 400;
 	left: 50%;
 	position: absolute;
+	text-align: center;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	width: 100%;
 }
 
 .voice-card__inner {
@@ -3436,6 +3464,18 @@ html {
 
 .form__privacyCheck-wrapper {
 	padding-left: 2.375rem;
+}
+
+.form__privacyCheck-wrapper input {
+	left: -2.625rem;
+}
+
+.form__privacyCheck-wrapper input + span::before {
+	left: -2.375rem;
+}
+
+.form__privacyCheck-wrapper input + span::after {
+	left: -2rem;
 }
 
 .form__button {

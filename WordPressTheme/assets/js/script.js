@@ -203,50 +203,6 @@ jQuery(function ($) {
         return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
       }
 
-      // // フィルターパラメータを取得
-      // var filter = getParameterByName('filter');
-
-      // if (filter) {
-      //     // フィルターを適用
-      //     $filter.removeClass('is-active');
-      //     $filter.filter('[data-filter="' + filter + '"]').addClass('is-active');
-
-      //     $item.removeClass('is-active').fadeOut().promise().done(function () {
-      //         if (filter === 'all') {
-      //             $item.addClass('is-active').fadeIn();
-      //         } else {
-      //             $item.filter('[data-item="' + filter + '"]').addClass('is-active').fadeIn();
-      //         }
-      //     });
-      // }
-
-      // //フィルター切り替え
-      //     // カテゴリをクリックしたら
-      // $filter.click(function (e) {
-      //     // デフォルトの動作をキャンセル
-      //     e.preventDefault();
-      //     var $this = $(this);
-
-      //     // クリックしたカテゴリにクラスを付与
-      //     $filter.removeClass('is-active');
-      //     $this.addClass('is-active');
-
-      //     // クリックした要素のdata属性を取得
-      //     var $filterItem = $this.attr('data-filter');
-
-      //     // データ属性が all なら全ての要素を表示
-      //     if ($filterItem === 'all') {
-      //         $item.removeClass('is-active').fadeOut().promise().done(function () {
-      //             $item.addClass('is-active').fadeIn();
-      //         });
-      //     // all 以外の場合は、クリックした要素のdata属性の値を同じ値のアイテムを表示
-      //         } else {
-      //         $item.removeClass('is-active').fadeOut().promise().done(function () {
-      //             $item.filter('[data-item="' + $filterItem + '"]').addClass('is-active').fadeIn();
-      //         });
-      //     }
-      // });
-
       // タブ切り替え
       $tabMenu.on('click', function () {
         $tabMenu.removeClass('is-active');
@@ -276,9 +232,16 @@ jQuery(function ($) {
         var nameField = $('#name');
         var mailField = $('#mail');
         var phoneField = $('#phone');
-        var categoryFields = $('input[name="category"]');
-        var messageField = $('textarea[name="message"]');
-        var privacyCheck = $('#privacyCheck');
+        var categoryFields = $('input[name="category_1[]"]');
+        var messageField = $('#message');
+        var privacyCheck = $('input[name="privacyCheck_1[]"]');
+
+        // console.log('name:', nameField.val());
+        // console.log('mail:', mailField.val());
+        // console.log('phone:', phoneField.val());
+        // console.log('category:', categoryFields.length);
+        // console.log('message:', messageField.val());
+        // console.log('privacyCheck:', privacyCheck.length); // 要素の存在確認
 
         // エラーメッセージを非表示にする
         var errorElement = $('.form__error');
