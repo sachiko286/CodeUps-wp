@@ -2552,7 +2552,7 @@ html.is-fixed {
 
 .post-card__img {
 	aspect-ratio: 121/90;
-	width: 46.0077%;
+	width: 49.1869918699%;
 }
 
 .post-card__img img {
@@ -2564,6 +2564,7 @@ html.is-fixed {
 
 .post-card__content {
 	margin-left: 1rem;
+	width: 50.8130081301%;
 }
 
 .post-card__date {

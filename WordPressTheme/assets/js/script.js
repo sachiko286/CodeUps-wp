@@ -284,7 +284,7 @@ jQuery(function ($) {
           errorElement.show();
         } else {
           // フォームを送信する処理をここに追加
-          window.location.href = 'page-thanks.html';
+          window.location.href = 'http://codeups01.local/thanks/';
         }
       });
       function setErrorStyle(element) {
