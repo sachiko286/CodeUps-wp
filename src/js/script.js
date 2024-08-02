@@ -14,7 +14,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
         // backgroundまたはページ内リンクをクリックでドロワーメニュが閉じる
         $(".header__drawer, .js-drawer a[href]").on("click", function () {
-            closeDrawer(); 
+            closeDrawer();
         });
 
         // resizeイベント　ウインドウ幅が広がるとドロワーメニューが閉じる
@@ -31,7 +31,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
             $(".top-header").removeClass("is-color");//ヘッダーの色を戻す
         }
 
-    // });
+        // });
 
 
 
@@ -76,24 +76,24 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
         });
 
 
-    //トップへ戻るボタン
-    // $(function () {
+        //トップへ戻るボタン
+        // $(function () {
         const pagetop = $(".js-page-top");
         pagetop.hide(); //最初はボタンを非表示
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) { //100px以上スクロールしたら
-            pagetop.fadeIn(); //ボタンをフェードイン
+                pagetop.fadeIn(); //ボタンをフェードイン
             } else {
-            pagetop.fadeOut(); //ボタンをフェードアウト
+                pagetop.fadeOut(); //ボタンをフェードアウト
             }
         });
         pagetop.click(function () {
             $("body,html").animate({
                 scrollTop: 0, //上から0pxの位置に戻る
-            },500); //500ミリ秒かけて上に戻る
+            }, 500); //500ミリ秒かけて上に戻る
             return false;
         });
-    
+
         //フッター手前で止まるボタン
         $(".js-page-top").hide();
         $(window).on("scroll", function () {
@@ -101,17 +101,17 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
             const scrollPosition = $(window).height() + $(window).scrollTop(); //現在の位置
             const footHeight = $("footer").innerHeight(); //フッターの高さ
             if (scrollHeight - scrollPosition <= footHeight) { //ドキュメントの高さと現在の位置の差がフッターの高さ以下のとき
-            $(".js-page-top").css({ position: "absolute", bottom: footHeight + 0 }); //pisitionをabsoluteに変更 ボタンの位置をフッターの高さ + 余白に設定
+                $(".js-page-top").css({ position: "absolute", bottom: footHeight + 0 }); //pisitionをabsoluteに変更 ボタンの位置をフッターの高さ + 余白に設定
             } else { //それ以外の場合は
-            $(".js-page-top").css({ position: "fixed", bottom: "0" }); //固定で表示
+                $(".js-page-top").css({ position: "fixed", bottom: "0" }); //固定で表示
             }
         });
-    // }); 
-        
+        // }); 
 
 
-    // 背景色の後に画像が表示されるアニメーション
-    // $(function () {
+
+        // 背景色の後に画像が表示されるアニメーション
+        // $(function () {
         //要素の取得とスピードの設定
         var box = $('.colorbox'),
             speed = 400;
@@ -138,7 +138,7 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
             });
         });
 
-    // });
+        // });
 
 
 
@@ -146,24 +146,24 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
         let scrollPos;
 
         $(".js-photo").click(function () {
-        let windowWidth = $(window).width();
+            let windowWidth = $(window).width();
 
-        // スマホサイズでない場合のみモーダルウィンドウを表示
-        if (windowWidth > 767) {
-        scrollPos = $(window).scrollTop();
-        $(".js-overlay").html($(this).prop("outerHTML"));
-        $(".js-overlay").fadeIn(200);
-        $('html').addClass('is-fixed');
-        }
-        return false;
+            // スマホサイズでない場合のみモーダルウィンドウを表示
+            if (windowWidth > 767) {
+                scrollPos = $(window).scrollTop();
+                $(".js-overlay").html($(this).prop("outerHTML"));
+                $(".js-overlay").fadeIn(200);
+                $('html').addClass('is-fixed');
+            }
+            return false;
         });
 
         $(".js-overlay").click(function () {
-        $(".js-overlay").fadeOut(200, function () {
-            $('html').removeClass('is-fixed');
-            $(window).scrollTop(scrollPos);
-        });
-        return false;
+            $(".js-overlay").fadeOut(200, function () {
+                $('html').removeClass('is-fixed');
+                $(window).scrollTop(scrollPos);
+            });
+            return false;
         });
 
 
@@ -186,17 +186,17 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
             // 変数を要素をセット
             // var $filter = $('.filter-content__list [data-filter]');
             // var    $item = $('.filter-content__items [data-item]');
-            var    $tabMenu = $('.js-tab-menu');         // タブメニュー要素の定義
-            var    $tabContent = $('.js-tab-content');    // タブコンテンツ要素の定義
-        
+            var $tabMenu = $('.js-tab-menu');         // タブメニュー要素の定義
+            var $tabContent = $('.js-tab-content');    // タブコンテンツ要素の定義
+
             // URLのパラメータを取得する関数
             function getParameterByName(name) {
                 var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
                 return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
             }
-        
 
-        
+
+
             // タブ切り替え
             $tabMenu.on('click', function () {
                 $tabMenu.removeClass('is-active');
@@ -205,95 +205,95 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
                 var number = $(this).data("number");
                 $('#' + number).addClass('is-active');
             });
-        
+
             // タブのURLパラメータを取得
             var tab = getParameterByName('tab');
-                if (tab) {
-                    // タブを切り替え
-                    $tabMenu.removeClass('is-active');
-                    $tabContent.removeClass('is-active');
-                    $tabMenu.filter('[data-number="' + tab + '"]').addClass('is-active');
-                    $('#' + tab).addClass('is-active');
-                }
+            if (tab) {
+                // タブを切り替え
+                $tabMenu.removeClass('is-active');
+                $tabContent.removeClass('is-active');
+                $tabMenu.filter('[data-number="' + tab + '"]').addClass('is-active');
+                $('#' + tab).addClass('is-active');
+            }
         });
 
 
 
         //フォームエラーチェック、送信
-        $(document).ready(function() {
-            $('#js-submit').click(function(event) {
-              event.preventDefault(); // フォームの送信を防止
-        
-            // 必須フィールドを取得
-            var nameField = $('#name');
-            var mailField = $('#mail');
-            var phoneField = $('#phone');
-            var categoryFields = $('#categorycheck');
-                        var messageField = $('#message');
-            var privacyCheck = $('#privacyCheck');
+        $(document).ready(function () {
+            $('#js-submit').click(function (event) {
+                event.preventDefault(); // フォームの送信を防止
 
-            console.log('name:', nameField.val());
-            console.log('mail:', mailField.val());
-            console.log('phone:', phoneField.val());
-            console.log('category:', categoryFields.length);
-            console.log('message:', messageField.val());
-            console.log('privacyCheck:', privacyCheck.length);  // 要素の存在確認
+                // 必須フィールドを取得
+                var nameField = $('#name');
+                var mailField = $('#mail');
+                var phoneField = $('#phone');
+                var categoryFields = $('#categorycheck');
+                var messageField = $('#message');
+                var privacyCheck = $('#privacyCheck');
 
-        
-            // エラーメッセージを非表示にする
-            var errorElement = $('.form__error');
-            errorElement.hide();
-        
-            // 入力フィールドのエラースタイルをリセット
-            resetErrorStyles();
-        
-            // バリデーションフラグ
-            var isValid = true;
-        
-            // バリデーションチェック
-            if (!nameField.val().trim()) {
-                setErrorStyle(nameField.closest('.form__input'));
-                isValid = false;
-            }
-            if (!mailField.val().trim()) {
-                setErrorStyle(mailField.closest('.form__input'));
-                isValid = false;
-            }
-            if (!phoneField.val().trim()) {
-                setErrorStyle(phoneField.closest('.form__input'));
-                isValid = false;
-            }
-            if (!categoryFields.is(':checked')) {
-                setErrorStyle(categoryFields.closest('.form__checkbox'));
-                isValid = false;
-            }
-            if (!messageField.val().trim()) {
-                setErrorStyle(messageField.closest('.form__textarea'));
-                isValid = false;
-            }
-            if (!privacyCheck.is(':checked')) {
-                setErrorStyle(privacyCheck.closest('.form__privacyCheck-wrapper'));
-                isValid = false;
-            }
-        
-            // エラーがあればエラーメッセージを表示
-            if (!isValid) {
-                errorElement.show();
-            } else {
-                // フォームを送信する処理をここに追加
-                window.location.href = 'page-thanks.html';
-            }
+                console.log('name:', nameField.val());
+                console.log('mail:', mailField.val());
+                console.log('phone:', phoneField.val());
+                console.log('category:', categoryFields.length);
+                console.log('message:', messageField.val());
+                console.log('privacyCheck:', privacyCheck.length);  // 要素の存在確認
+
+
+                // エラーメッセージを非表示にする
+                var errorElement = $('.form__error');
+                errorElement.hide();
+
+                // 入力フィールドのエラースタイルをリセット
+                resetErrorStyles();
+
+                // バリデーションフラグ
+                var isValid = true;
+
+                // バリデーションチェック
+                if (!nameField.val().trim()) {
+                    setErrorStyle(nameField.closest('.form__input'));
+                    isValid = false;
+                }
+                if (!mailField.val().trim()) {
+                    setErrorStyle(mailField.closest('.form__input'));
+                    isValid = false;
+                }
+                if (!phoneField.val().trim()) {
+                    setErrorStyle(phoneField.closest('.form__input'));
+                    isValid = false;
+                }
+                if (!categoryFields.is(':checked')) {
+                    setErrorStyle(categoryFields.closest('.form__checkbox'));
+                    isValid = false;
+                }
+                if (!messageField.val().trim()) {
+                    setErrorStyle(messageField.closest('.form__textarea'));
+                    isValid = false;
+                }
+                if (!privacyCheck.is(':checked')) {
+                    setErrorStyle(privacyCheck.closest('.form__privacyCheck-wrapper'));
+                    isValid = false;
+                }
+
+                // エラーがあればエラーメッセージを表示
+                if (!isValid) {
+                    errorElement.show();
+                } else {
+                    // フォームを送信する処理をここに追加
+                    window.location.href = 'thanks.php';
+                }
             });
-        
+
             function setErrorStyle(element) {
-            element.addClass('error');
+                element.addClass('error');
             }
-        
+
             function resetErrorStyles() {
-            $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');
+                $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');
             }
         });
-                    
+
     });
 });
 
