@@ -57,7 +57,7 @@ $contact = esc_url(home_url('/contact/'));
         endif; ?>
       </ul>
     </div>
-　
+
     <div class="page-blog__aside-content page-blog__aside-content--voice blog-aside">
       <h2 class="blog-aside__title">口コミ</h2>
       <div class="blog-aside__voice aside-voice">

@@ -46,7 +46,6 @@ $contact = esc_url(home_url('/contact/'));
                         <?php endif; ?>
                       </div>
                       <div class="blog-card__content">
-                        <!-- <time class="blog-card__date" datetime="2023-11-17">2023.11/17</time> -->
                         <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m/d'); ?></time>
                         <p class="blog-card__title"><?php the_title(); ?></p>
                         <div class="blog-card__text">

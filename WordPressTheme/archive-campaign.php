@@ -16,7 +16,6 @@ $information = esc_url(home_url('/information/'));
 $contact = esc_url(home_url('/contact/'));
 ?>
 
-
 <main>
 
   <section class="sub-fv sub-fv--campaign">
@@ -31,54 +30,26 @@ $contact = esc_url(home_url('/contact/'));
     <div class="page-campaign__inner inner">
       <div class="page-campaign__filter filter-content">
         <ul class="filter-content__list">
-          <li class="filter-content__list-title <?php echo !isset($_GET['category']) || $_GET['category'] == 'all' ? 'is-active' : ''; ?>">
-            <a href="?category=all&paged=1">ALL</a>
+          <li class="filter-content__list-title <?php if (!isset($_GET['campaign_category'])) echo 'is-active'; ?>">
+            <a href="<?php echo get_post_type_archive_link('campaign'); ?>">ALL</a>
           </li>
-          <li class="filter-content__list-title <?php echo isset($_GET['category']) && $_GET['category'] == 'license' ? 'is-active' : ''; ?>">
-            <a href="?category=license&paged=1">ライセンス講習</a>
-          </li>
-          <li class="filter-content__list-title <?php echo isset($_GET['category']) && $_GET['category'] == 'fundiving' ? 'is-active' : ''; ?>">
-            <a href="?category=fundiving&paged=1">ファンダイビング</a>
-          </li>
-          <li class="filter-content__list-title <?php echo isset($_GET['category']) && $_GET['category'] == 'experience' ? 'is-active' : ''; ?>">
-            <a href="?category=experience&paged=1">体験ダイビング</a>
-          </li>
+          <?php
+          $terms = get_terms('campaign_category');
+          if ($terms && !is_wp_error($terms)) :
+            foreach ($terms as $term) : ?>
+              <li class="filter-content__list-title <?php if (isset($_GET['campaign_category']) && $_GET['campaign_category'] == $term->slug) echo 'is-active'; ?>">
+                <a href="<?php echo add_query_arg('campaign_category', $term->slug, get_post_type_archive_link('campaign')); ?>"><?php echo $term->name; ?></a>
+              </li>
+          <?php endforeach;
+          endif; ?>
         </ul>
       </div>
 
       <div class="page-campaign__wrapper">
         <ul class="page-campaign__items">
-          <?php
-          // カテゴリーに基づいてクエリを作成
-          $category = isset($_GET['category']) ? $_GET['category'] : 'all';
-          $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // 現在のページを取得
-
-          $args = array(
-            'post_type' => 'campaign', // カスタム投稿タイプを指定
-            'posts_per_page' => 4,     // 表示件数を指定
-            'paged' => $paged,         // ページ番号を指定
-          );
-
-          if ($category != 'all') {
-            $args['tax_query'] = array(
-              array(
-                'taxonomy' => 'campaign_category', // タクソノミー名を指定
-                'field' => 'slug',
-                'terms' => $category,
-              ),
-            );
-          }
-
-          $query = new WP_Query($args);
-
-          // 有効なページ番号でない場合は最初のページにリダイレクト
-          if ($paged > $query->max_num_pages && $query->max_num_pages > 0) {
-            wp_redirect(get_pagenum_link(1));
-            exit;
-          }
-
-          if ($query->have_posts()) :
-            while ($query->have_posts()) : $query->the_post(); ?>
+          <?php if (have_posts()) :
+            while (have_posts()) :
+              the_post(); ?>
               <li class="page-campaign__item campaign-card">
                 <div class="campaign-card__item">
                   <div class="campaign-card__img">
@@ -115,25 +86,21 @@ $contact = esc_url(home_url('/contact/'));
                   </div>
                 </div>
               </li>
-            <?php endwhile; ?>
-            <?php wp_reset_postdata(); ?>
-          <?php else : ?>
-            <p>該当するキャンペーンがありません。</p>
-          <?php endif; ?>
+          <?php endwhile;
+          endif; ?>
         </ul>
       </div>
 
-      <!-- ページナビゲーション -->
       <div class="pagenavi">
         <div class="pagenavi__inner">
-          <?php wp_pagenavi(array('query' => $query)); ?>
+          <!-- WP-PageNaviで出力される部分 ここから -->
+          <?php wp_pagenavi(); ?>
+          <!-- WP-PageNaviで出力される部分 ここまで -->
         </div>
       </div>
-
     </div>
   </section>
+
 </main>
-
-
 
 <?php get_footer(); ?>

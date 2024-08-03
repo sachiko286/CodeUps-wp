@@ -34,12 +34,12 @@ add_action('wp_head', 'add_fonts_preconnect', 5);
 
 function my_setup()
 {
-    add_theme_support('post-thumbnails'); /* アイキャッチ */
-    add_theme_support('automatic-feed-links'); /* RSSフィード */
-    add_theme_support('title-tag'); /* タイトルタグ自動生成 */
+    add_theme_support('post-thumbnails'); //アイキャッチ 
+    add_theme_support('automatic-feed-links'); // RSSフィード 
+    add_theme_support('title-tag'); //タイトルタグ自動生成 
     add_theme_support(
         'html5',
-        array( /* HTML5のタグで出力 */
+        array( //HTML5のタグで出力 
             'search-form',
             'comment-form',
             'comment-list',
@@ -50,7 +50,8 @@ function my_setup()
 }
 add_action('after_setup_theme', 'my_setup');
 
-// アーカイブの表示件数設定
+
+/* ---------- アーカイブの表示件数設定---------- */
 function change_posts_per_page($query)
 {
     // 管理画面ではなく、メインクエリであることを確認
@@ -66,6 +67,29 @@ function change_posts_per_page($query)
     }
 }
 add_action('pre_get_posts', 'change_posts_per_page');
+
+/* ---------- タクソノミーでの絞り込み ---------- */
+// function filter_by_taxonomy($query)
+// {
+//     if (!is_admin() && $query->is_main_query()) {
+//         // 'campaign' カスタム投稿タイプのアーカイブページでのフィルタリング
+//         if ($query->is_post_type_archive('campaign') || $query->is_post_type_archive('voice')) {
+//             // 'campaign_category' または 'voice_category' タクソノミーでフィルタリング
+//             $taxonomy = $query->is_post_type_archive('campaign') ? 'campaign_category' : 'voice_category';
+//             if (isset($_GET[$taxonomy]) && $_GET[$taxonomy] != '') {
+//                 $query->set('tax_query', array(
+//                     array(
+//                         'taxonomy' => $taxonomy,
+//                         'field'    => 'slug',
+//                         'terms'    => $_GET[$taxonomy],
+//                     ),
+//                 ));
+//             }
+//         }
+//     }
+// }
+// add_action('pre_get_posts', 'filter_by_taxonomy');
+
 
 
 /* ---------- 「投稿」の表記変更 ---------- */
@@ -98,7 +122,7 @@ add_action('init', 'Change_objectlabel');
 add_action('admin_menu', 'Change_menulabel');
 
 
-// Contact Form 7で自動挿入されるPタグ、brタグを削除
+/* -------Contact Form 7で自動挿入されるPタグ、brタグを削除 -------*/
 add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
 function wpcf7_autop_return_false()
 {
@@ -145,3 +169,13 @@ function track_post_views($post_id)
     set_post_views($post_id);
 }
 add_action('wp_head', 'track_post_views');
+
+add_filter('use_block_editor_for_post',function($use_block_editor,$post){
+	if($post->post_type==='page'){
+		if(in_array($post->post_name,['about-us','faq','information','price','contact','thanks','top','blog','404-2','sitemap'])){ //ページスラッグが「about」または「company」ならコンテンツエディターを非表示
+			remove_post_type_support('page','editor');
+			return false;
+		}
+	}
+	return $use_block_editor;
+},10,2);
