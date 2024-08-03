@@ -1,15 +1,15 @@
+"use strict";
 
-jQuery(function ($) { // この中であればWordpressでも「$」が使用可能になる
+jQuery(function ($) {
+    // この中であればWordpressでも「$」が使用可能になる
 
     //ハンバーガーメニュー
     $(function () {
-
         $(".js-hamburger").on("click", function () {
-            $(this).toggleClass("is-open");//ボタンの開閉
-            $(".js-drawer").fadeToggle();//ドロワーメニュをフェードイン、フェードアウト
+            $(this).toggleClass("is-open"); //ボタンの開閉
+            $(".js-drawer").fadeToggle(); //ドロワーメニュをフェードイン、フェードアウト
             $('body').toggleClass('header__drawer-noscroll'); // 背景スクロール固定設定、解除
-            $(".top-header").toggleClass("is-color");//ヘッダーの色を変える
-
+            $(".top-header").toggleClass("is-color"); //ヘッダーの色を変える
         });
 
         // backgroundまたはページ内リンクをクリックでドロワーメニュが閉じる
@@ -23,73 +23,75 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
                 closeDrawer();
             }
         });
-
         function closeDrawer() {
-            $(".js-drawer").fadeOut();//ドロワーメニューをフェードアウト
-            $(".js-hamburger").removeClass("is-open");//ボタンからクラス名「is-open」を取る
-            $('body').removeClass('header__drawer-noscroll');//背景スクロール解除 
-            $(".top-header").removeClass("is-color");//ヘッダーの色を戻す
+            $(".js-drawer").fadeOut(); //ドロワーメニューをフェードアウト
+            $(".js-hamburger").removeClass("is-open"); //ボタンからクラス名「is-open」を取る
+            $('body').removeClass('header__drawer-noscroll'); //背景スクロール解除 
+            $(".top-header").removeClass("is-color"); //ヘッダーの色を戻す
         }
 
         // });
 
-
-
         // Fvスライダー
-        const mv_swiper = new Swiper(".js-fv-swiper", {
+        var mv_swiper = new Swiper(".js-fv-swiper", {
             loop: true,
             speed: 2000,
             effect: "fade",
             fadeEffect: {
-                crossFade: true,
+                crossFade: true
             },
             autoplay: {
                 delay: 4000,
-                disableOnInteraction: false,
-            },
+                disableOnInteraction: false
+            }
         });
 
-
-
         // キャンペーンスライダー（swiper）
-        const mySwiper = new Swiper('.js-campaign-swiper', { //名前を変える
+        var mySwiper = new Swiper('.js-campaign-swiper', {
+            //名前を変える
             loop: true,
             loopAdditionalSlides: 1,
             autoplay: {
                 delay: 2000,
-                disableOnInteraction: false,
+                disableOnInteraction: false
             },
-            speed: 2000,          //追記
+            speed: 2000,
+            //追記
             slidesPerView: "auto",
-            spaceBetween: 24, // スライド間の余白（px）
-            grabCursor: true, // PCでマウスカーソルを「掴む」マークにする
+            spaceBetween: 24,
+            // スライド間の余白（px）
+            grabCursor: true,
+            // PCでマウスカーソルを「掴む」マークにする
             breakpoints: {
                 // 768px以上の場合
                 768: {
-                    spaceBetween: 40, // スライド間の余白（px）
+                    spaceBetween: 40 // スライド間の余白（px）
                 }
             },
-            navigation: {
-                prevEl: ".swiper-button-prev", //戻るボタンのclass
-                nextEl: ".swiper-button-next", //進むボタンのclass
-            },
-        });
 
+            navigation: {
+                prevEl: ".swiper-button-prev",
+                //戻るボタンのclass
+                nextEl: ".swiper-button-next" //進むボタンのclass
+            }
+        });
 
         //トップへ戻るボタン
         // $(function () {
-        const pagetop = $(".js-page-top");
+        var pagetop = $(".js-page-top");
         pagetop.hide(); //最初はボタンを非表示
         $(window).scroll(function () {
-            if ($(this).scrollTop() > 100) { //100px以上スクロールしたら
+            if ($(this).scrollTop() > 100) {
+                //100px以上スクロールしたら
                 pagetop.fadeIn(); //ボタンをフェードイン
             } else {
                 pagetop.fadeOut(); //ボタンをフェードアウト
             }
         });
+
         pagetop.click(function () {
             $("body,html").animate({
-                scrollTop: 0, //上から0pxの位置に戻る
+                scrollTop: 0 //上から0pxの位置に戻る
             }, 500); //500ミリ秒かけて上に戻る
             return false;
         });
@@ -97,18 +99,24 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
         //フッター手前で止まるボタン
         $(".js-page-top").hide();
         $(window).on("scroll", function () {
-            const scrollHeight = $(document).height(); //ドキュメントの高さ
-            const scrollPosition = $(window).height() + $(window).scrollTop(); //現在の位置
-            const footHeight = $("footer").innerHeight(); //フッターの高さ
-            if (scrollHeight - scrollPosition <= footHeight) { //ドキュメントの高さと現在の位置の差がフッターの高さ以下のとき
-                $(".js-page-top").css({ position: "absolute", bottom: footHeight + 0 }); //pisitionをabsoluteに変更 ボタンの位置をフッターの高さ + 余白に設定
-            } else { //それ以外の場合は
-                $(".js-page-top").css({ position: "fixed", bottom: "0" }); //固定で表示
+            var scrollHeight = $(document).height(); //ドキュメントの高さ
+            var scrollPosition = $(window).height() + $(window).scrollTop(); //現在の位置
+            var footHeight = $("footer").innerHeight(); //フッターの高さ
+            if (scrollHeight - scrollPosition <= footHeight) {
+                //ドキュメントの高さと現在の位置の差がフッターの高さ以下のとき
+                $(".js-page-top").css({
+                    position: "absolute",
+                    bottom: footHeight + 0
+                }); //pisitionをabsoluteに変更 ボタンの位置をフッターの高さ + 余白に設定
+            } else {
+                //それ以外の場合は
+                $(".js-page-top").css({
+                    position: "fixed",
+                    bottom: "0"
+                }); //固定で表示
             }
         });
         // }); 
-
-
 
         // 背景色の後に画像が表示されるアニメーション
         // $(function () {
@@ -118,21 +126,27 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
         //.colorboxの付いた全ての要素に対して下記の処理を行う
         box.each(function () {
-            $(this).append('<div class="color"></div>')
+            $(this).append('<div class="color"></div>');
             var color = $(this).find($('.color')),
                 image = $(this).find('img');
             var counter = 0;
-
             image.css('opacity', '0');
             color.css('width', '0%');
             //inviewを使って背景色が画面に現れたら処理をする
             color.on('inview', function () {
                 if (counter == 0) {
-                    $(this).delay(200).animate({ 'width': '100%' }, speed, function () {
+                    $(this).delay(200).animate({
+                        'width': '100%'
+                    }, speed, function () {
                         image.css('opacity', '1');
-                        $(this).css({ 'left': '0', 'right': 'auto' });
-                        $(this).animate({ 'width': '0%' }, speed);
-                    })
+                        $(this).css({
+                            'left': '0',
+                            'right': 'auto'
+                        });
+                        $(this).animate({
+                            'width': '0%'
+                        }, speed);
+                    });
                     counter = 1;
                 }
             });
@@ -140,13 +154,10 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
         // });
 
-
-
         // モーダル
-        let scrollPos;
-
+        var scrollPos;
         $(".js-photo").click(function () {
-            let windowWidth = $(window).width();
+            var windowWidth = $(window).width();
 
             // スマホサイズでない場合のみモーダルウィンドウを表示
             if (windowWidth > 767) {
@@ -157,7 +168,6 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
             }
             return false;
         });
-
         $(".js-overlay").click(function () {
             $(".js-overlay").fadeOut(200, function () {
                 $('html').removeClass('is-fixed');
@@ -165,8 +175,6 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
             });
             return false;
         });
-
-
 
         //アコーディオンfqa
         $('.js-faq-question').on('click', function () {
@@ -186,16 +194,14 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
             // 変数を要素をセット
             // var $filter = $('.filter-content__list [data-filter]');
             // var    $item = $('.filter-content__items [data-item]');
-            var $tabMenu = $('.js-tab-menu');         // タブメニュー要素の定義
-            var $tabContent = $('.js-tab-content');    // タブコンテンツ要素の定義
+            var $tabMenu = $('.js-tab-menu'); // タブメニュー要素の定義
+            var $tabContent = $('.js-tab-content'); // タブコンテンツ要素の定義
 
             // URLのパラメータを取得する関数
             function getParameterByName(name) {
                 var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
                 return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
             }
-
-
 
             // タブ切り替え
             $tabMenu.on('click', function () {
@@ -217,8 +223,6 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
             }
         });
 
-
-
         //フォームエラーチェック、送信
         $(document).ready(function () {
             $('#js-submit').click(function (event) {
@@ -228,17 +232,16 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
                 var nameField = $('#name');
                 var mailField = $('#mail');
                 var phoneField = $('#phone');
-                var categoryFields = $('#categorycheck');
+                var categoryFields = $('input[name="category_1[]"]');
                 var messageField = $('#message');
-                var privacyCheck = $('#privacyCheck');
+                var privacyCheck = $('input[name="privacyCheck_1[]"]');
 
-                console.log('name:', nameField.val());
-                console.log('mail:', mailField.val());
-                console.log('phone:', phoneField.val());
-                console.log('category:', categoryFields.length);
-                console.log('message:', messageField.val());
-                console.log('privacyCheck:', privacyCheck.length);  // 要素の存在確認
-
+                // console.log('name:', nameField.val());
+                // console.log('mail:', mailField.val());
+                // console.log('phone:', phoneField.val());
+                // console.log('category:', categoryFields.length);
+                // console.log('message:', messageField.val());
+                // console.log('privacyCheck:', privacyCheck.length); // 要素の存在確認
 
                 // エラーメッセージを非表示にする
                 var errorElement = $('.form__error');
@@ -281,14 +284,12 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
                     errorElement.show();
                 } else {
                     // フォームを送信する処理をここに追加
-                    window.location.href = 'thanks.php';
+                    window.location.href = 'http://codeups01.local/thanks/';
                 }
             });
-
             function setErrorStyle(element) {
                 element.addClass('error');
             }
-
             function resetErrorStyles() {
                 $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');
             }
@@ -296,4 +297,3 @@ jQuery(function ($) { // この中であればWordpressでも「$」が使用可
 
     });
 });
-

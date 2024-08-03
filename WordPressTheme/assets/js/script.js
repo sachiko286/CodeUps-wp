@@ -294,6 +294,5 @@ jQuery(function ($) {
         $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');
       }
     });
-
   });
 });
