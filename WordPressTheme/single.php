@@ -29,40 +29,39 @@
 
             <div class="page-sub-blog__body">
               <?php the_content(); ?>
-
-              <figure>
-                <img src="./assets/images/common/blog1.jpg" alt="省略">
-              </figure>
-              <p>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-              </p>
-              <ul>
-                <li>リスト１</li>
-                <li>リスト２</li>
-                <li>リスト３</li>
-              </ul>
-              <p>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-              </p>
             </div>
 
+            <?php
+            $prev = get_previous_post();
+            if (!empty($prev)) {
+              $prev_url = esc_url(get_permalink($prev->ID));
+            }
 
-
+            $next = get_next_post();
+            if (!empty($next)) {
+              $next_url = esc_url(get_permalink($next->ID));
+            }
+            ?>
 
             <div class="pagenavi pagenavi--sub-blog">
               <div class="pagenavi__inner pagenavi__inner--sub-blog">
-                <!-- WP-PageNaviで出力される部分 ここから -->
                 <div class="wp-pagenavi wp-pagenavi--sub-blog" role="navigation">
-                  <a class="previouspostslink" rel="prev" href="#"></a>
-                  <a class="nextpostslink" rel="next" href="#"></a>
+                  <?php if (!empty($prev)) : ?>
+                    <a class="previouspostslink" rel="prev" href="<?php echo $prev_url; ?>"></a>
+                  <?php endif; ?>
+                  <?php if (!empty($next)) : ?>
+                    <a class="nextpostslink" rel="next" href="<?php echo $next_url; ?>"></a>
+                  <?php endif; ?>
                 </div>
-                <!-- WP-PageNaviで出力される部分 ここまで -->
               </div>
             </div>
+
           </div>
 
+
+
           <?php get_template_part('parts/aside') ?>
-          
+
         </div>
       </section>
   <?php endwhile;

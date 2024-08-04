@@ -224,7 +224,8 @@ $contact = esc_url(home_url('/contact/'));
                     <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m/d'); ?></time>
                     <p class="blog-card__title"><?php the_title(); ?></p>
                     <div class="blog-card__text">
-                      <?php the_content(); ?></div>
+                    <?php echo wp_trim_words(get_the_content(), 88, '…'); ?>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -308,73 +309,51 @@ $contact = esc_url(home_url('/contact/'));
         <div class="price__content">
           <div class="price__item">
             <h3 class="price__subtitle">ライセンス講習</h3>
-            <dl class="price__menu">
-              <dt class="price__course">オープンウォーターダイバーコース</dt>
-              <dd class="price__fee">¥50,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">アドバンスドオープンウォーターコース</dt>
-              <dd class="price__fee">¥60,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">レスキュー＋EFRコース</dt>
-              <dd class="price__fee">¥70,000</dd>
-            </dl>
+            <?php $licenses = SCF::get('license', 26); ?>
+            <?php foreach ($licenses as $license) : ?>
+              <dl class="price__menu">
+                <dt class="price__course"><?php echo esc_html($license['course1']); ?></dt>
+                <dd class="price__fee">¥<?php echo number_format(esc_html($license['price1'])); ?></dd>
+              </dl>
+            <?php endforeach; ?>
           </div>
           <div class="price__item">
             <h3 class="price__subtitle">体験ダイビング</h3>
-            <dl class="price__menu">
-              <dt class="price__course">ビーチ体験ダイビング(半日)</dt>
-              <dd class="price__fee">¥7,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">ビーチ体験ダイビング(1日)</dt>
-              <dd class="price__fee">¥14,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">ボート体験ダイビング(半日)</dt>
-              <dd class="price__fee">¥10,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">ボート体験ダイビング(1日)</dt>
-              <dd class="price__fee">¥18,000</dd>
-            </dl>
+            <?php $trials = SCF::get('trial-diving', 26); ?>
+            <?php foreach ($trials as $trial) : ?>
+              <dl class="price__menu">
+                <dt class="price__course"><?php echo esc_html($trial['course2']); ?></dt>
+                <dd class="price__fee">¥<?php echo number_format(esc_html($trial['price2'])); ?></dd>
+              </dl>
+            <?php endforeach; ?>
+
           </div>
           <div class="price__item">
             <h3 class="price__subtitle">ファンダイビング</h3>
-            <dl class="price__menu">
-              <dt class="price__course">ビーチダイビング(2ダイブ)</dt>
-              <dd class="price__fee">¥14,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">ボートダイビング(2ダイブ)</dt>
-              <dd class="price__fee">¥18,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">スペシャルダイビング(2ダイブ)</dt>
-              <dd class="price__fee">¥24,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">ナイトダイビング(1ダイブ)</dt>
-              <dd class="price__fee">¥10,000</dd>
-            </dl>
+            <?php $funs = SCF::get('fun-diving', 26); ?>
+            <?php foreach ($funs as $fun) : ?>
+              <dl class="price__menu">
+                <dt class="price__course"><?php echo esc_html($fun['course3']); ?></dt>
+                <dd class="price__fee">¥<?php echo number_format(esc_html($fun['price3'])); ?></dd>
+              </dl>
+            <?php endforeach; ?>
           </div>
           <div class="price__item">
             <h3 class="price__subtitle">スペシャルダイビング</h3>
-            <dl class="price__menu">
-              <dt class="price__course">貸切ダイビング(2ダイブ)</dt>
-              <dd class="price__fee">¥24,000</dd>
-            </dl>
-            <dl class="price__menu">
-              <dt class="price__course">1日ダイビング(3ダイブ)</dt>
-              <dd class="price__fee">¥32,000</dd>
-            </dl>
+            <?php $specials = SCF::get('special-diving', 26); ?>
+            <?php foreach ($specials as $special) : ?>
+              <dl class="price__menu">
+                <dt class="price__course"><?php echo $special['course4']; ?></dt>
+                <dd class="price__fee">¥<?php echo number_format($special['price4']); ?></dd>
+              </dl>
+            <?php endforeach; ?>
           </div>
         </div>
       </div>
-      <div class="price__button">
-        <a href="<?php echo $price; ?>" class="button slide">View more<span class="button__arrow"></span></a>
-      </div>
+    </div>
+    <div class="price__button">
+      <a href="<?php echo $price; ?>" class="button slide">View more<span class="button__arrow"></span></a>
+    </div>
     </div>
   </section>
 </main>

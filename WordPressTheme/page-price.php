@@ -58,7 +58,6 @@
         <div class="price-table__title">スペシャルダイビング</div>
         <table class="price-table__body">
           <?php $specials = SCF::get('special-diving'); ?>
-
           <?php foreach ($specials as $special) : ?>
             <tr>
               <td class="price-table__course"><?php echo $special['course4']; ?></td>

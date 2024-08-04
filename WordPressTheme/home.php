@@ -49,7 +49,8 @@ $contact = esc_url(home_url('/contact/'));
                         <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m/d'); ?></time>
                         <p class="blog-card__title"><?php the_title(); ?></p>
                         <div class="blog-card__text">
-                          <?php the_content(); ?></div>
+                          <?php echo wp_trim_words(get_the_content(), 88, '…'); ?>
+                        </div>
                       </div>
                     </div>
                   </a>

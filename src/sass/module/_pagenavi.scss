@@ -35,7 +35,8 @@ gap: rem(12);
 
 //ワードプレス調整
 .wp-pagenavi--sub-blog {
-  justify-content: space-between;
+  // justify-content: space-between;
+  gap: rem(28);
 }
 
 .pagenavi__numbers {

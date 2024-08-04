@@ -9,7 +9,7 @@
   <!-- ポートフォリオや学習の時 検索結果に出ないように設定 -->
   <meta name="robots" content="noindex" />
   <!-- meta情報 -->
-  <title>CodeUps</title>
+  <!-- <title>CodeUps</title> -->
   <!-- ウェブページの概要や説明。検索結果に表示されることがある -->
   <meta name="description" content="" />
   <meta name="keywords" content="ウェブページの内容に関連するキーワード" />
