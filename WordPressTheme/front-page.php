@@ -309,7 +309,7 @@ $contact = esc_url(home_url('/contact/'));
         <div class="price__content">
           <div class="price__item">
             <h3 class="price__subtitle">ライセンス講習</h3>
-            <?php $licenses = SCF::get('license', 26); ?>
+            <?php $licenses = SCF::get('license-table', 26); ?>
             <?php foreach ($licenses as $license) : ?>
               <dl class="price__menu">
                 <dt class="price__course"><?php echo esc_html($license['course1']); ?></dt>
@@ -319,18 +319,18 @@ $contact = esc_url(home_url('/contact/'));
           </div>
           <div class="price__item">
             <h3 class="price__subtitle">体験ダイビング</h3>
-            <?php $trials = SCF::get('trial-diving', 26); ?>
-            <?php foreach ($trials as $trial) : ?>
+            <?php $experiences = SCF::get('experience-table', 26); ?>
+            <?php foreach ($experiences as $experience) : ?>
               <dl class="price__menu">
-                <dt class="price__course"><?php echo esc_html($trial['course2']); ?></dt>
-                <dd class="price__fee">¥<?php echo number_format(esc_html($trial['price2'])); ?></dd>
+                <dt class="price__course"><?php echo esc_html($experience['course2']); ?></dt>
+                <dd class="price__fee">¥<?php echo number_format(esc_html($experience['price2'])); ?></dd>
               </dl>
             <?php endforeach; ?>
 
           </div>
           <div class="price__item">
             <h3 class="price__subtitle">ファンダイビング</h3>
-            <?php $funs = SCF::get('fun-diving', 26); ?>
+            <?php $funs = SCF::get('fundiving-table', 26); ?>
             <?php foreach ($funs as $fun) : ?>
               <dl class="price__menu">
                 <dt class="price__course"><?php echo esc_html($fun['course3']); ?></dt>
@@ -340,7 +340,7 @@ $contact = esc_url(home_url('/contact/'));
           </div>
           <div class="price__item">
             <h3 class="price__subtitle">スペシャルダイビング</h3>
-            <?php $specials = SCF::get('special-diving', 26); ?>
+            <?php $specials = SCF::get('specialdiving-table', 26); ?>
             <?php foreach ($specials as $special) : ?>
               <dl class="price__menu">
                 <dt class="price__course"><?php echo $special['course4']; ?></dt>

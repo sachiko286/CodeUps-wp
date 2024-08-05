@@ -52,3 +52,8 @@ $lightgreen: #DDF0F1;
 body {
   color: $darkgreen;
 }
+
+
+html {
+  scroll-padding-top: 100px; /* 固定ヘッダーの高さ */
+}

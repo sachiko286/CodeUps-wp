@@ -10,6 +10,10 @@ body {
 	color: #0D2936;
 }
 
+html {
+	scroll-padding-top: 100px; /* 固定ヘッダーの高さ */
+}
+
 .u-desktop {
 	display: none;
 }
@@ -2084,6 +2088,11 @@ html.is-fixed {
 	margin-top: 5.125rem;
 }
 
+.page-blog__archive {
+	line-height: 2.5;
+	text-align: center;
+}
+
 .page-campaign__inner {
 	max-width: 36.25rem;
 }
@@ -2273,7 +2282,7 @@ html.is-fixed {
 	text-align: center;
 }
 
-.price-table__::before {
+.price-table__title::before {
 	background-image: url("../images/common/price-icon.svg");
 	background-size: contain;
 	content: "";
@@ -3717,6 +3726,10 @@ html {
 	margin-left: 5.375rem;
 }
 
+.page-blog__archive {
+	text-align: left;
+}
+
 .page-campaign__items {
 	grid-template-columns: 1fr 1fr;
 	padding: 0;
@@ -3805,7 +3818,7 @@ html {
 	width: 100%;
 }
 
-.price-table__::before {
+.price-table__title::before {
 	display: none;
 }
 

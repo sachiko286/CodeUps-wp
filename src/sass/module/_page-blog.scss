@@ -60,3 +60,11 @@
   margin-top: rem(82);
 }
 
+// ワードプレス調整(アーカイブタイトル）
+.page-blog__archive{
+  line-height: 2.5;
+  text-align: center;
+  @include mq(md) {
+      text-align: start;
+  }
+}

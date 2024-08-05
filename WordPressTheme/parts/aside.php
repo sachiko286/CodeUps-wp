@@ -163,34 +163,9 @@ $contact = esc_url(home_url('/contact/'));
       </div>
     </div>
 
-
     <div class="page-blog__aside-content page-blog__aside-content--archive blog-aside">
       <h2 class="blog-aside__title">アーカイブ</h2>
-      <ul class="blog-aside__archive aside-archive">
-        <li class="aside-archive__item">
-          <p class="aside-archive__item-year js-archive archive-arrow">2023</p>
-          <div class="aside-archive__item-mouths js-mouths">
-            <a href="" class="aside-archive__item-mouth archive-arrow">
-              <p>3月</p>
-            </a>
-            <a href="" class="aside-archive__item-mouth archive-arrow">
-              <p>2月</p>
-            </a>
-            <a href="" class="aside-archive__item-mouth archive-arrow">
-              <p>1月</p>
-            </a>
-          </div>
-        </li>
-        <li class="aside-archive__item">
-          <p class="aside-archive__item-year js-faq-question archive-arrow">2022</p>
-          <div class="aside-archive__item-mouths js-mouths">
-
-            <p class="aside-archive__item-mouth archive-arrow">3月</p>
-            <p class="aside-archive__item-mouth archive-arrow">2月</p>
-            <p class="aside-archive__item-mouth archive-arrow">1月</p>
-          </div>
-        </li>
-      </ul>
+      <?php echo custom_archives(); ?>
     </div>
   </div>
 </div>

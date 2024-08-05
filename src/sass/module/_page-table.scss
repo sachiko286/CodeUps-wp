@@ -40,7 +40,7 @@
 }
 
 
-.price-table__::before {
+.price-table__title::before {
   content: "";
   background-image: url("../images/common/price-icon.svg");
   background-size: contain;

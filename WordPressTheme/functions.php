@@ -172,12 +172,80 @@ add_action('wp_head', 'track_post_views');
 
 
 /* ---------- 特定の固定ページのエディタ非表示 ---------- */
-add_filter('use_block_editor_for_post',function($use_block_editor,$post){
-	if($post->post_type==='page'){
-		if(in_array($post->post_name,['about-us','faq','information','price','contact','thanks','top','blog','404-2','sitemap'])){ //ページスラッグ名
-			remove_post_type_support('page','editor');
-			return false;
-		}
-	}
-	return $use_block_editor;
-},10,2);
+add_filter('use_block_editor_for_post', function ($use_block_editor, $post) {
+    if ($post->post_type === 'page') {
+        if (in_array($post->post_name, ['about-us', 'faq', 'information', 'price', 'contact', 'thanks', 'top', 'blog', '404-2', 'sitemap'])) { //ページスラッグ名
+            remove_post_type_support('page', 'editor');
+            return false;
+        }
+    }
+    return $use_block_editor;
+}, 10, 2);
+
+
+/* ---------- アーカイブページ ---------- */
+function custom_archives() {
+    global $wpdb;
+
+    // 月名を日本語で配列に格納
+    $months_japanese = array(
+        1 => '1月', 2 => '2月', 3 => '3月', 4 => '4月', 
+        5 => '5月', 6 => '6月', 7 => '7月', 8 => '8月', 
+        9 => '9月', 10 => '10月', 11 => '11月', 12 => '12月'
+    );
+
+    // 年ごとと月ごとに投稿をグループ化して取得
+    $years = $wpdb->get_results("SELECT DISTINCT YEAR(post_date) AS year, MONTH(post_date) AS month, COUNT(ID) as post_count FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' GROUP BY year, month ORDER BY post_date DESC");
+
+    $output = '<ul class="blog-aside__archive aside-archive">';
+
+    $current_year = null;
+    foreach($years as $year) {
+        if ($current_year != $year->year) {
+            if ($current_year != null) {
+                $output .= '</div></li>';
+            }
+            $current_year = $year->year;
+            $output .= '<li class="aside-archive__item">';
+            $output .= '<p class="aside-archive__item-year js-archive archive-arrow">' . $year->year . '</p>';
+            $output .= '<div class="aside-archive__item-mouths js-mouths">';
+        }
+        $month_name = $months_japanese[$year->month]; // 日本語の月名を使用
+        $month_url = get_month_link($year->year, $year->month);
+        $output .= '<a href="' . $month_url . '" class="aside-archive__item-mouth archive-arrow"><p>' . $month_name . '</p></a>';
+    }
+    if ($current_year != null) {
+        $output .= '</div></li>';
+    }
+    $output .= '</ul>';
+
+    return $output;
+}
+
+/* ---------- お問い合わせページ キャンペーンタイトルの取得 ---------- */
+function campaign_titles_select_menu() {
+    $args = array(
+        'post_type' => 'campaign', // カスタム投稿タイプに変更
+        'posts_per_page' => -1 // すべてのキャンペーンを取得
+    );
+    $campaigns = new WP_Query($args);
+    $output = '';
+
+    if ($campaigns->have_posts()) {
+        $output .= '<select name="campaign" class="form__select">';
+        $output .= '<option value="">キャンペーン内容を選択</option>'; // 空のオプション
+        while ($campaigns->have_posts()) {
+            $campaigns->the_post();
+            $output .= '<option value="' . get_the_title() . '">' . get_the_title() . '</option>';
+        }
+        $output .= '</select>';
+        wp_reset_postdata();
+    }
+
+    return $output;
+}
+add_shortcode('campaign_titles_select', 'campaign_titles_select_menu');
+
+// Contact Form 7内でショートコードを処理するためのフィルター
+add_filter('wpcf7_form_elements', 'do_shortcode');
+

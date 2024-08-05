@@ -47,102 +47,110 @@ $contact = esc_url(home_url('/contact/'));
   <!-- ヘッダー -->
   <header class="header top-header">
     <div class="header__inner">
-      <h1 class="header__logo">
-        <a href="<?php echo $home; ?>">
-          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-w.svg" alt="ロゴ">
-        </a>
-      </h1>
+      <?php if (is_front_page()) : ?>
+        <h1 class="header__logo">
+      <?php else : ?>
+        <div class="header__logo">
+      <?php endif; ?>
+          <a href="<?php echo $home; ?>">
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-w.svg" alt="ロゴ">
+          </a>
+      <?php if (is_front_page()) : ?>
+        </h1>
+      <?php else : ?>
+        </div>
+      <?php endif; ?>
 
-      <!-- ハンバーガーボタン -->
-      <button class="header__hamburger js-hamburger" aria-label="メニューを開く">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+  <!-- ハンバーガーボタン -->
+  <button class="header__hamburger js-hamburger" aria-label="メニューを開く">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
-      <!-- PCヘッダーナビ -->
-      <nav class="header__pc-nav pc-nav">
-        <ul class="pc-nav__items">
-          <li class="pc-nav__item">
-            <a href="<?php echo $campaign; ?>">Campaign<span>キャンペーン</span></a>
-          </li>
-          <li class="pc-nav__item">
-            <a href="<?php echo $aboutus; ?>">About us<span>私たちについて</span></a>
-          </li>
-          <li class="pc-nav__item">
-            <a href="<?php echo $information; ?>">Information<span>ダイビング情報</span></a>
-          </li>
-          <li class="pc-nav__item">
-            <a href="<?php echo $blog; ?>">Blog<span>ブログ</span></a>
-          </li>
-          <li class="pc-nav__item">
-            <a href="<?php echo $voice; ?>">Voice<span>お客様の声</span></a>
-          </li>
-          <li class="pc-nav__item">
-            <a href="<?php echo $price; ?>">Price<span>料金一覧</span></a>
-          </li>
-          <li class="pc-nav__item">
-            <a href="<?php echo $faq; ?>">FAQ<span>よくある質問</span></a>
-          </li>
-          <li class="pc-nav__item">
-            <a href="<?php echo $contact; ?>">Contact<span>お問い合わせ</span></a>
-          </li>
+  <!-- PCヘッダーナビ -->
+  <nav class="header__pc-nav pc-nav">
+    <ul class="pc-nav__items">
+      <li class="pc-nav__item">
+        <a href="<?php echo $campaign; ?>">Campaign<span>キャンペーン</span></a>
+      </li>
+      <li class="pc-nav__item">
+        <a href="<?php echo $aboutus; ?>">About us<span>私たちについて</span></a>
+      </li>
+      <li class="pc-nav__item">
+        <a href="<?php echo $information; ?>">Information<span>ダイビング情報</span></a>
+      </li>
+      <li class="pc-nav__item">
+        <a href="<?php echo $blog; ?>">Blog<span>ブログ</span></a>
+      </li>
+      <li class="pc-nav__item">
+        <a href="<?php echo $voice; ?>">Voice<span>お客様の声</span></a>
+      </li>
+      <li class="pc-nav__item">
+        <a href="<?php echo $price; ?>">Price<span>料金一覧</span></a>
+      </li>
+      <li class="pc-nav__item">
+        <a href="<?php echo $faq; ?>">FAQ<span>よくある質問</span></a>
+      </li>
+      <li class="pc-nav__item">
+        <a href="<?php echo $contact; ?>">Contact<span>お問い合わせ</span></a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- spドロワーメニュー -->
+  <div class="header__drawer js-drawer">
+    <nav class="header__drawer-nav sp-nav">
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">キャンペーン</a></p>
+        <ul class="sp-nav__list-items">
+          <li class="sp-nav__list-item"><a href="#">ライセンス取得</a></li>
+          <li class="sp-nav__list-item"><a href="#">貸切体験ダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="#">ナイトダイビング</a></li>
         </ul>
-      </nav>
-
-      <!-- spドロワーメニュー -->
-      <div class="header__drawer js-drawer">
-        <nav class="header__drawer-nav sp-nav">
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">キャンペーン</a></p>
-            <ul class="sp-nav__list-items">
-              <li class="sp-nav__list-item"><a href="#">ライセンス取得</a></li>
-              <li class="sp-nav__list-item"><a href="#">貸切体験ダイビング</a></li>
-              <li class="sp-nav__list-item"><a href="#">ナイトダイビング</a></li>
-            </ul>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $aboutus; ?>">私たちについて</a></p>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">ダイビング情報</a></p>
-            <ul class="sp-nav__list-items">
-              <li class="sp-nav__list-item"><a href="#">ライセンス講習</a></li>
-              <li class="sp-nav__list-item"><a href="#">体験ダイビング</a></li>
-              <li class="sp-nav__list-item"><a href="#">ファンダイビング</a></li>
-            </ul>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $blog; ?>">ブログ</a></p>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $voice; ?>">お客様の声</a></p>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $price; ?>">料金一覧</a></p>
-            <ul class="sp-nav__list-items">
-              <li class="sp-nav__list-item"><a href="#">ライセンス講習</a></li>
-              <li class="sp-nav__list-item"><a href="#">体験ダイビング</a></li>
-              <li class="sp-nav__list-item"><a href="#">ファンダイビング</a></li>
-            </ul>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $faq; ?>">よくある質問</a></p>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $sitemap; ?>">サイトマップ</a></p>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category "><a href="<?php echo $privacypolicy; ?>">プライバシー<br class="u-mobile">ポリシー</a>
-            </p>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $terms; ?>">利用規約</a></p>
-          </div>
-          <div class="sp-nav__list-box">
-            <p class="sp-nav__list-category"><a href="<?php echo $contact; ?>">お問い合わせ</a></p>
-          </div>
-        </nav>
       </div>
-    </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $aboutus; ?>">私たちについて</a></p>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">ダイビング情報</a></p>
+        <ul class="sp-nav__list-items">
+          <li class="sp-nav__list-item"><a href="#">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="#">体験ダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="#">ファンダイビング</a></li>
+        </ul>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $blog; ?>">ブログ</a></p>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $voice; ?>">お客様の声</a></p>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $price; ?>">料金一覧</a></p>
+        <ul class="sp-nav__list-items">
+          <li class="sp-nav__list-item"><a href="#">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="#">体験ダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="#">ファンダイビング</a></li>
+        </ul>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $faq; ?>">よくある質問</a></p>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $sitemap; ?>">サイトマップ</a></p>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category "><a href="<?php echo $privacypolicy; ?>">プライバシー<br class="u-mobile">ポリシー</a>
+        </p>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $terms; ?>">利用規約</a></p>
+      </div>
+      <div class="sp-nav__list-box">
+        <p class="sp-nav__list-category"><a href="<?php echo $contact; ?>">お問い合わせ</a></p>
+      </div>
+    </nav>
+  </div>
+  </div>
   </header>
