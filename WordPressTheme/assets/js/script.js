@@ -300,7 +300,7 @@ jQuery(function ($) {
                             window.location.href = redirectUrl;
                         }, 1000); // 1秒遅延してリダイレクト
                     }
-                }, { once: true }); // イベントリスナーを一度だけ実行
+                }, { once: true }); // イベントリスナーを一度だけ実行//test
               }
           }
       });
