@@ -283,17 +283,37 @@ jQuery(function ($) {
                 if (!isValid) {
                     errorElement.show();
                 } else {
-                    // フォームを送信する処理をここに追加
-                    window.location.href = 'http://codeups01.local/thanks/';
+                    // フォームのIDを指定
+                    var form = document.querySelector('form.wpcf7-form');
+
+                    if (form) {
+                        // フォーム送信をトリガー
+                        form.submit();
+
+                        // フォーム送信完了後のリダイレクト
+                        document.addEventListener('wpcf7mailsent', function (event) {
+                            console.log('Contact Form 7 sent event triggered');
+                            if (event.detail.contactFormId == '62617b1') { // 実際のフォームIDに置き換えてください
+                                setTimeout(function () {
+                                    var redirectUrl = 'http://codeups01.local/thanks/';
+                                    console.log('Redirecting to: ' + redirectUrl);
+                                    window.location.href = redirectUrl;
+                                }, 1000); // 1秒遅延してリダイレクト
+                            }
+                        }, { once: true }); // イベントリスナーを一度だけ実行
+                    }
                 }
             });
+
             function setErrorStyle(element) {
                 element.addClass('error');
             }
+
             function resetErrorStyles() {
                 $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');
             }
         });
+
 
     });
 });
