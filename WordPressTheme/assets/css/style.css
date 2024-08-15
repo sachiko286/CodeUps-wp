@@ -183,6 +183,10 @@ a {
 	padding-top: 3rem;
 }
 
+.top-footer.top-footert--mt0 {
+	margin-top: 0;
+}
+
 .top-footer--404 {
 	padding-bottom: 3.625rem;
 	padding-top: 3.25rem;
@@ -1618,6 +1622,10 @@ a {
 .wpcf7-list-item {
 	display: block !important;
 	margin: 0 !important;
+}
+
+.wpcf7-form.sent .wpcf7-response-output {
+	display: none;
 }
 
 .fv__title-wrap {

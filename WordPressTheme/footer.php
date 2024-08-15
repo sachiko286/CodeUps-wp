@@ -14,13 +14,13 @@ $information = esc_url(home_url('/information/'));
 $contact = esc_url(home_url('/contact/'));
 ?>
 
-<?php if (!is_page('contact')) : ?>
+<?php if (!is_page('contact') && !is_404()) : ?>
   <section class="contact sub-contact">
     <div class="contact__inner inner">
       <div class="contact__content">
         <div class="contact__access">
           <div class="contact__company">
-            <img src="<?php echo get_theme_file_uri(); ?>./assets/images/common/CodeUps-gr.svg" alt="社名ロゴ">
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-gr.svg" alt="社名ロゴ">
           </div>
           <div class="contact__address">
             <div class="contact__text">
@@ -51,7 +51,7 @@ $contact = esc_url(home_url('/contact/'));
   </section>
 <?php endif; ?>
 
-<footer class="footer top-footer">
+<footer class="footer top-footer <?php if (is_404()) { echo 'top-footert--mt0'; } ?>">
   <div class="footer__inner inner">
     <div class="footer__heater">
       <div class="footer__title">

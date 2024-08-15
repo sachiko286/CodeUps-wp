@@ -122,13 +122,6 @@ add_action('init', 'Change_objectlabel');
 add_action('admin_menu', 'Change_menulabel');
 
 
-/* -------Contact Form 7で自動挿入されるPタグ、brタグを削除 -------*/
-add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
-function wpcf7_autop_return_false()
-{
-    return false;
-}
-
 /* ---------- 人気記事 ---------- */
 // 閲覧数を増加させる関数
 function set_post_views($postID)
@@ -222,6 +215,13 @@ function custom_archives() {
     return $output;
 }
 
+/* -------Contact Form 7で自動挿入されるPタグ、brタグを削除 -------*/
+add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
+function wpcf7_autop_return_false()
+{
+    return false;
+}
+
 /* ---------- お問い合わせページ キャンペーンタイトルの取得 ---------- */
 function campaign_titles_select_menu() {
     $args = array(
@@ -249,3 +249,10 @@ add_shortcode('campaign_titles_select', 'campaign_titles_select_menu');
 // Contact Form 7内でショートコードを処理するためのフィルター
 add_filter('wpcf7_form_elements', 'do_shortcode');
 
+
+/* ---------- サンクスページに移る ---------- */
+function redirect_to_thank_you_page() {
+    echo "<script>location.href='" . esc_url(home_url('/thanks/')) . "';</script>";
+}
+
+add_action('wpcf7_mail_sent', 'redirect_to_thank_you_page');

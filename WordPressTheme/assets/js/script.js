@@ -222,12 +222,8 @@ jQuery(function ($) {
         $('#' + tab).addClass('is-active');
       }
     });
-
-    //フォームエラーチェック、送信
     $(document).ready(function () {
-      $('#js-submit').click(function (event) {
-        event.preventDefault(); // フォームの送信を防止
-
+      $('#js-submit').click(function () {
         // 必須フィールドを取得
         var nameField = $('#name');
         var mailField = $('#mail');
@@ -235,13 +231,6 @@ jQuery(function ($) {
         var categoryFields = $('input[name="category_1[]"]');
         var messageField = $('#message');
         var privacyCheck = $('input[name="privacyCheck_1[]"]');
-
-        // console.log('name:', nameField.val());
-        // console.log('mail:', mailField.val());
-        // console.log('phone:', phoneField.val());
-        // console.log('category:', categoryFields.length);
-        // console.log('message:', messageField.val());
-        // console.log('privacyCheck:', privacyCheck.length); // 要素の存在確認
 
         // エラーメッセージを非表示にする
         var errorElement = $('.form__error');
@@ -288,25 +277,9 @@ jQuery(function ($) {
           if (form) {
             // フォーム送信をトリガー
             form.submit();
-
-            // フォーム送信完了後のリダイレクト
-            document.addEventListener('wpcf7mailsent', function (event) {
-              console.log('Contact Form 7 sent event triggered');
-              if (event.detail.contactFormId == '62617b1') {
-                // 実際のフォームIDに置き換えてください
-                setTimeout(function () {
-                  var redirectUrl = 'http://codeups01.local/thanks/';
-                  console.log('Redirecting to: ' + redirectUrl);
-                  window.location.href = redirectUrl;
-                }, 1000); // 1秒遅延してリダイレクト
-              }
-            }, {
-              once: true
-            }); // イベントリスナーを一度だけ実行
           }
         }
       });
-
       function setErrorStyle(element) {
         element.addClass('error');
       }
