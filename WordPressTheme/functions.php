@@ -167,7 +167,7 @@ add_action('wp_head', 'track_post_views');
 /* ---------- 特定の固定ページのエディタ非表示 ---------- */
 add_filter('use_block_editor_for_post', function ($use_block_editor, $post) {
     if ($post->post_type === 'page') {
-        if (in_array($post->post_name, ['about-us', 'faq', 'information', 'price', 'contact', 'thanks', 'top', 'blog', '404-2', 'sitemap'])) { //ページスラッグ名
+        if (in_array($post->post_name, ['about-us', 'faq', 'information', 'price', 'contact', 'contact_thanks', 'top', 'blog', '404-2', 'sitemap'])) { //ページスラッグ名
             remove_post_type_support('page', 'editor');
             return false;
         }
@@ -252,7 +252,7 @@ add_filter('wpcf7_form_elements', 'do_shortcode');
 
 /* ---------- サンクスページに移る ---------- */
 function redirect_to_thank_you_page() {
-    echo "<script>location.href='" . esc_url(home_url('/thanks/')) . "';</script>";
+    echo "<script>location.href='" . esc_url(home_url('/contact_thanks/')) . "';</script>";
 }
 
 add_action('wpcf7_mail_sent', 'redirect_to_thank_you_page');
