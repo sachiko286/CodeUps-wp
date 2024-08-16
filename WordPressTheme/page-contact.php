@@ -12,9 +12,7 @@
 
   <div class="page-contact top-page-contact">
     <div class="page-contact__inner inner">
-      <!-- <form class="page-contact__form form" id="form" action="#"> -->
       <?php echo do_shortcode('[contact-form-7 id="62617b1" title="コンタクトフォーム 1"]'); ?>
-      <!-- </form> -->
     </div>
   </div>
 </main>

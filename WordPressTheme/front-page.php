@@ -354,7 +354,6 @@ $contact = esc_url(home_url('/contact/'));
     <div class="price__button">
       <a href="<?php echo $price; ?>" class="button slide">View more<span class="button__arrow"></span></a>
     </div>
-    </div>
   </section>
 </main>
 

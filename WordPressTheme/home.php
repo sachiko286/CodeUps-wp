@@ -64,15 +64,11 @@ $contact = esc_url(home_url('/contact/'));
               <?php wp_pagenavi(); ?>
               <!-- WP-PageNaviで出力される部分 ここまで -->
             </div>
-
           </div>
-
-
         </div>
       </div>
-
       <?php get_template_part('parts/aside') ?>
-
+    </div>
   </section>
 </main>
 
