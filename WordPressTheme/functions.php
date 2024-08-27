@@ -256,3 +256,16 @@ function redirect_to_thank_you_page() {
 }
 
 add_action('wpcf7_mail_sent', 'redirect_to_thank_you_page');
+
+
+/* ---------- 文字数制限 voice---------- */
+function custom_trim_content($content, $length = 354, $more = '…') {
+    $content = strip_tags($content, '<br><p>'); // <br>と<p>タグを残す
+    if(mb_strwidth($content, 'UTF-8') <= $length) {
+        return $content;
+    } else {
+        $trimmed_content = mb_strimwidth($content, 0, $length, '', 'UTF-8');
+        return $trimmed_content . $more;
+    }
+}
+

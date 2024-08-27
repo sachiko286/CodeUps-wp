@@ -13,7 +13,7 @@
     <div class="page-voice__inner inner">
       <div class="page-voice__folter filter-content">
         <ul class="filter-content__list">
-          <li class="filter-content__list-title <?php if (!isset($_GET['voice_category'])) echo 'is-active'; ?>">
+          <li class="filter-content__list-title <?php if (!is_tax('voice_category')) echo 'is-active'; ?>">
             <a href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
           </li>
           <?php
@@ -30,7 +30,7 @@
 
       <div class="page-voice__wrapper">
         <ul class="page-voice__items voice-list ">
-          <?php 
+          <?php
           if (have_posts()) :
             while (have_posts()) :
               the_post(); ?>
@@ -60,7 +60,7 @@
                   </div>
                 </div>
               </li>
-          <?php endwhile;?>
+            <?php endwhile; ?>
           <?php else : ?>
             <p>該当する口コミがありません。</p>
           <?php endif; ?>

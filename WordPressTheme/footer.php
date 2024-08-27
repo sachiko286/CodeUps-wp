@@ -1,18 +1,4 @@
-<?php
-$home = esc_url(home_url('/'));
-$blog = esc_url(home_url('/blog/'));
-$aboutus = esc_url(home_url('/about-us/'));
-$campaign = esc_url(home_url('/campaign/'));
-$company = esc_url(home_url('/company/'));
-$voice = esc_url(home_url('/voice/'));
-$faq = esc_url(home_url('/faq/'));
-$price = esc_url(home_url('/price/'));
-$privacypolicy = esc_url(home_url('/privacypolicy/'));
-$sitemap = esc_url(home_url('/sitemap/'));
-$terms = esc_url(home_url('/terms-of-servic/'));
-$information = esc_url(home_url('/information/'));
-$contact = esc_url(home_url('/contact/'));
-?>
+<?php include 'urls.php'; ?>
 
 <?php if (!is_page('contact') && !is_404()) : ?>
   <section class="contact sub-contact">
@@ -58,8 +44,8 @@ $contact = esc_url(home_url('/contact/'));
         <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-w.svg" alt="会社ロゴホワイト">
       </div>
       <div class="footer__sns">
-        <a class="footer__sns-facebook" href="#"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/FacebookLogo.png" alt="フェイスブックロゴ"></a>
-        <a class="footer__sns-insta" href="#"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/insta.png" alt="インスタロゴ"></a>
+        <a class="footer__sns-facebook" href="https://www.facebook.com/?locale=ja_JP" target="_blank"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/FacebookLogo.png" alt="フェイスブックロゴ"></a>
+        <a class="footer__sns-insta" href="https://www.instagram.com/" target="_blank"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/insta.png" alt="インスタロゴ"></a>
       </div>
     </div>
     <nav class="footer__nav sp-nav">
@@ -95,7 +81,6 @@ $contact = esc_url(home_url('/contact/'));
           <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-license">ライセンス講習</a></li>
           <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-experience">体験ダイビング</a></li>
           <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-fundiving">ファンダイビング</a></li>
-          <!-- <li class="sp-nav__list-item"><a href="#">スペシャルダイビング</a></li> -->
         </ul>
       </div>
       <div class="sp-nav__list-box">

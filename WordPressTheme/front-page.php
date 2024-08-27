@@ -1,20 +1,6 @@
 <?php get_header(); ?>
 
-<?php
-$home = esc_url(home_url('/'));
-$blog = esc_url(home_url('/blog/'));
-$aboutus = esc_url(home_url('/about-us/'));
-$campaign = esc_url(home_url('/campaign/'));
-$company = esc_url(home_url('/company/'));
-$voice = esc_url(home_url('/voice/'));
-$faq = esc_url(home_url('/faq/'));
-$price = esc_url(home_url('/price/'));
-$privacypolicy = esc_url(home_url('/privacypolicy/'));
-$sitemap = esc_url(home_url('/sitemap/'));
-$terms = esc_url(home_url('/terms-of-servic/'));
-$information = esc_url(home_url('/information/'));
-$contact = esc_url(home_url('/contact/'));
-?>
+<?php include 'urls.php'; ?>
 
 <main>
   <section class="fv top-fv">
@@ -224,7 +210,7 @@ $contact = esc_url(home_url('/contact/'));
                     <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m/d'); ?></time>
                     <p class="blog-card__title"><?php the_title(); ?></p>
                     <div class="blog-card__text">
-                    <?php echo wp_trim_words(get_the_content(), 88, '…'); ?>
+                      <?php echo wp_trim_words(get_the_content(), 88, '…'); ?>
                     </div>
                   </div>
                 </div>
@@ -279,7 +265,8 @@ $contact = esc_url(home_url('/contact/'));
                   </div>
                 </div>
                 <div class="voice-card__text">
-                  <?php the_content(); ?>
+                  <?php echo wpautop(custom_trim_content(get_the_content(), 354, '…')); //文字数制限
+                  ?>
                 </div>
               </div>
             </li>

@@ -21,7 +21,8 @@
   <meta property="og:site_name" content="サイトの名前" />
   <meta property="og:description" content="ページの説明" />
   <!-- ファビコン -->
-  <link rel="icon" href="#" />
+  <link rel="icon" href="<?php echo get_theme_file_uri(); ?>/assets/images/common/favicon.ico" alt="ロゴ" />
+  <!-- favicon.ico -->
 
   <?php wp_head(); ?>
 
@@ -36,22 +37,7 @@
 </script>
 </head>
 
-<?php
-$home = esc_url(home_url('/'));
-$blog = esc_url(home_url('/blog/'));
-$aboutus = esc_url(home_url('/about-us/'));
-$campaign = esc_url(home_url('/campaign/'));
-$company = esc_url(home_url('/company/'));
-$voice = esc_url(home_url('/voice/'));
-$faq = esc_url(home_url('/faq/'));
-$price = esc_url(home_url('/price/'));
-$privacypolicy = esc_url(home_url('/privacypolicy/'));
-$sitemap = esc_url(home_url('/sitemap/'));
-$terms = esc_url(home_url('/terms-of-servic/'));
-$information = esc_url(home_url('/information/'));
-$contact = esc_url(home_url('/contact/'));
-?>
-
+<?php include 'urls.php'; ?>
 
 <body>
   <!-- ヘッダー -->
@@ -114,20 +100,20 @@ $contact = esc_url(home_url('/contact/'));
       <div class="sp-nav__list-box">
         <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">キャンペーン</a></p>
         <ul class="sp-nav__list-items">
-          <li class="sp-nav__list-item"><a href="#">ライセンス取得</a></li>
-          <li class="sp-nav__list-item"><a href="#">貸切体験ダイビング</a></li>
-          <li class="sp-nav__list-item"><a href="#">ナイトダイビング</a></li>
+        <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-license">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-experience">体験ダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-fundiving">ファンダイビング</a></li>
         </ul>
       </div>
       <div class="sp-nav__list-box">
         <p class="sp-nav__list-category"><a href="<?php echo $aboutus; ?>">私たちについて</a></p>
       </div>
       <div class="sp-nav__list-box">
-        <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">ダイビング情報</a></p>
+        <p class="sp-nav__list-category"><a href="<?php echo $information; ?>">ダイビング情報</a></p>
         <ul class="sp-nav__list-items">
-          <li class="sp-nav__list-item"><a href="#">ライセンス講習</a></li>
-          <li class="sp-nav__list-item"><a href="#">体験ダイビング</a></li>
-          <li class="sp-nav__list-item"><a href="#">ファンダイビング</a></li>
+        <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab01">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab03">体験ダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab02">ファンダイビング</a></li>
         </ul>
       </div>
       <div class="sp-nav__list-box">
@@ -139,9 +125,9 @@ $contact = esc_url(home_url('/contact/'));
       <div class="sp-nav__list-box">
         <p class="sp-nav__list-category"><a href="<?php echo $price; ?>">料金一覧</a></p>
         <ul class="sp-nav__list-items">
-          <li class="sp-nav__list-item"><a href="#">ライセンス講習</a></li>
-          <li class="sp-nav__list-item"><a href="#">体験ダイビング</a></li>
-          <li class="sp-nav__list-item"><a href="#">ファンダイビング</a></li>
+        <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-license">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-experience">体験ダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-fundiving">ファンダイビング</a></li>
         </ul>
       </div>
       <div class="sp-nav__list-box">

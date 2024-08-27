@@ -16,7 +16,7 @@
     <div class="page-campaign__inner inner">
       <div class="page-campaign__filter filter-content">
       <ul class="filter-content__list">
-          <li class="filter-content__list-title <?php if (!isset($_GET['campaign_category'])) echo 'is-active'; ?>">
+          <li class="filter-content__list-title <?php if (!is_tax('campaign_category')) echo 'is-active'; ?>">
             <a href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
           </li>
           <?php

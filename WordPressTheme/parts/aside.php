@@ -74,7 +74,7 @@ $contact = esc_url(home_url('/contact/'));
         <?php if ($voice_query->have_posts()) :
           while ($voice_query->have_posts()) : $voice_query->the_post();
         ?>
-            <a href="#" class="aside-voice__card">
+            <div class="aside-voice__card">
               <div class="aside-voice__img">
                 <?php if (get_the_post_thumbnail()) : ?>
                   <?php $age = get_field('age'); ?>
@@ -92,7 +92,7 @@ $contact = esc_url(home_url('/contact/'));
                 </div>
                 <h3 class="aside-voice__subtitle"><?php the_title(); ?></h3>
               </div>
-            </a>
+            </div>
         <?php
           endwhile;
         endif;
