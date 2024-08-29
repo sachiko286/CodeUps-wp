@@ -38,6 +38,14 @@
   height: 100%;
 }
 
+.footer__title a {
+  transition: .3s;
+}
+
+.footer__title a:hover {
+  opacity: 0.6;
+}
+
 
 .footer__sns {
   display: flex;

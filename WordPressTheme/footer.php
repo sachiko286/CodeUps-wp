@@ -37,11 +37,15 @@
   </section>
 <?php endif; ?>
 
-<footer class="footer top-footer <?php if (is_404()) { echo 'top-footert--mt0'; } ?>">
+<footer class="footer top-footer <?php if (is_404()) {
+                                    echo 'top-footert--mt0';
+                                  } ?>">
   <div class="footer__inner inner">
     <div class="footer__heater">
       <div class="footer__title">
-        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-w.svg" alt="会社ロゴホワイト">
+        <a href="<?php echo $home; ?>">
+          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-w.svg" alt="ロゴ">
+        </a>
       </div>
       <div class="footer__sns">
         <a class="footer__sns-facebook" href="https://www.facebook.com/?locale=ja_JP" target="_blank"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/FacebookLogo.png" alt="フェイスブックロゴ"></a>

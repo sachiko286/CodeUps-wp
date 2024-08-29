@@ -21,6 +21,14 @@
   }
 }
 
+.header__logo a {
+  transition: .3s;
+}
+
+.header__logo a:hover {
+  opacity: 0.6;
+}
+
 
 .header__logo img {
   // width: 100%;

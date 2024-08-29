@@ -1280,6 +1280,14 @@ a {
 	width: 100%;
 }
 
+.footer__title a {
+	transition: 0.3s;
+}
+
+.footer__title a:hover {
+	opacity: 0.6;
+}
+
 .footer__sns {
 	align-items: center;
 	display: flex;
@@ -1748,6 +1756,14 @@ html.is-fixed {
 .header__logo {
 	max-width: 6.375rem;
 	width: 100%;
+}
+
+.header__logo a {
+	transition: 0.3s;
+}
+
+.header__logo a:hover {
+	opacity: 0.6;
 }
 
 .header__logo img {

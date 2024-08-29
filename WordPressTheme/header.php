@@ -11,30 +11,33 @@
   <!-- meta情報 -->
   <!-- <title>CodeUps</title> -->
   <!-- ウェブページの概要や説明。検索結果に表示されることがある -->
-  <meta name="description" content="" />
-  <meta name="keywords" content="ウェブページの内容に関連するキーワード" />
+  <!-- <meta name="description" content="" /> -->
+  <!-- <meta name="keywords" content="ウェブページの内容に関連するキーワード" /> -->
   <!-- ogp -->
-  <meta property="og:title" content="共有された際のページのタイトル" />
-  <meta property="og:type" content="ページの種類 例:website、article、videoなど">
-  <meta property="og:url" content="ページのURLを指定" />
-  <meta property="og:image" content="ページを共有した際に表示される画像のURL" />
-  <meta property="og:site_name" content="サイトの名前" />
-  <meta property="og:description" content="ページの説明" />
-  <!-- ファビコン -->
-  <link rel="icon" href="<?php echo get_theme_file_uri(); ?>/assets/images/common/favicon.ico" alt="ロゴ" />
+  <!-- <meta property="og:title" content="共有された際のページのタイトル" /> -->
+  <!-- <meta property="og:type" content="ページの種類 例:website、article、videoなど"> -->
+  <!-- <meta property="og:url" content="ページのURLを指定" /> -->
+  <!-- <meta property="og:image" content="ページを共有した際に表示される画像のURL" /> -->
+  <!-- <meta property="og:site_name" content="サイトの名前" /> -->
+  <!-- <meta property="og:description" content="ページの説明" /> -->
   <!-- favicon.ico -->
+  <!-- <link rel="icon" href="assets/images/common/favicon.ico" alt="ロゴ" /> -->
+
 
   <?php wp_head(); ?>
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLQPSR946R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLQPSR946R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-GLQPSR946R');
-</script>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-GLQPSR946R');
+  </script>
 </head>
 
 <?php include 'urls.php'; ?>
@@ -45,17 +48,17 @@
     <div class="header__inner">
       <?php if (is_front_page()) : ?>
         <h1 class="header__logo">
-      <?php else : ?>
-        <div class="header__logo">
-      <?php endif; ?>
+        <?php else : ?>
+          <div class="header__logo">
+          <?php endif; ?>
           <a href="<?php echo $home; ?>">
             <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/CodeUps-w.svg" alt="ロゴ">
           </a>
-      <?php if (is_front_page()) : ?>
+          <?php if (is_front_page()) : ?>
         </h1>
       <?php else : ?>
-        </div>
-      <?php endif; ?>
+    </div>
+  <?php endif; ?>
 
   <!-- ハンバーガーボタン -->
   <button class="header__hamburger js-hamburger" aria-label="メニューを開く">
@@ -100,9 +103,9 @@
       <div class="sp-nav__list-box">
         <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">キャンペーン</a></p>
         <ul class="sp-nav__list-items">
-        <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-license">ライセンス講習</a></li>
-          <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-experience">体験ダイビング</a></li>
-          <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-fundiving">ファンダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo add_query_arg('campaign_category', 'license', $campaign); ?>">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo add_query_arg('campaign_category', 'experience', $campaign); ?>">体験ダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo add_query_arg('campaign_category', 'fundiving', $campaign); ?>">ファンダイビング</a></li>
         </ul>
       </div>
       <div class="sp-nav__list-box">
@@ -111,7 +114,7 @@
       <div class="sp-nav__list-box">
         <p class="sp-nav__list-category"><a href="<?php echo $information; ?>">ダイビング情報</a></p>
         <ul class="sp-nav__list-items">
-        <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab01">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab01">ライセンス講習</a></li>
           <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab03">体験ダイビング</a></li>
           <li class="sp-nav__list-item"><a href="<?php echo $information; ?>?tab=tab02">ファンダイビング</a></li>
         </ul>
@@ -125,7 +128,7 @@
       <div class="sp-nav__list-box">
         <p class="sp-nav__list-category"><a href="<?php echo $price; ?>">料金一覧</a></p>
         <ul class="sp-nav__list-items">
-        <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-license">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-license">ライセンス講習</a></li>
           <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-experience">体験ダイビング</a></li>
           <li class="sp-nav__list-item"><a href="<?php echo $price; ?>#price-fundiving">ファンダイビング</a></li>
         </ul>
