@@ -68,6 +68,23 @@ function change_posts_per_page($query)
 }
 add_action('pre_get_posts', 'change_posts_per_page');
 
+/* ---------- カスタム投稿の記事知覧で並び順を日付降順に変更---------- */
+function change_post_types_admin_order($wp_query)
+{
+    if (is_admin()) {
+        $post_type_array = array('campaign', 'voice'); // カスタム投稿のスラッグ（post_type）
+        $post_type = $wp_query->query['post_type'];
+        $get_orderby = get_query_var('orderby');
+        if ($post_type && $get_orderby) {
+            if (in_array($post_type, $post_type_array) && $get_orderby === 'menu_order title') {
+                $wp_query->set('orderby', 'date'); // data = 日付
+                $wp_query->set('order', 'DESC'); // DESC = 降順
+            }
+        }
+    }
+}
+add_filter('pre_get_posts', 'change_post_types_admin_order');
+
 /* ---------- タクソノミーでの絞り込み ---------- */
 // function filter_by_taxonomy($query)
 // {
@@ -175,16 +192,25 @@ add_filter('use_block_editor_for_post', function ($use_block_editor, $post) {
     return $use_block_editor;
 }, 10, 2);
 
-
 /* ---------- アーカイブページ ---------- */
-function custom_archives() {
+function custom_archives()
+{
     global $wpdb;
 
     // 月名を日本語で配列に格納
     $months_japanese = array(
-        1 => '1月', 2 => '2月', 3 => '3月', 4 => '4月', 
-        5 => '5月', 6 => '6月', 7 => '7月', 8 => '8月', 
-        9 => '9月', 10 => '10月', 11 => '11月', 12 => '12月'
+        1 => '1月',
+        2 => '2月',
+        3 => '3月',
+        4 => '4月',
+        5 => '5月',
+        6 => '6月',
+        7 => '7月',
+        8 => '8月',
+        9 => '9月',
+        10 => '10月',
+        11 => '11月',
+        12 => '12月'
     );
 
     // 年ごとと月ごとに投稿をグループ化して取得
@@ -193,7 +219,7 @@ function custom_archives() {
     $output = '<ul class="blog-aside__archive aside-archive">';
 
     $current_year = null;
-    foreach($years as $year) {
+    foreach ($years as $year) {
         if ($current_year != $year->year) {
             if ($current_year != null) {
                 $output .= '</div></li>';
@@ -215,6 +241,20 @@ function custom_archives() {
     return $output;
 }
 
+/* ------- the_archive_title 余計な文字を削除  -------*/
+
+add_filter('get_the_archive_title', function ($title) {
+    if (is_year()) {
+        // 年別アーカイブの場合、年を取得
+        $title = get_the_time('Y年');
+    } elseif (is_month()) {
+        // 月別アーカイブの場合、年と月を取得
+        $title = get_the_time('Y年n月');
+    }
+    return $title;
+    return $title;
+});
+
 /* -------Contact Form 7で自動挿入されるPタグ、brタグを削除 -------*/
 add_filter('wpcf7_autop_or_not', 'wpcf7_autop_return_false');
 function wpcf7_autop_return_false()
@@ -223,7 +263,8 @@ function wpcf7_autop_return_false()
 }
 
 /* ---------- お問い合わせページ キャンペーンタイトルの取得 ---------- */
-function campaign_titles_select_menu() {
+function campaign_titles_select_menu()
+{
     $args = array(
         'post_type' => 'campaign', // カスタム投稿タイプに変更
         'posts_per_page' => -1 // すべてのキャンペーンを取得
@@ -251,7 +292,8 @@ add_filter('wpcf7_form_elements', 'do_shortcode');
 
 
 /* ---------- サンクスページに移る ---------- */
-function redirect_to_thank_you_page() {
+function redirect_to_thank_you_page()
+{
     echo "<script>location.href='" . esc_url(home_url('/contact_thanks/')) . "';</script>";
 }
 
@@ -259,9 +301,10 @@ add_action('wpcf7_mail_sent', 'redirect_to_thank_you_page');
 
 
 /* ---------- 文字数制限 voice---------- */
-function custom_trim_content($content, $length = 354, $more = '…') {
+function custom_trim_content($content, $length = 354, $more = '…')
+{
     $content = strip_tags($content, '<br><p>'); // <br>と<p>タグを残す
-    if(mb_strwidth($content, 'UTF-8') <= $length) {
+    if (mb_strwidth($content, 'UTF-8') <= $length) {
         return $content;
     } else {
         $trimmed_content = mb_strimwidth($content, 0, $length, '', 'UTF-8');
@@ -269,3 +312,28 @@ function custom_trim_content($content, $length = 354, $more = '…') {
     }
 }
 
+/* ---------- 【管理画面】サイドメニュー並び順を変更 ---------- */
+
+function my_custom_menu_order($menu_order)
+{
+    if (!$menu_order) return true;
+    return array(
+        "index.php", // ダッシュボード
+        "edit.php", // ブログ
+        "edit.php?post_type=campaign", // キャンペーン
+        "edit.php?post_type=voice", // お客様の声
+        "edit.php?post_type=page", // 固定ページ
+        "separator1", // 区切り線1
+        "upload.php", // メディア
+        "edit-comments.php", // コメント
+        "separator2", // 区切り線2
+        "options-general.php", // 設定
+        "themes.php", // 外観
+        "users.php", // ユーザー
+        "tools.php", // ツール
+        "plugins.php", // プラグイン
+        "separator-last" // 区切り線（最後）
+    );
+}
+add_filter('custom_menu_order', 'my_custom_menu_order');
+add_filter('menu_order', 'my_custom_menu_order');

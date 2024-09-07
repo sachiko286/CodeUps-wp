@@ -37,9 +37,7 @@
   </section>
 <?php endif; ?>
 
-<footer class="footer top-footer <?php if (is_404()) {
-                                    echo 'top-footert--mt0';
-                                  } ?>">
+<footer class="footer top-footer <?php echo is_404() ? 'top-footer--mt0' : ''; ?>">
   <div class="footer__inner inner">
     <div class="footer__heater">
       <div class="footer__title">

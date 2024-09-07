@@ -4,7 +4,7 @@
 
 <section class="sub-fv sub-fv--blog">
   <!-- <div class="sub-fv__inner"> -->
-  <h2 class="sub-fv__title">Blog</h2>
+  <h2 class="sub-fv__title"><?php the_archive_title(); ?></h2>
 </section>
 
 <!-- パンくず -->
@@ -12,24 +12,7 @@
 
 
 <section class="page-blog top-page-blog ">
-  <div class="page-blog__archive inner">
-    <h1 class="page-blog__title">
-      <?php
-      if (is_day()) {
-        printf(__('%s のブログ記事', 'textdomain'), get_the_date());
-      } elseif (is_month()) {
-        printf(__('%s のブログ記事', 'textdomain'), get_the_date(_x('Y年 F', 'monthly archives date format', 'textdomain')));
-      } elseif (is_year()) {
-        printf(__('%s のブログ記事', 'textdomain'), get_the_date(_x('Y年', 'yearly archives date format', 'textdomain')));
-      } else {
-        _e('ブログ記事', 'textdomain');
-      }
-      ?>
-    </h1>
-  </div>
-
   <div class="page-blog__inner inner">
-
     <div class="page-blog__main">
       <div class="page-blog__main-inner">
         <!-- アーカイブのタイトルを表示 -->
@@ -73,7 +56,7 @@
 
       </div>
     </div>
-    <?php get_template_part('parts/aside') ?>
+    <?php get_sidebar(); ?>
 
 </section>
 

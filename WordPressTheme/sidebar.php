@@ -1,40 +1,29 @@
-<?php
-$home = esc_url(home_url('/'));
-$blog = esc_url(home_url('/blog/'));
-$aboutus = esc_url(home_url('/about-us/'));
-$campaign = esc_url(home_url('/campaign/'));
-$company = esc_url(home_url('/company/'));
-$voice = esc_url(home_url('/voice/'));
-$faq = esc_url(home_url('/faq/'));
-$price = esc_url(home_url('/price/'));
-$privacypolicy = esc_url(home_url('/privacypolicy/'));
-$sitemap = esc_url(home_url('/sitemap/'));
-$terms = esc_url(home_url('/terms-of-servic/'));
-$information = esc_url(home_url('/information/'));
-$contact = esc_url(home_url('/contact/'));
-?>
+<?php include 'urls.php'; ?>
 
 <div class="page-blog__aside">
   <div class="page-blog__aside-inner">
-    <div class="page-blog__aside-content blog-aside">
-      <h2 class="blog-aside__title">人気記事</h2>
-      <ul class="blog-aside__popular-post post-list">
-        <?php
-        // カスタムクエリで人気記事を取得する
-        $popular_posts_args = array(
-          'posts_per_page' => 3, // 表示する投稿数
-          'meta_key' => 'post_views_count', // カスタムフィールド名
-          'orderby' => 'meta_value_num', // メタ値で並べ替え
-          'order' => 'DESC', // 降順で並べ替え
-          'post_type' => 'post', // 投稿タイプ
-          'post_status' => 'publish', // 公開済みの投稿
-        );
 
-        $popular_posts_query = new WP_Query($popular_posts_args);
+    <?php
+    // カスタムクエリで人気記事を取得する
+    $popular_posts_args = array(
+      'posts_per_page' => 3, // 表示する投稿数
+      'meta_key' => 'post_views_count', // カスタムフィールド名
+      'orderby' => 'meta_value_num', // メタ値で並べ替え
+      'order' => 'DESC', // 降順で並べ替え
+      'post_type' => 'post', // 投稿タイプ
+      'post_status' => 'publish', // 公開済みの投稿
+    );
 
-        // 人気記事が存在する場合のループ
-        if ($popular_posts_query->have_posts()) :
-          while ($popular_posts_query->have_posts()) : $popular_posts_query->the_post(); ?>
+    $popular_posts_query = new WP_Query($popular_posts_args);
+
+    // 人気記事が存在するかどうか
+    if ($popular_posts_query->have_posts()) : ?>
+
+      <div class="page-blog__aside-content blog-aside">
+        <h2 class="blog-aside__title">人気記事</h2>
+        <ul class="blog-aside__popular-post post-list">
+          <!-- サブループ処理開始 -->
+          <?php while ($popular_posts_query->have_posts()) : $popular_posts_query->the_post(); ?>
             <li class="post-list__item">
               <a href="<?php the_permalink(); ?>" class="post-card">
                 <div class="post-card__inner">
@@ -52,28 +41,32 @@ $contact = esc_url(home_url('/contact/'));
                 </div>
               </a>
             </li>
-        <?php endwhile;
-          wp_reset_postdata(); // クエリをリセットする
-        endif; ?>
-      </ul>
-    </div>
+          <?php endwhile; ?>
 
-    <div class="page-blog__aside-content page-blog__aside-content--voice blog-aside">
-      <h2 class="blog-aside__title">口コミ</h2>
-      <div class="blog-aside__voice aside-voice">
-        <?php
-        // カスタム投稿タイプ 'voice' の最新1件を取得
-        $voice_args = array(
-          'post_type'      => 'voice',
-          'posts_per_page' => 1,
-        );
-        $voice_query = new WP_Query($voice_args);
-        ?>
+        </ul>
+      </div>
+    <?php endif; ?>
+    <!-- クエリのリセット -->
+    <?php wp_reset_postdata(); ?>
 
-        <!-- サブループ処理開始 -->
-        <?php if ($voice_query->have_posts()) :
-          while ($voice_query->have_posts()) : $voice_query->the_post();
-        ?>
+    <?php
+    // カスタム投稿タイプ 'voice' の最新1件を取得
+    $voice_args = array(
+      'post_type'      => 'voice',
+      'posts_per_page' => 1,
+    );
+    $voice_query = new WP_Query($voice_args);
+    ?>
+
+
+    <?php if ($voice_query->have_posts()) : ?>
+
+      <div class="page-blog__aside-content page-blog__aside-content--voice blog-aside">
+        <h2 class="blog-aside__title">口コミ</h2>
+        <div class="blog-aside__voice aside-voice">
+          <!-- サブループ処理開始 -->
+          <?php while ($voice_query->have_posts()) : $voice_query->the_post();
+          ?>
             <div class="aside-voice__card">
               <div class="aside-voice__img">
                 <?php if (get_the_post_thumbnail()) : ?>
@@ -93,33 +86,35 @@ $contact = esc_url(home_url('/contact/'));
                 <h3 class="aside-voice__subtitle"><?php the_title(); ?></h3>
               </div>
             </div>
-        <?php
-          endwhile;
-        endif;
-        // クエリのリセット
-        wp_reset_postdata();
-        ?>
-        <div class="aside-voice__button">
-          <a href="<?php echo $voice; ?>" class="button slide">View more<span class="button__arrow"></span></a>
+          <?php endwhile; ?>
+
+          <div class="aside-voice__button">
+            <a href="<?php echo $voice; ?>" class="button slide">View more<span class="button__arrow"></span></a>
+          </div>
+
         </div>
       </div>
-    </div>
+    <?php endif; ?>
+    <!-- クエリのリセット -->
+    <?php wp_reset_postdata(); ?>
 
-    <div class="page-blog__aside-content page-blog__aside-content--campaign blog-aside">
-      <h2 class="blog-aside__title">キャンペーン</h2>
-      <div class="blog-aside__campaign aside-campaign">
-        <?php
-        // カスタム投稿タイプ 'campaign' の最新2件を取得
-        $campaign_args = array(
-          'post_type'      => 'campaign',
-          'posts_per_page' => 2,
-        );
-        $campaign_query = new WP_Query($campaign_args);
-        ?>
-        <!-- サブループ処理開始 -->
-        <?php if ($campaign_query->have_posts()) :
-          while ($campaign_query->have_posts()) : $campaign_query->the_post();
-        ?>
+    <?php
+    // カスタム投稿タイプ 'campaign' の最新2件を取得
+    $campaign_args = array(
+      'post_type'      => 'campaign',
+      'posts_per_page' => 2,
+    );
+    $campaign_query = new WP_Query($campaign_args);
+    ?>
+
+    <?php if ($campaign_query->have_posts()) : ?>
+
+      <div class="page-blog__aside-content page-blog__aside-content--campaign blog-aside">
+        <h2 class="blog-aside__title">キャンペーン</h2>
+        <div class="blog-aside__campaign aside-campaign">
+          <!-- サブループ処理開始 -->
+          <?php while ($campaign_query->have_posts()) : $campaign_query->the_post();
+          ?>
             <div class="aside-campaign__list campaign-card">
 
               <!-- スライドの中身 -->
@@ -149,23 +144,22 @@ $contact = esc_url(home_url('/contact/'));
                 </div>
               </div>
             </div>
-        <?php
-          endwhile;
-        endif;
-        // クエリのリセット
-        wp_reset_postdata();
-        ?>
-        <div class="aside-voice__button">
-          <a href="<?php echo $campaign; ?>" class="button slide">View more<span class="button__arrow"></span></a>
+          <?php endwhile; ?>
+          <div class="aside-voice__button">
+            <a href="<?php echo $campaign; ?>" class="button slide">View more<span class="button__arrow"></span></a>
+          </div>
         </div>
-
-
       </div>
-    </div>
+    <?php endif; ?>
+    <!-- クエリのリセット -->
+    <?php wp_reset_postdata(); ?>
 
-    <div class="page-blog__aside-content page-blog__aside-content--archive blog-aside">
-      <h2 class="blog-aside__title">アーカイブ</h2>
-      <?php echo custom_archives(); ?>
-    </div>
+    <?php if (have_posts() && custom_archives()) : ?>
+      <div class="page-blog__aside-content page-blog__aside-content--archive blog-aside">
+        <h2 class="blog-aside__title">アーカイブ</h2>
+        <!-- functions.phpに記載 -->
+        <?php echo custom_archives(); ?>
+      </div>
+    <?php endif; ?>
   </div>
 </div>

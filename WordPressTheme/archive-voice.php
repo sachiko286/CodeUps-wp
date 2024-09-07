@@ -11,29 +11,28 @@
 
   <section class="page-voice top-page-voice">
     <div class="page-voice__inner inner">
-      <div class="page-voice__folter filter-content">
-        <ul class="filter-content__list">
-          <li class="filter-content__list-title <?php if (!isset($_GET['voice_category'])) echo 'is-active'; ?>">
-            <a href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
-          </li>
-          <?php
-          $voice_terms = get_terms('voice_category');
-          if ($voice_terms && !is_wp_error($voice_terms)) :
-            foreach ($voice_terms as $voice_term) : ?>
-              <li class="filter-content__list-title <?php if (is_tax('voice_category', $voice_term->slug)) echo 'is-active'; ?>">
-                <a href="<?php echo esc_url(get_term_link($voice_term)); ?>"><?php echo $voice_term->name; ?></a>
-              </li>
-          <?php endforeach;
-          endif; ?>
-        </ul>
-      </div>
+      <!-- 投稿があれば表示なければ非表示 -->
+      <?php if (have_posts()) : ?>
+        <div class="page-voice__folter filter-content">
+          <ul class="filter-content__list">
+            <li class="filter-content__list-title <?php if (!isset($_GET['voice_category'])) echo 'is-active'; ?>">
+              <a href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
+            </li>
+            <?php
+            $voice_terms = get_terms('voice_category');
+            if ($voice_terms && !is_wp_error($voice_terms)) :
+              foreach ($voice_terms as $voice_term) : ?>
+                <li class="filter-content__list-title <?php if (is_tax('voice_category', $voice_term->slug)) echo 'is-active'; ?>">
+                  <a href="<?php echo esc_url(get_term_link($voice_term)); ?>"><?php echo $voice_term->name; ?></a>
+                </li>
+            <?php endforeach;
+            endif; ?>
+          </ul>
+        </div>
 
-      <div class="page-voice__wrapper">
-        <ul class="page-voice__items voice-list ">
-          <?php 
-          if (have_posts()) :
-            while (have_posts()) :
-              the_post(); ?>
+        <div class="page-voice__wrapper">
+          <ul class="page-voice__items voice-list ">
+            <?php while (have_posts()): the_post(); ?>
               <li class="voice-list__item voice-card">
                 <div class="voice-card__inner">
                   <div class="voice-card__header">
@@ -60,19 +59,19 @@
                   </div>
                 </div>
               </li>
-          <?php endwhile;?>
-          <?php else : ?>
-            <p>該当する口コミがありません。</p>
-          <?php endif; ?>
-        </ul>
-      </div>
-
-      <!-- ページナビゲーション -->
-      <div class="pagenavi">
-        <div class="pagenavi__inner">
-          <?php wp_pagenavi(); ?>
+            <?php endwhile; ?>
+          </ul>
         </div>
-      </div>
+
+        <!-- ページナビゲーション -->
+        <div class="pagenavi">
+          <div class="pagenavi__inner">
+            <?php wp_pagenavi(); ?>
+          </div>
+        </div>
+      <?php else: ?>
+        <p>投稿はありません。</p>
+      <?php endif; ?>
     </div>
   </section>
 

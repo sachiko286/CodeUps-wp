@@ -1036,11 +1036,11 @@ a {
 }
 
 .campaign .swiper-button-prev::after {
-	background-image: url(/assets/images/common/btn-prev.svg);
+	background-image: url(../images/common/btn-prev.svg);
 }
 
 .campaign .swiper-button-next::after {
-	background-image: url(/assets/images/common/btn-next.svg);
+	background-image: url(../images/common/btn-next.svg);
 }
 
 .campaign .swiper-button-prev:hover,
@@ -2087,6 +2087,7 @@ html.is-fixed {
 
 .page-blog__main {
 	max-width: 44.125rem;
+	width: 100%;
 }
 
 .page-blog__main-inner {

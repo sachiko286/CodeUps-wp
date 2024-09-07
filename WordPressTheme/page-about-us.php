@@ -62,31 +62,50 @@
     </div>
   </section>
 
-  <section class="gallery top-gallery">
-    <div class="gallery__modal js-overlay"></div>
-    <div class="gallery__inner inner">
-      <div class="about-us__header section-header">
-        <p class="section-header__engtitle">Gallery</p>
-        <h2 class="section-header__jatitle">フォト</h2>
-      </div>
+  <?php
+  $fields = SCF::get('gallery');
+  $has_image = false;
 
-      <ul class="gallery__list gallery-list">
-      
-        <?php $fields = SCF::get('gallery'); ?>
-        <!-- 繰り返し -->
-        <?php foreach ($fields as $field) : ?>
-          <li class="gallery-list__item js-photo">
-          <?php if ($field['gallery-img1']) : ?>
-            <img src="<?php echo wp_get_attachment_url($field['gallery-img1']); ?>" alt="<?php the_title(); ?>">
-          <?php else : ?>
-            <img src="<?php echo esc_url(get_theme_file_uri('assets/images/common/noimage.jpg')); ?>" alt="noimage">
-          <?php endif; ?>
-          </li>
-        <?php endforeach; ?>
-        <!-- / 繰り返し -->
-      </ul>
-    </div>
-  </section>
+  // 各フィールドをチェックして、少なくとも1つの画像が存在するかを確認
+  if ($fields && !empty($fields)) {
+    foreach ($fields as $field) {
+      if (!empty($field['gallery-img1'])) {
+        $has_image = true;
+        break; // 1つでも画像が見つかればループを抜ける
+      }
+    }
+  }
+  ?>
+
+  <?php if ($has_image) : ?> <!-- 画像が存在する場合のみセクションを表示 -->
+
+    <section class="gallery top-gallery">
+      <div class="gallery__modal js-overlay"></div>
+      <div class="gallery__inner inner">
+        <div class="about-us__header section-header">
+          <p class="section-header__engtitle">Gallery</p>
+          <h2 class="section-header__jatitle">フォト</h2>
+        </div>
+
+        <ul class="gallery__list gallery-list">
+
+          <!-- 繰り返し -->
+          <?php foreach ($fields as $field) : ?>
+            <?php if ($field['gallery-img1']) : ?> <!-- 各フィールドが 'gallery-img1' を持っているかをチェック -->
+              <li class="gallery-list__item js-photo">
+                <img src="<?php echo wp_get_attachment_url($field['gallery-img1']); ?>" alt="<?php the_title(); ?>">
+              </li>
+            <?php endif; ?>
+          <?php endforeach; ?>
+          <!-- / 繰り返し -->
+        </ul>
+      </div>
+    </section>
+
+  <?php endif; ?>
+
+
+
 </main>
 
 

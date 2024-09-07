@@ -17,10 +17,9 @@
     <div class="page-blog__inner inner">
       <div class="page-blog__main">
         <div class="page-blog__main-inner">
-          <ul class="page-blog__list blog-list blog-list--page">
-            <?php if (have_posts()) :
-              while (have_posts()) :
-                the_post(); ?>
+          <?php if (have_posts()) : ?>
+            <ul class="page-blog__list blog-list blog-list--page">
+              <?php while (have_posts()) : the_post(); ?>
                 <li class="blog-list__item">
                   <a href="<?php the_permalink(); ?>" class="blog-card">
                     <div class="blog-card__inner">
@@ -41,19 +40,23 @@
                     </div>
                   </a>
                 </li>
-            <?php endwhile;
-            endif; ?>
-          </ul>
-          <div class="pagenavi">
-            <div class="pagenavi__inner">
-              <!-- WP-PageNaviで出力される部分 ここから -->
-              <?php wp_pagenavi(); ?>
-              <!-- WP-PageNaviで出力される部分 ここまで -->
+              <?php endwhile; ?>
+            </ul>
+            <div class="pagenavi">
+              <div class="pagenavi__inner">
+                <!-- WP-PageNaviで出力される部分 ここから -->
+                <?php wp_pagenavi(); ?>
+                <!-- WP-PageNaviで出力される部分 ここまで -->
+              </div>
             </div>
-          </div>
+          <?php else : ?>
+            <p>ブログの投稿はありません</p>
+          <?php endif; ?>
+          <!-- クエリのリセット -->
+          <?php wp_reset_postdata(); ?>
         </div>
       </div>
-      <?php get_template_part('parts/aside') ?>
+      <?php get_sidebar(); ?>
     </div>
   </section>
 </main>

@@ -8,15 +8,8 @@
   </section>
 
 
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <ol class="breadcrumb__list">
-        <li class="breadcrumb__list-item"><a href="/">TOP</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">お問い合わせ</a></li>
-        <li class="breadcrumb__list-item"><a href="/category">送信完了</a></li>
-      </ol>
-    </div>
-  </div>
+  <!-- パンくず -->
+  <?php get_template_part('parts/breadcrumb') ?>
 
   <div class="page-thanks top-page-thanks">
     <div class="page-thanks__inner inner">

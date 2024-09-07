@@ -15,8 +15,7 @@
             <div class="fv__slide-image swiper-img">
               <picture>
                 <source srcset="<?php the_field('pc_fv1'); ?>" media="(min-width: 768px)">
-
-                <img src="<?php the_field('sp_fv1'); ?>" alt="省略">
+                <img src="<?php the_field('sp_fv1'); ?>" alt="fv画像1">
               </picture>
             </div>
           </div>
@@ -24,7 +23,7 @@
             <div class="fv__slide-image swiper-img">
               <picture>
                 <source srcset="<?php the_field('pc_fv2'); ?>" media="(min-width: 768px)">
-                <img src="<?php the_field('sp_fv2'); ?>" alt="省略">
+                <img src="<?php the_field('sp_fv2'); ?>" alt="fv画像2">
               </picture>
             </div>
           </div>
@@ -32,7 +31,7 @@
             <div class="fv__slide-image swiper-img">
               <picture>
                 <source srcset="<?php the_field('pc_fv3'); ?>" media="(min-width: 768px)">
-                <img src="<?php the_field('sp_fv3'); ?>" alt="省略">
+                <img src="<?php the_field('sp_fv3'); ?>" alt="fv画像3">
               </picture>
             </div>
           </div>
@@ -40,7 +39,7 @@
             <div class="fv__slide-image swiper-img">
               <picture>
                 <source srcset="<?php the_field('pc_fv4'); ?>" media="(min-width: 768px)">
-                <img src="<?php the_field('sp_fv4'); ?>" alt="省略">
+                <img src="<?php the_field('sp_fv4'); ?>" alt="fv画像4">
               </picture>
             </div>
           </div>
@@ -57,6 +56,7 @@
   );
   $campaign_query = new WP_Query($campaign_args);
   ?>
+
   <section class="campaign top-campaign">
     <div class="campaign__inner inner">
       <div class="campaign__header section-header">
@@ -64,17 +64,17 @@
         <h2 class="section-header__jatitle">キャンペーン</h2>
       </div>
 
-      <div class="campaign__swiper swiper-container">
-        <div class="swiper-button-wrapper u-desktop">
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
 
-        <div class="swiper js-campaign-swiper">
-          <div class="campaign__cards campaign-cards swiper-wrapper">
-            <?php if ($campaign_query->have_posts()) :
-              while ($campaign_query->have_posts()) : $campaign_query->the_post();
-            ?>
+      <div class="campaign__swiper swiper-container">
+        <?php if ($campaign_query->have_posts()) : ?>
+          <div class="swiper-button-wrapper u-desktop">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+
+          <div class="swiper js-campaign-swiper">
+            <div class="campaign__cards campaign-cards swiper-wrapper">
+              <?php while ($campaign_query->have_posts()) : $campaign_query->the_post(); ?>
                 <div class="campaign-cards__list campaign-card swiper-slide">
                   <!-- スライドの中身 -->
                   <div class="campaign-card__item">
@@ -82,13 +82,18 @@
                       <?php if (get_the_post_thumbnail()) : ?>
                         <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
                       <?php else : ?>
-                        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                        <img src="<?php echo esc_url(get_theme_file_uri('/assets/images/common/noimage.jpg')); ?>" alt="noimage">
                       <?php endif; ?>
                     </div>
                     <div class="campaign-card__body">
                       <div class="campaign-card__category">
                         <p>
-                          <?php echo get_the_terms(get_the_ID(), 'campaign_category')[0]->name; ?>
+                          <?php
+                          $terms = get_the_terms(get_the_ID(), 'campaign_category');
+                          if ($terms && !is_wp_error($terms)) {
+                            echo esc_html($terms[0]->name);
+                          }
+                          ?>
                         </p>
                       </div>
                       <h3 class="campaign-card__title"><?php the_title(); ?></h3>
@@ -110,17 +115,18 @@
                     </div>
                   </div>
                 </div>
-            <?php
-              endwhile;
-            endif;
-            // クエリのリセット
-            wp_reset_postdata();
-            ?>
-          </div>
+              <?php endwhile; ?>
+            </div> <!-- .campaign-cards -->
+          </div> <!-- .swiper -->
+        <?php else : ?>
+          <p>現在のキャンペーンはありません</p>
+        <?php endif; ?>
+        <!-- クエリのリセット -->
+        <?php wp_reset_postdata(); ?>
+        <div class="campaign__button">
+          <a href="<?php echo esc_url($campaign); ?>" class="button slide">View more<span class="button__arrow"></span></a>
         </div>
-      </div>
-      <div class="campaign__button">
-        <a href="<?php echo $campaign; ?>" class="button slide">View more<span class="button__arrow"></span></a>
+
       </div>
     </div>
   </section>
@@ -193,8 +199,9 @@
         <p class="section-header__engtitle">Blog</p>
         <h2 class="section-header__jatitle">ブログ</h2>
       </div>
-      <ul class="blog__list blog-list">
-        <?php if ($blog_query->have_posts()) : ?>
+
+      <?php if ($blog_query->have_posts()) : ?>
+        <ul class="blog__list blog-list">
           <?php while ($blog_query->have_posts()) : $blog_query->the_post(); ?>
             <li class="blog-list__item">
               <a href="<?php the_permalink(); ?>" class="blog-card">
@@ -216,14 +223,20 @@
                 </div>
               </a>
             </li>
-        <?php endwhile;
-          wp_reset_postdata();
-        endif; ?>
-      </ul>
+          <?php endwhile; ?>
+        </ul>
+      <?php else : ?>
+        <p>ブログの投稿はありません</p>
+      <?php endif; ?>
+      <!-- クエリのリセット -->
+      <?php wp_reset_postdata(); ?>
 
       <div class="blog__button">
         <a href="<?php echo $blog; ?>" class="button slide">View more<span class="button__arrow"></span></a>
       </div>
+
+
+
     </div>
   </section>
 
@@ -240,8 +253,9 @@
         <p class="section-header__engtitle">Voice</p>
         <h2 class="section-header__jatitle">お客様の声</h2>
       </div>
-      <ul class="voice__list voice-list">
-        <?php if ($voice_query->have_posts()) : ?>
+
+      <?php if ($voice_query->have_posts()) : ?>
+        <ul class="voice__list voice-list">
           <?php while ($voice_query->have_posts()) : $voice_query->the_post(); ?>
             <li class="voice-list__item voice-card">
               <div class="voice-card__inner">
@@ -270,10 +284,13 @@
                 </div>
               </div>
             </li>
-        <?php endwhile;
-          wp_reset_postdata();
-        endif; ?>
-      </ul>
+          <?php endwhile; ?>
+        </ul>
+      <?php else : ?>
+        <p>投稿はありません</p>
+      <?php endif; ?>
+      <!-- クエリのリセット -->
+      <?php wp_reset_postdata(); ?>
       <div class="voice__button">
         <a href="<?php echo $voice; ?>" class="button slide">View more<span class="button__arrow"></span></a>
       </div>
@@ -286,57 +303,103 @@
         <p class="section-header__engtitle">Price</p>
         <h2 class="section-header__jatitle">料金一覧</h2>
       </div>
-      <div class="price__wrapper">
-        <div class="price__image  colorbox">
-          <picture>
-            <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/price-pc.jpg" media="(min-width: 768px)">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/price-sp.jpg" alt="かめの写真">
-          </picture>
-        </div>
-        <div class="price__content">
-          <div class="price__item">
-            <h3 class="price__subtitle">ライセンス講習</h3>
-            <?php $licenses = SCF::get('license-table', 26); ?>
-            <?php foreach ($licenses as $license) : ?>
-              <dl class="price__menu">
-                <dt class="price__course"><?php echo esc_html($license['course1']); ?></dt>
-                <dd class="price__fee">¥<?php echo number_format(esc_html($license['price1'])); ?></dd>
-              </dl>
-            <?php endforeach; ?>
+      <!-- ライセンス料金表 -->
+      <?php $licenses = SCF::get('license-table', 26); ?>
+      <!-- 空でない値だけをフィルタリング -->
+      <?php $filtered_licenses = array_filter($licenses, function ($license) {
+        return !empty($license['course1']) && !empty($license['price1']);
+      }); ?>
+
+      <!-- 体験ダイビング料金表 -->
+      <?php $experiences = SCF::get('experience-table', 26); ?>
+      <!-- 空でない値だけをフィルタリング -->
+      <?php $filtered_experiences = array_filter($experiences, function ($experience) {
+        return !empty($experience['course2']) && !empty($experience['price2']);
+      }); ?>
+
+      <!-- ファンダイビング料金表 -->
+      <?php $funs = SCF::get('fundiving-table', 26); ?>
+      <!-- 空でない値だけをフィルタリング -->
+      <?php $filtered_funs = array_filter($funs, function ($fun) {
+        return !empty($fun['course3']) && !empty($fun['price3']);
+      }); ?>
+
+      <!-- スペシャルダイビング料金表 -->
+      <?php $specials = SCF::get('specialdiving-table', 26); ?>
+      <!-- 空でない値だけをフィルタリング -->
+      <?php $filtered_specials = array_filter($specials, function ($special) {
+        return !empty($special['course4']) && !empty($special['price4']);
+      }); ?>
+
+      <!-- いずれかの料金表が空でない場合に表示 -->
+      <?php if (!empty($filtered_licenses) || !empty($filtered_experiences) || !empty($filtered_funs) || !empty($filtered_specials)) : ?>
+        <div class="price__wrapper">
+          <div class="price__image  colorbox">
+            <picture>
+              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/price-pc.jpg" media="(min-width: 768px)">
+              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/price-sp.jpg" alt="かめの写真">
+            </picture>
           </div>
-          <div class="price__item">
-            <h3 class="price__subtitle">体験ダイビング</h3>
-            <?php $experiences = SCF::get('experience-table', 26); ?>
-            <?php foreach ($experiences as $experience) : ?>
-              <dl class="price__menu">
-                <dt class="price__course"><?php echo esc_html($experience['course2']); ?></dt>
-                <dd class="price__fee">¥<?php echo number_format(esc_html($experience['price2'])); ?></dd>
-              </dl>
-            <?php endforeach; ?>
+          <div class="price__content">
+
+            <!-- ライセンス料金表の表示 -->
+            <?php if (!empty($filtered_licenses)) : ?>
+              <div class="price__item">
+                <h3 class="price__subtitle">ライセンス講習</h3>
+                <?php foreach ($filtered_licenses as $license) : ?>
+                  <dl class="price__menu">
+                    <dt class="price__course"><?php echo esc_html($license['course1']); ?></dt>
+                    <dd class="price__fee"><?php echo esc_html($license['price1']); ?></dd>
+                  </dl>
+                <?php endforeach; ?>
+              </div>
+            <?php endif; ?>
+
+            <!-- 体験ダイビング料金表の表示 -->
+            <?php if (!empty($filtered_experiences)) : ?>
+              <div class="price__item">
+                <h3 class="price__subtitle">体験ダイビング</h3>
+                <?php foreach ($filtered_experiences as $experience) : ?>
+                  <dl class="price__menu">
+                    <dt class="price__course"><?php echo esc_html($experience['course2']); ?></dt>
+                    <dd class="price__fee"><?php echo esc_html($experience['price2']); ?></dd>
+                  </dl>
+                <?php endforeach; ?>
+              </div>
+            <?php endif; ?>
+
+            <!-- ファンダイビング料金表の表示 -->
+            <?php if (!empty($filtered_funs)) : ?>
+              <div class="price__item">
+                <h3 class="price__subtitle">ファンダイビング</h3>
+                <?php foreach ($filtered_funs as $fun) : ?>
+                  <dl class="price__menu">
+                    <dt class="price__course"><?php echo esc_html($fun['course3']); ?></dt>
+                    <dd class="price__fee"><?php echo esc_html($fun['price3']); ?></dd>
+                  </dl>
+                <?php endforeach; ?>
+              </div>
+            <?php endif; ?>
+
+            <!-- スペシャルダイビング料金表の表示 -->
+            <?php if (!empty($filtered_specials)) : ?>
+              <div class="price__item">
+                <h3 class="price__subtitle">スペシャルダイビング</h3>
+                <?php foreach ($filtered_specials as $special) : ?>
+                  <dl class="price__menu">
+                    <dt class="price__course"><?php echo esc_html($special['course4']); ?></dt>
+                    <dd class="price__fee"><?php echo esc_html($special['price4']); ?></dd>
+                  </dl>
+                <?php endforeach; ?>
+              </div>
+            <?php endif; ?>
 
           </div>
-          <div class="price__item">
-            <h3 class="price__subtitle">ファンダイビング</h3>
-            <?php $funs = SCF::get('fundiving-table', 26); ?>
-            <?php foreach ($funs as $fun) : ?>
-              <dl class="price__menu">
-                <dt class="price__course"><?php echo esc_html($fun['course3']); ?></dt>
-                <dd class="price__fee">¥<?php echo number_format(esc_html($fun['price3'])); ?></dd>
-              </dl>
-            <?php endforeach; ?>
-          </div>
-          <div class="price__item">
-            <h3 class="price__subtitle">スペシャルダイビング</h3>
-            <?php $specials = SCF::get('specialdiving-table', 26); ?>
-            <?php foreach ($specials as $special) : ?>
-              <dl class="price__menu">
-                <dt class="price__course"><?php echo $special['course4']; ?></dt>
-                <dd class="price__fee">¥<?php echo number_format($special['price4']); ?></dd>
-              </dl>
-            <?php endforeach; ?>
-          </div>
         </div>
-      </div>
+      <?php else : ?>
+        <!-- すべての料金表が空の場合 -->
+        <p>準備中です</p>
+      <?php endif; ?>
     </div>
     <div class="price__button">
       <a href="<?php echo $price; ?>" class="button slide">View more<span class="button__arrow"></span></a>

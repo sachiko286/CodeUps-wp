@@ -60,7 +60,7 @@
 
 
 
-          <?php get_template_part('parts/aside') ?>
+          <?php get_sidebar(); ?>
 
         </div>
       </section>

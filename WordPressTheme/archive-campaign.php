@@ -14,28 +14,28 @@
 
   <section class="page-campaign top-page-campaign">
     <div class="page-campaign__inner inner">
-      <div class="page-campaign__filter filter-content">
-      <ul class="filter-content__list">
-          <li class="filter-content__list-title <?php if (!isset($_GET['campaign_category'])) echo 'is-active'; ?>">
-            <a href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
-          </li>
-          <?php
-          $voice_terms = get_terms('campaign_category');
-          if ($voice_terms && !is_wp_error($voice_terms)) :
-            foreach ($voice_terms as $voice_term) : ?>
-              <li class="filter-content__list-title <?php if (is_tax('campaign_category', $voice_term->slug)) echo 'is-active'; ?>">
-                <a href="<?php echo esc_url(get_term_link($voice_term)); ?>"><?php echo $voice_term->name; ?></a>
-              </li>
-          <?php endforeach;
-          endif; ?>
-        </ul>
-      </div>
+      <!-- 投稿があれば表示なければ非表示 -->
+      <?php if (have_posts()) : ?>
+        <div class="page-campaign__filter filter-content">
+          <ul class="filter-content__list">
+            <li class="filter-content__list-title <?php if (!isset($_GET['campaign_category'])) echo 'is-active'; ?>">
+              <a href="<?php echo get_post_type_archive_link('campaign'); ?>">ALL</a>
+            </li>
+            <?php
+            $campaign_terms = get_terms('campaign_category');
+            if ($campaign_terms && !is_wp_error($campaign_terms)) :
+              foreach ($campaign_terms as $campaign_term) : ?>
+                <li class="filter-content__list-title <?php if (is_tax('campaign_category', $campaign_term->slug)) echo 'is-active'; ?>">
+                  <a href="<?php echo esc_url(get_term_link($campaign_term)); ?>"><?php echo $campaign_term->name; ?></a>
+                </li>
+            <?php endforeach;
+            endif; ?>
+          </ul>
+        </div>
 
-      <div class="page-campaign__wrapper">
-        <ul class="page-campaign__items">
-          <?php if (have_posts()) :
-            while (have_posts()) :
-              the_post(); ?>
+        <div class="page-campaign__wrapper">
+          <ul class="page-campaign__items">
+            <?php while (have_posts()): the_post(); ?>
               <li class="page-campaign__item campaign-card">
                 <div class="campaign-card__item">
                   <div class="campaign-card__img">
@@ -64,7 +64,10 @@
                   </div>
                   <div class="campaign__wrapper u-desktop">
                     <div class="campaign__text"><?php the_content(); ?></div>
-                    <p class="campaign__date">2023/6/1-9/30</p>
+                    <?php $period = get_field('period'); ?>
+                    <?php if ($period) : ?>
+                      <p class="campaign__date"><?php echo $period; ?></p>
+                    <?php endif; ?>
                     <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
                     <div class="campaign__info-button">
                       <a href="<?php echo $contact; ?>" class="button slide">Contact us<span class="button__arrow"></span></a>
@@ -72,18 +75,20 @@
                   </div>
                 </div>
               </li>
-          <?php endwhile;
-          endif; ?>
-        </ul>
-      </div>
-
-      <div class="pagenavi">
-        <div class="pagenavi__inner">
-          <!-- WP-PageNaviで出力される部分 ここから -->
-          <?php wp_pagenavi(); ?>
-          <!-- WP-PageNaviで出力される部分 ここまで -->
+            <?php endwhile; ?>
+          </ul>
         </div>
-      </div>
+
+        <div class="pagenavi">
+          <div class="pagenavi__inner">
+            <!-- WP-PageNaviで出力される部分 ここから -->
+            <?php wp_pagenavi(); ?>
+            <!-- WP-PageNaviで出力される部分 ここまで -->
+          </div>
+        </div>
+      <?php else: ?>
+        <p>現在のキャンペーンはありません</p>
+      <?php endif; ?>
     </div>
   </section>
 
