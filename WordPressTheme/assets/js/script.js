@@ -154,7 +154,6 @@ jQuery(function ($) {
 
     // });
 
-
     // モーダル
     var scrollPos;
     $(".js-photo").click(function () {
@@ -272,7 +271,14 @@ jQuery(function ($) {
         // エラーがあればエラーメッセージを表示
         if (!isValid) {
           errorElement.show();
+          // パンくずに「お問い合わせエラー」を追加
+          var breadcrumbInner = $('.breadcrumb__inner');
+          if (breadcrumbInner.find('.error-breadcrumb').length === 0) {
+            breadcrumbInner.append(' &gt; <span class="error-breadcrumb">お問い合わせエラー</span>');
+          }
         } else {
+          // エラーがなければ、エラーパンくずを削除
+          $('.error-breadcrumb').remove();
           // フォームのIDを指定
           var form = document.querySelector('form.wpcf7-form');
           if (form) {

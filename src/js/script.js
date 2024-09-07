@@ -226,7 +226,7 @@ jQuery(function ($) {
 
         $(document).ready(function () {
             $('#js-submit').click(function () {
-        
+
                 // 必須フィールドを取得
                 var nameField = $('#name');
                 var mailField = $('#mail');
@@ -234,17 +234,17 @@ jQuery(function ($) {
                 var categoryFields = $('input[name="category_1[]"]');
                 var messageField = $('#message');
                 var privacyCheck = $('input[name="privacyCheck_1[]"]');
-        
+
                 // エラーメッセージを非表示にする
                 var errorElement = $('.form__error');
                 errorElement.hide();
-        
+
                 // 入力フィールドのエラースタイルをリセット
                 resetErrorStyles();
-        
+
                 // バリデーションフラグ
                 var isValid = true;
-        
+
                 // バリデーションチェック
                 if (!nameField.val().trim()) {
                     setErrorStyle(nameField.closest('.form__input'));
@@ -270,25 +270,32 @@ jQuery(function ($) {
                     setErrorStyle(privacyCheck.closest('.form__privacyCheck-wrapper'));
                     isValid = false;
                 }
-        
+
                 // エラーがあればエラーメッセージを表示
                 if (!isValid) {
                     errorElement.show();
+                    // パンくずに「お問い合わせエラー」を追加
+                    var breadcrumbInner = $('.breadcrumb__inner');
+                    if (breadcrumbInner.find('.error-breadcrumb').length === 0) {
+                        breadcrumbInner.append(' &gt; <span class="error-breadcrumb">お問い合わせエラー</span>');
+                    }
                 } else {
+                    // エラーがなければ、エラーパンくずを削除
+                    $('.error-breadcrumb').remove();
                     // フォームのIDを指定
                     var form = document.querySelector('form.wpcf7-form');
-        
+
                     if (form) {
                         // フォーム送信をトリガー
                         form.submit();
                     }
                 }
             });
-        
+
             function setErrorStyle(element) {
                 element.addClass('error');
             }
-        
+
             function resetErrorStyles() {
                 $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');
             }

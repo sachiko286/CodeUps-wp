@@ -266,26 +266,32 @@ function wpcf7_autop_return_false()
 function campaign_titles_select_menu()
 {
     $args = array(
-        'post_type' => 'campaign', // カスタム投稿タイプに変更
+        'post_type' => 'campaign', // カスタム投稿タイプ
         'posts_per_page' => -1 // すべてのキャンペーンを取得
     );
     $campaigns = new WP_Query($args);
     $output = '';
 
+    // セレクトボックスの開始タグと空のオプションを出力
+    $output .= '<select name="campaign" class="form__select">';
+    $output .= '<option value="">キャンペーン内容を選択</option>'; // 空のオプション
+
+    // 投稿がある場合のみオプションを追加
     if ($campaigns->have_posts()) {
-        $output .= '<select name="campaign" class="form__select">';
-        $output .= '<option value="">キャンペーン内容を選択</option>'; // 空のオプション
         while ($campaigns->have_posts()) {
             $campaigns->the_post();
             $output .= '<option value="' . get_the_title() . '">' . get_the_title() . '</option>';
         }
-        $output .= '</select>';
         wp_reset_postdata();
     }
+
+    // セレクトボックスの終了タグ
+    $output .= '</select>';
 
     return $output;
 }
 add_shortcode('campaign_titles_select', 'campaign_titles_select_menu');
+
 
 // Contact Form 7内でショートコードを処理するためのフィルター
 add_filter('wpcf7_form_elements', 'do_shortcode');
