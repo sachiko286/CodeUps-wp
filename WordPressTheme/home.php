@@ -14,10 +14,10 @@
   <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-blog top-page-blog">
-    <div class="page-blog__inner inner">
-      <div class="page-blog__main">
-        <div class="page-blog__main-inner">
-          <?php if (have_posts()) : ?>
+    <?php if (have_posts()) : ?>
+      <div class="page-blog__inner inner">
+        <div class="page-blog__main">
+          <div class="page-blog__main-inner">
             <ul class="page-blog__list blog-list blog-list--page">
               <?php while (have_posts()) : the_post(); ?>
                 <li class="blog-list__item">
@@ -49,15 +49,13 @@
                 <!-- WP-PageNaviで出力される部分 ここまで -->
               </div>
             </div>
-          <?php else : ?>
-            <p>ブログの投稿はありません</p>
-          <?php endif; ?>
-          <!-- クエリのリセット -->
-          <?php wp_reset_postdata(); ?>
+          </div>
+        <?php else : ?>
+          <p class="non-message">ブログの投稿はありません</p>
+        <?php endif; ?>
         </div>
       </div>
       <?php get_sidebar(); ?>
-    </div>
   </section>
 </main>
 

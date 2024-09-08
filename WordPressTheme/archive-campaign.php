@@ -8,7 +8,6 @@
     <h2 class="sub-fv__title">Campaign</h2>
   </section>
 
-
   <!-- パンくず -->
   <?php get_template_part('parts/breadcrumb') ?>
 
@@ -61,7 +60,6 @@
                         <p class="campaign-card__price-discount campaign-card__price-discount--sub"><?php echo esc_html($price_2); ?></p>
                       <?php endif; ?>
                     </div>
-
                   </div>
                   <div class="campaign__wrapper u-desktop">
                     <div class="campaign__text"><?php the_content(); ?></div>
@@ -88,7 +86,7 @@
           </div>
         </div>
       <?php else: ?>
-        <p>現在のキャンペーンはありません</p>
+        <p class="non-message">現在のキャンペーンはありません</p>
       <?php endif; ?>
     </div>
   </section>

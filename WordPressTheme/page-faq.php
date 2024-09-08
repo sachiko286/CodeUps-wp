@@ -37,7 +37,7 @@
           <?php endforeach; ?>
         </ul>
       <?php else : ?>
-        <p>質問はありません。</p>
+        <p  class="non-message">準備中です。</p>
       <?php endif; ?>
     </div>
   </section>

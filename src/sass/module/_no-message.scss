@@ -1,0 +1,15 @@
+@use "global" as *;
+
+.non-message {
+  text-align: center;
+}
+
+.non-message--top {
+  margin-top: rem(50);
+}
+
+.non-message--blog{
+  @include mq(md) {
+      color: $white;
+  }
+}

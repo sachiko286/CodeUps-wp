@@ -242,7 +242,6 @@ function custom_archives()
 }
 
 /* ------- the_archive_title 余計な文字を削除  -------*/
-
 add_filter('get_the_archive_title', function ($title) {
     if (is_year()) {
         // 年別アーカイブの場合、年を取得
@@ -251,7 +250,6 @@ add_filter('get_the_archive_title', function ($title) {
         // 月別アーカイブの場合、年と月を取得
         $title = get_the_time('Y年n月');
     }
-    return $title;
     return $title;
 });
 

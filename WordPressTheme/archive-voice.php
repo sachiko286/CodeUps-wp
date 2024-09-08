@@ -70,7 +70,7 @@
           </div>
         </div>
       <?php else: ?>
-        <p>投稿はありません。</p>
+        <p class="non-message">投稿はありません。</p>
       <?php endif; ?>
     </div>
   </section>

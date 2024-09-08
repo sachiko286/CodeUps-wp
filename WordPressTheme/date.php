@@ -3,13 +3,11 @@
 <?php include 'urls.php'; ?>
 
 <section class="sub-fv sub-fv--blog">
-  <!-- <div class="sub-fv__inner"> -->
   <h2 class="sub-fv__title"><?php the_archive_title(); ?></h2>
 </section>
 
 <!-- パンくず -->
 <?php get_template_part('parts/breadcrumb') ?>
-
 
 <section class="page-blog top-page-blog ">
   <div class="page-blog__inner inner">

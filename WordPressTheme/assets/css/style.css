@@ -2012,6 +2012,14 @@ html.is-fixed {
 	width: 100%;
 }
 
+.non-message {
+	text-align: center;
+}
+
+.non-message--top {
+	margin-top: 3.125rem;
+}
+
 .page-404 {
 	background-color: #408F95;
 	background-image: url("../images/common/404back.png");
@@ -2942,6 +2950,7 @@ html {
 }
 
 .top-blog {
+	min-height: 31.25rem;
 	padding-top: 5.9375rem;
 }
 
@@ -3687,6 +3696,10 @@ html {
 	max-width: 1130px;
 	padding-left: 25px;
 	padding-right: 25px;
+}
+
+.non-message--blog {
+	color: #fff;
 }
 
 .page-404__inner {

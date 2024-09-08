@@ -64,9 +64,8 @@
         <h2 class="section-header__jatitle">キャンペーン</h2>
       </div>
 
-
-      <div class="campaign__swiper swiper-container">
-        <?php if ($campaign_query->have_posts()) : ?>
+      <?php if ($campaign_query->have_posts()) : ?>
+        <div class="campaign__swiper swiper-container">
           <div class="swiper-button-wrapper u-desktop">
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
@@ -118,15 +117,14 @@
               <?php endwhile; ?>
             </div> <!-- .campaign-cards -->
           </div> <!-- .swiper -->
-        <?php else : ?>
-          <p>現在のキャンペーンはありません</p>
-        <?php endif; ?>
-        <!-- クエリのリセット -->
-        <?php wp_reset_postdata(); ?>
-        <div class="campaign__button">
-          <a href="<?php echo esc_url($campaign); ?>" class="button slide">View more<span class="button__arrow"></span></a>
         </div>
-
+      <?php else : ?>
+        <p class="non-message non-message--top">現在のキャンペーンはありません</p>
+      <?php endif; ?>
+      <!-- クエリのリセット -->
+      <?php wp_reset_postdata(); ?>
+      <div class="campaign__button">
+        <a href="<?php echo $campaign; ?>" class="button slide">View more<span class="button__arrow"></span></a>
       </div>
     </div>
   </section>
@@ -140,10 +138,10 @@
       <div class="about-us__wrapper">
         <div class="about-us__images">
           <div class="about-us__image1">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/about1.jpg" alt="シーサー写真">
+            <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/about1.jpg") ; ?>" alt="シーサー写真">
           </div>
           <div class="about-us__image2">
-            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/about2.jpg" alt="シーサー写真">
+            <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/about2.jpg") ; ?>" alt="シーサー写真">
           </div>
         </div>
         <div class="about-us__content">
@@ -170,7 +168,7 @@
       </div>
       <div class="information__wrapper">
         <div class="information__image colorbox">
-          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/info.jpg" alt="サカナの写真">
+          <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/info.jpg") ; ?>" alt="サカナの写真">
         </div>
         <div class="information__content">
           <h3 class="information__subtitle">ライセンス講習</h3>
@@ -210,7 +208,7 @@
                     <?php if (get_the_post_thumbnail()) : ?>
                       <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
                     <?php else : ?>
-                      <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                      <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/noimage.jpg") ; ?>" alt="noimage">
                     <?php endif; ?>
                   </div>
                   <div class="blog-card__content">
@@ -226,7 +224,7 @@
           <?php endwhile; ?>
         </ul>
       <?php else : ?>
-        <p>ブログの投稿はありません</p>
+        <p class="non-message non-message--top non-message--blog">ブログの投稿はありません</p>
       <?php endif; ?>
       <!-- クエリのリセット -->
       <?php wp_reset_postdata(); ?>
@@ -274,7 +272,7 @@
                     <?php if (get_the_post_thumbnail()) : ?>
                       <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php echo $age; ?>のアイキャッチ画像">
                     <?php else : ?>
-                      <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                      <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/noimage.jpg") ; ?>" alt="noimage">
                     <?php endif; ?>
                   </div>
                 </div>
@@ -287,7 +285,7 @@
           <?php endwhile; ?>
         </ul>
       <?php else : ?>
-        <p>投稿はありません</p>
+        <p class="non-message non-message--top">投稿はありません</p>
       <?php endif; ?>
       <!-- クエリのリセット -->
       <?php wp_reset_postdata(); ?>
@@ -336,8 +334,8 @@
         <div class="price__wrapper">
           <div class="price__image  colorbox">
             <picture>
-              <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/price-pc.jpg" media="(min-width: 768px)">
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/price-sp.jpg" alt="かめの写真">
+              <source srcset="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/price-pc.jpg"); ?>" media="(min-width: 768px)">
+              <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/price-sp.jpg"); ?>" alt="かめの写真">
             </picture>
           </div>
           <div class="price__content">
@@ -398,7 +396,7 @@
         </div>
       <?php else : ?>
         <!-- すべての料金表が空の場合 -->
-        <p>準備中です</p>
+        <p class="non-message non-message--top">準備中です</p>
       <?php endif; ?>
     </div>
     <div class="price__button">

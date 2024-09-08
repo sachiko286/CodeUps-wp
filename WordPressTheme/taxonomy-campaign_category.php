@@ -64,8 +64,10 @@
                   </div>
                   <div class="campaign__wrapper u-desktop">
                     <div class="campaign__text"><?php the_content(); ?></div>
-                    <p class="campaign__date">2023/6/1-9/30</p>
-                    <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
+                    <?php $period = get_field('period'); ?>
+                    <?php if ($period) : ?>
+                      <p class="campaign__date"><?php echo $period; ?></p>
+                    <?php endif; ?>                    <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
                     <div class="campaign__info-button">
                       <a href="<?php echo $contact; ?>" class="button slide">Contact us<span class="button__arrow"></span></a>
                     </div>

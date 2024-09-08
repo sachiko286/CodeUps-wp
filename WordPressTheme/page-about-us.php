@@ -86,9 +86,7 @@
           <p class="section-header__engtitle">Gallery</p>
           <h2 class="section-header__jatitle">フォト</h2>
         </div>
-
         <ul class="gallery__list gallery-list">
-
           <!-- 繰り返し -->
           <?php foreach ($fields as $field) : ?>
             <?php if ($field['gallery-img1']) : ?> <!-- 各フィールドが 'gallery-img1' を持っているかをチェック -->

@@ -107,7 +107,7 @@
 
       <?php else : ?>
         <!-- 全ての料金表が空の場合 -->
-          <p>準備中です</p>
+          <p class="non-message">準備中です</p>
       <?php endif; ?>
 
     </div>
