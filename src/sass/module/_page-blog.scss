@@ -49,16 +49,8 @@
   }
 }
 
-.page-blog__aside-content--voice {
+.page-blog__aside-content +  .page-blog__aside-content {
   margin-top: rem(80);
-}
-
-.page-blog__aside-content--campaign {
-  margin-top: rem(84);
-}
-
-.page-blog__aside-content--archive {
-  margin-top: rem(82);
 }
 
 // ワードプレス調整(アーカイブタイトル）

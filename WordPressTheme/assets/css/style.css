@@ -614,6 +614,13 @@ a {
 	margin-top: 1rem;
 }
 
+.blog-card__text--top {
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5; /* 7行に制限 */
+	display: -webkit-box;
+	overflow: hidden;
+}
+
 .blog-card--hover-scale:hover {
 	opacity: 1;
 }
@@ -2110,16 +2117,8 @@ html.is-fixed {
 	padding: 0 1.5625rem;
 }
 
-.page-blog__aside-content--voice {
+.page-blog__aside-content + .page-blog__aside-content {
 	margin-top: 5rem;
-}
-
-.page-blog__aside-content--campaign {
-	margin-top: 5.25rem;
-}
-
-.page-blog__aside-content--archive {
-	margin-top: 5.125rem;
 }
 
 .page-blog__archive {
@@ -2901,6 +2900,13 @@ html.is-fixed {
 	font-weight: 400;
 	line-height: 1.5;
 	margin-top: 1rem;
+}
+
+.voice-card__text--top {
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 7; /* 7行に制限 */
+	display: -webkit-box;
+	overflow: hidden;
 }
 
 .voice-list {

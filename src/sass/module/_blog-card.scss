@@ -60,6 +60,13 @@
   }
 }
 
+.blog-card__text--top {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* 7行に制限 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 
 // .blog-card:hover {
 //   opacity: 0.9;

@@ -85,30 +85,6 @@ function change_post_types_admin_order($wp_query)
 }
 add_filter('pre_get_posts', 'change_post_types_admin_order');
 
-/* ---------- タクソノミーでの絞り込み ---------- */
-// function filter_by_taxonomy($query)
-// {
-//     if (!is_admin() && $query->is_main_query()) {
-//         // 'campaign' カスタム投稿タイプのアーカイブページでのフィルタリング
-//         if ($query->is_post_type_archive('campaign') || $query->is_post_type_archive('voice')) {
-//             // 'campaign_category' または 'voice_category' タクソノミーでフィルタリング
-//             $taxonomy = $query->is_post_type_archive('campaign') ? 'campaign_category' : 'voice_category';
-//             if (isset($_GET[$taxonomy]) && $_GET[$taxonomy] != '') {
-//                 $query->set('tax_query', array(
-//                     array(
-//                         'taxonomy' => $taxonomy,
-//                         'field'    => 'slug',
-//                         'terms'    => $_GET[$taxonomy],
-//                     ),
-//                 ));
-//             }
-//         }
-//     }
-// }
-// add_action('pre_get_posts', 'filter_by_taxonomy');
-
-
-
 /* ---------- 「投稿」の表記変更 ---------- */
 function Change_menulabel()
 {
@@ -303,18 +279,6 @@ function redirect_to_thank_you_page()
 
 add_action('wpcf7_mail_sent', 'redirect_to_thank_you_page');
 
-
-/* ---------- 文字数制限 voice---------- */
-function custom_trim_content($content, $length = 354, $more = '…')
-{
-    $content = strip_tags($content, '<br><p>'); // <br>と<p>タグを残す
-    if (mb_strwidth($content, 'UTF-8') <= $length) {
-        return $content;
-    } else {
-        $trimmed_content = mb_strimwidth($content, 0, $length, '', 'UTF-8');
-        return $trimmed_content . $more;
-    }
-}
 
 /* ---------- 【管理画面】サイドメニュー並び順を変更 ---------- */
 

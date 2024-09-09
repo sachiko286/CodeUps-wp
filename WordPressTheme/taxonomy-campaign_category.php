@@ -54,11 +54,11 @@
                     <div class="campaign-card__price campaign-card__price--sub">
                       <?php $price_1 = get_field('price_1'); ?>
                       <?php if ($price_1) : ?>
-                        <p class="campaign-card__price-original"><span>¥<?php echo number_format($price_1); ?></span></p>
+                        <p class="campaign-card__price-original"><span><?php echo esc_html($price_1); ?></span></p>
                       <?php endif; ?>
                       <?php $price_2 = get_field('price_2'); ?>
                       <?php if ($price_2) : ?>
-                        <p class="campaign-card__price-discount campaign-card__price-discount--sub">¥<?php echo number_format($price_2); ?></p>
+                        <p class="campaign-card__price-discount campaign-card__price-discount--sub"><?php echo esc_html($price_2); ?></p>
                       <?php endif; ?>
                     </div>
                   </div>

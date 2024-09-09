@@ -133,12 +133,12 @@
                     <?php $price_1 = get_field('price_1'); ?>
                     <?php if ($price_1) : ?>
                       <p class="campaign-card__price-original campaign-card__price-original--aside">
-                        <span>¥<?php echo number_format($price_1); ?></span>
+                        <span><?php echo esc_html($price_1); ?></span>
                       </p>
                     <?php endif; ?>
                     <?php $price_2 = get_field('price_2'); ?>
                     <?php if ($price_2) : ?>
-                      <p class="campaign-card__price-discount campaign-card__price-discount--aside">¥<?php echo number_format($price_2); ?></p>
+                      <p class="campaign-card__price-discount campaign-card__price-discount--aside"><?php echo esc_html($price_2); ?></p>
                     <?php endif; ?>
                   </div>
                 </div>

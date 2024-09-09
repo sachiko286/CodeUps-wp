@@ -101,13 +101,13 @@
                         <?php $price_1 = get_field('price_1'); ?>
                         <?php if ($price_1) : ?>
                           <p class="campaign-card__price-original">
-                            <span>¥<?php echo number_format($price_1); ?></span>
+                            <span><?php echo esc_html($price_1); ?></span>
                           </p>
                         <?php endif; ?>
                         <?php $price_2 = get_field('price_2'); ?>
                         <?php if ($price_2) : ?>
                           <p class="campaign-card__price-discount">
-                            ¥<?php echo number_format($price_2); ?>
+                            <?php echo esc_html($price_2); ?>
                           </p>
                         <?php endif; ?>
                       </div>
@@ -214,8 +214,8 @@
                   <div class="blog-card__content">
                     <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m/d'); ?></time>
                     <p class="blog-card__title"><?php the_title(); ?></p>
-                    <div class="blog-card__text">
-                      <?php echo wp_trim_words(get_the_content(), 88, '…'); ?>
+                    <div class="blog-card__text blog-card__text--top">
+                      <?php echo get_the_content(); ?>
                     </div>
                   </div>
                 </div>
@@ -232,9 +232,6 @@
       <div class="blog__button">
         <a href="<?php echo $blog; ?>" class="button slide">View more<span class="button__arrow"></span></a>
       </div>
-
-
-
     </div>
   </section>
 
@@ -276,8 +273,8 @@
                     <?php endif; ?>
                   </div>
                 </div>
-                <div class="voice-card__text">
-                  <?php echo wpautop(custom_trim_content(get_the_content(), 354, '…')); //文字数制限
+                <div class="voice-card__text voice-card__text--top">
+                  <?php echo get_the_content(); //文字数制限
                   ?>
                 </div>
               </div>
