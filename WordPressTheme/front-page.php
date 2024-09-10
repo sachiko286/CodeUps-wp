@@ -138,10 +138,10 @@
       <div class="about-us__wrapper">
         <div class="about-us__images">
           <div class="about-us__image1">
-            <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/about1.jpg") ; ?>" alt="シーサー写真">
+            <img src="<?php echo get_theme_file_uri(). "/assets/images/common/about1.jpg" ; ?>" alt="シーサー写真">
           </div>
           <div class="about-us__image2">
-            <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/about2.jpg") ; ?>" alt="シーサー写真">
+            <img src="<?php echo get_theme_file_uri(). "/assets/images/common/about2.jpg" ; ?>" alt="シーサー写真">
           </div>
         </div>
         <div class="about-us__content">
@@ -168,7 +168,7 @@
       </div>
       <div class="information__wrapper">
         <div class="information__image colorbox">
-          <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/info.jpg") ; ?>" alt="サカナの写真">
+          <img src="<?php echo get_theme_file_uri(). "/assets/images/common/info.jpg" ; ?>" alt="サカナの写真">
         </div>
         <div class="information__content">
           <h3 class="information__subtitle">ライセンス講習</h3>
@@ -208,7 +208,7 @@
                     <?php if (get_the_post_thumbnail()) : ?>
                       <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title(); ?>のアイキャッチ画像">
                     <?php else : ?>
-                      <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/noimage.jpg") ; ?>" alt="noimage">
+                      <img src="<?php echo get_theme_file_uri(). "/assets/images/common/noimage.jpg" ; ?>" alt="noimage">
                     <?php endif; ?>
                   </div>
                   <div class="blog-card__content">
@@ -269,7 +269,7 @@
                     <?php if (get_the_post_thumbnail()) : ?>
                       <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php echo $age; ?>のアイキャッチ画像">
                     <?php else : ?>
-                      <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/noimage.jpg") ; ?>" alt="noimage">
+                      <img src="<?php echo get_theme_file_uri(). "/assets/images/common/noimage.jpg" ; ?>" alt="noimage">
                     <?php endif; ?>
                   </div>
                 </div>
@@ -331,8 +331,8 @@
         <div class="price__wrapper">
           <div class="price__image  colorbox">
             <picture>
-              <source srcset="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/price-pc.jpg"); ?>" media="(min-width: 768px)">
-              <img src="<?php echo esc_url(get_theme_file_uri(). "/assets/images/common/price-sp.jpg"); ?>" alt="かめの写真">
+              <source srcset="<?php echo get_theme_file_uri(). "/assets/images/common/price-pc.jpg" ; ?>" media="(min-width: 768px)">
+              <img src="<?php echo get_theme_file_uri(). "/assets/images/common/price-sp.jpg" ; ?>" alt="かめの写真">
             </picture>
           </div>
           <div class="price__content">

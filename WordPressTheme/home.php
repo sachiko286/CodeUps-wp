@@ -21,7 +21,7 @@
             <ul class="page-blog__list blog-list blog-list--page">
               <?php while (have_posts()) : the_post(); ?>
                 <li class="blog-list__item">
-                  <a href="<?php the_permalink(); ?>" class="blog-card">
+                  <a href="<?php echo esc_url(get_permalink()); ?>" class="blog-card">
                     <div class="blog-card__inner">
                       <div class="blog-card__img">
                         <?php if (get_the_post_thumbnail()) : ?>

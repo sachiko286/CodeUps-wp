@@ -2,15 +2,7 @@
 <main>
 
   <section class="sub-fv sub-fv--about">
-    <!-- <div class="sub-fv__inner"> -->
     <h2 class="sub-fv__title">About us</h2>
-    <!-- <div class="sub-fv__image">
-      <picture >
-        <source srcset="./assets/images/common/sub-fv-pc.jpg" alt="省略" media="(min-width: 768px)">
-        <img src="./assets/images/common/sub-fv-sp.jpg" alt="省略">
-      </picture>
-      </div> -->
-    <!-- </div> -->
   </section>
 
   <!-- パンくず -->
@@ -36,7 +28,6 @@
       </div>
     </div>
   </section>
-
 
   <section class="page-about-us--pc about-us u-desktop">
     <div class="about-us__inner inner">

@@ -13,13 +13,15 @@
     <div class="page-voice__inner inner">
       <!-- 投稿があれば表示なければ非表示 -->
       <?php if (have_posts()) : ?>
-        <div class="page-voice__folter filter-content">
+        <div class="page-voice__filter filter-content">
           <ul class="filter-content__list">
+            <!-- 'ALL' リンクが選択された時にクラス 'is-active' を追加 -->
             <li class="filter-content__list-title <?php if (!isset($_GET['voice_category'])) echo 'is-active'; ?>">
-              <a href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
+              <a href="<?php echo esc_url(get_post_type_archive_link('voice')); ?>">ALL</a>
             </li>
             <?php
             $voice_terms = get_terms('voice_category');
+            // Voiceカテゴリーが存在するかどうかをチェック
             if ($voice_terms && !is_wp_error($voice_terms)) :
               foreach ($voice_terms as $voice_term) : ?>
                 <li class="filter-content__list-title <?php if (is_tax('voice_category', $voice_term->slug)) echo 'is-active'; ?>">
@@ -42,7 +44,11 @@
                         <?php if ($age) : ?>
                           <p class="voice-card__age"><?php echo $age; ?></p>
                         <?php endif; ?>
-                        <p class="voice-card__category"><?php echo get_the_terms(get_the_ID(), 'voice_category')[0]->name; ?></p>
+                        <!-- get_the_terms の結果を変数に代入し、最初のカテゴリー名を表示 -->
+                        <?php $voice_category = get_the_terms(get_the_ID(), 'voice_category'); ?>
+                        <?php if (!empty($voice_category)) : ?>
+                          <p class="voice-card__category"><?php echo esc_html($voice_category[0]->name); ?></p>
+                        <?php endif; ?>
                       </div>
                       <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
                     </div>
@@ -70,6 +76,7 @@
           </div>
         </div>
       <?php else: ?>
+        <!-- 投稿がない場合のメッセージ -->
         <p class="non-message">投稿はありません。</p>
       <?php endif; ?>
     </div>

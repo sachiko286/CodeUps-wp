@@ -11,7 +11,7 @@
 
   <section class="page-voice top-page-voice">
     <div class="page-voice__inner inner">
-      <div class="page-voice__folter filter-content">
+      <div class="page-voice__filter filter-content">
         <ul class="filter-content__list">
           <li class="filter-content__list-title <?php if (!is_tax('voice_category')) echo 'is-active'; ?>">
             <a href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
@@ -39,11 +39,15 @@
                   <div class="voice-card__header">
                     <div class="voice-card__lead">
                       <div class="voice-card__meta">
-                        <?php $age = get_field('age'); ?>
+                      <?php $age = get_field('age'); ?>
                         <?php if ($age) : ?>
                           <p class="voice-card__age"><?php echo $age; ?></p>
                         <?php endif; ?>
-                        <p class="voice-card__category"><?php echo get_the_terms(get_the_ID(), 'voice_category')[0]->name; ?></p>
+                        <!-- get_the_terms の結果を変数に代入し、最初のカテゴリー名を表示 -->
+                        <?php $voice_category = get_the_terms(get_the_ID(), 'voice_category'); ?>
+                        <?php if (!empty($voice_category)) : ?>
+                          <p class="voice-card__category"><?php echo esc_html($voice_category[0]->name); ?></p>
+                        <?php endif; ?>
                       </div>
                       <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
                     </div>

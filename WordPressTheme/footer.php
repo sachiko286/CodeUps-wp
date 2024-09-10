@@ -46,8 +46,12 @@
         </a>
       </div>
       <div class="footer__sns">
-        <a class="footer__sns-facebook" href="https://www.facebook.com/?locale=ja_JP" target="_blank"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/FacebookLogo.png" alt="フェイスブックロゴ"></a>
-        <a class="footer__sns-insta" href="https://www.instagram.com/" target="_blank"><img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/insta.png" alt="インスタロゴ"></a>
+        <a class="footer__sns-facebook" href="https://www.facebook.com/?locale=ja_JP" target="_blank">
+          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/FacebookLogo.png" alt="フェイスブックロゴ">
+        </a>
+        <a class="footer__sns-insta" href="https://www.instagram.com/" target="_blank">
+          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/insta.png" alt="インスタロゴ">
+        </a>
       </div>
     </div>
     <nav class="footer__nav sp-nav">

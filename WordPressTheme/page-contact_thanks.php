@@ -3,7 +3,6 @@
 <main>
 
   <section class="sub-fv sub-fv--contact">
-    <!-- <div class="sub-fv__inner"> -->
     <h2 class="sub-fv__title sub-fv__title--contact">Contact</h2>
   </section>
 
