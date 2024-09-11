@@ -725,6 +725,10 @@ a {
 	display: none;
 }
 
+.breadcrumb span {
+	font-size: 0.875rem;
+}
+
 .button {
 	background: #408F95;
 	border: 1px solid #408F95;
@@ -3421,8 +3425,13 @@ html {
 }
 
 .filter-content__list {
+	display: flex;
 	gap: 0rem 2rem;
-	grid-template-columns: repeat(4, 10.125rem);
+}
+
+.filter-content__list-title {
+	max-width: 10rem;
+	width: 100%;
 }
 
 .footer__inner.inner {

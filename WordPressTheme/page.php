@@ -8,10 +8,8 @@
   </h2>
 </section>
 
-
 <!-- パンくず -->
 <?php get_template_part('parts/breadcrumb') ?>
-
 
 <section class="page-privacy top-page-privacy">
   <div class="page-privacy__inner inner">

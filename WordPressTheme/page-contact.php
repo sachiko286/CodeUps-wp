@@ -6,7 +6,6 @@
     <h2 class="sub-fv__title sub-fv__title--contact">Contact</h2>
   </section>
 
-
   <!-- パンくず -->
   <?php get_template_part('parts/breadcrumb') ?>
 

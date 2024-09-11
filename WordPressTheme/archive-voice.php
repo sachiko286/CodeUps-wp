@@ -20,7 +20,11 @@
               <a href="<?php echo esc_url(get_post_type_archive_link('voice')); ?>">ALL</a>
             </li>
             <?php
-            $voice_terms = get_terms('voice_category');
+            $voice_terms = get_terms(array(
+              'taxonomy' => 'voice_category',
+              'hide_empty' => false, // 投稿がなくてもカテゴリーを表示する
+              'orderby' => 'description',// カテゴリーの並び順
+            ));
             // Voiceカテゴリーが存在するかどうかをチェック
             if ($voice_terms && !is_wp_error($voice_terms)) :
               foreach ($voice_terms as $voice_term) : ?>

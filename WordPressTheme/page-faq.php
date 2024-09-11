@@ -7,7 +7,6 @@
     <h2 class="sub-fv__title">FAQ</h2>
   </section>
 
-
   <!-- パンくず -->
   <?php get_template_part('parts/breadcrumb') ?>
 
@@ -42,10 +41,6 @@
     </div>
   </section>
 
-
-
-
 </main>
-
 
 <?php get_footer(); ?>

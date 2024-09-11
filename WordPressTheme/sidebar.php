@@ -58,7 +58,6 @@
     $voice_query = new WP_Query($voice_args);
     ?>
 
-
     <?php if ($voice_query->have_posts()) : ?>
 
       <div class="page-blog__aside-content page-blog__aside-content--voice blog-aside">

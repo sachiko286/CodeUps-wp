@@ -7,8 +7,10 @@
   position: relative;
   z-index: 1;
   @include mq(md) {
-    grid-template-columns: repeat(4, #{rem(162)});
-    gap: rem(0) rem(32)
+    // grid-template-columns: repeat(4, #{rem(162)});
+    gap: rem(0) rem(32);
+    display: flex;
+    
 
   }
 }
@@ -16,12 +18,15 @@
   height: rem(34);
   text-align: center;
   border: 1px solid $green;
-  
   cursor: pointer;
   transition: all 0.3s;
   color: $green;
   background-color: #fff ;
   font-size: rem(14);
+  @include mq(md) {
+      max-width: rem(160);
+      width: 100%;
+  }
 }
 
 .filter-content__list-title a {

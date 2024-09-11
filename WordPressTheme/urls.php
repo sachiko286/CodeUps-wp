@@ -12,4 +12,8 @@ $sitemap = esc_url(home_url('/sitemap/'));
 $terms = esc_url(home_url('/terms-of-servic/'));
 $information = esc_url(home_url('/information/'));
 $contact = esc_url(home_url('/contact/'));
+$campaign_license = esc_url(home_url('/campaign_category/license/'));
+$campaign_experience = esc_url(home_url('/campaign_category/experience/'));
+$campaign_fundiving = esc_url(home_url('/campaign_category/fundiving/'));
+
 ?>

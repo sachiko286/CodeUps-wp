@@ -79,3 +79,8 @@
 .breadcrumb-404::after {
   display: none;
 }
+
+// Wordpress調整
+.breadcrumb span {
+  font-size: rem(14);
+}

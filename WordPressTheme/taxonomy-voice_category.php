@@ -17,7 +17,11 @@
             <a href="<?php echo get_post_type_archive_link('voice'); ?>">ALL</a>
           </li>
           <?php
-          $voice_terms = get_terms('voice_category');
+          $voice_terms = get_terms(array(
+            'taxonomy' => 'voice_category',
+            'hide_empty' => false, // 投稿がなくてもカテゴリーを表示する
+            'orderby' => 'description',// カテゴリーの並び順
+          ));
           if ($voice_terms && !is_wp_error($voice_terms)) :
             foreach ($voice_terms as $voice_term) : ?>
               <li class="filter-content__list-title <?php if (is_tax('voice_category', $voice_term->slug)) echo 'is-active'; ?>">
@@ -29,17 +33,15 @@
       </div>
 
       <div class="page-voice__wrapper">
-        <ul class="page-voice__items voice-list ">
-          <?php
-          if (have_posts()) :
-            while (have_posts()) :
-              the_post(); ?>
+        <?php if (have_posts()) : ?>
+          <ul class="page-voice__items voice-list ">
+            <?php while (have_posts()) : the_post(); ?>
               <li class="voice-list__item voice-card">
                 <div class="voice-card__inner">
                   <div class="voice-card__header">
                     <div class="voice-card__lead">
                       <div class="voice-card__meta">
-                      <?php $age = get_field('age'); ?>
+                        <?php $age = get_field('age'); ?>
                         <?php if ($age) : ?>
                           <p class="voice-card__age"><?php echo $age; ?></p>
                         <?php endif; ?>
@@ -65,10 +67,7 @@
                 </div>
               </li>
             <?php endwhile; ?>
-          <?php else : ?>
-            <p>該当する口コミがありません。</p>
-          <?php endif; ?>
-        </ul>
+          </ul>
       </div>
 
       <!-- ページナビゲーション -->
@@ -77,6 +76,18 @@
           <?php wp_pagenavi(); ?>
         </div>
       </div>
+    <?php else : ?>
+      <p class="non-message">
+        <?php
+          if (is_tax('voice_category')) {
+            $term = get_queried_object();
+            echo esc_html($term->name) . 'の投稿はありません';
+          } else {
+            echo '投稿はありません';
+          }
+        ?>
+      </p>
+    <?php endif; ?>
     </div>
   </section>
 

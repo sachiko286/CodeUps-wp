@@ -6,7 +6,6 @@
     <h2 class="sub-fv__title">Information</h2>
   </section>
 
-
   <!-- パンくず -->
   <?php get_template_part('parts/breadcrumb') ?>
 
@@ -75,6 +74,5 @@
     </div>
   </div>
 </main>
-
 
 <?php get_footer(); ?>

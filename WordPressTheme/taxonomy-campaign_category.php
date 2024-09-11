@@ -14,29 +14,34 @@
 
   <section class="page-campaign top-page-campaign">
     <div class="page-campaign__inner inner">
-      <div class="page-campaign__filter filter-content">
-        <ul class="filter-content__list">
-          <li class="filter-content__list-title <?php if (!is_tax('campaign_category')) echo 'is-active'; ?>">
-            <a href="<?php echo get_post_type_archive_link('campaign'); ?>">ALL</a>
-          </li>
-          <?php
-          $campaign_terms = get_terms('campaign_category');
-          // キャンペーンカテゴリーが存在するかどうかをチェック
-          if ($campaign_terms && !is_wp_error($campaign_terms)) :
-            foreach ($campaign_terms as $campaign_term) : ?>
-              <li class="filter-content__list-title <?php if (is_tax('campaign_category', $campaign_term->slug)) echo 'is-active'; ?>">
-                <a href="<?php echo esc_url(get_term_link($campaign_term)); ?>"><?php echo $campaign_term->name; ?></a>
-              </li>
-          <?php endforeach;
-          endif; ?>
-        </ul>
-      </div>
+        <div class="page-campaign__filter filter-content">
+          <ul class="filter-content__list">
+            <li class="filter-content__list-title <?php if (!is_tax('campaign_category')) echo 'is-active'; ?>">
+              <a href="<?php echo get_post_type_archive_link('campaign'); ?>">ALL</a>
+            </li>
+            <?php
+            $campaign_terms = get_terms(array(
+              'taxonomy' => 'campaign_category',
+              'hide_empty' => false, // 投稿がなくてもカテゴリーを表示する
+              'orderby' => 'description',// カテゴリーの並び順
+            ));
+            // キャンペーンカテゴリーが存在するかどうかをチェック
+            if ($campaign_terms && !is_wp_error($campaign_terms)) :
+              foreach ($campaign_terms as $campaign_term) : ?>
+                <li class="filter-content__list-title <?php if (is_tax('campaign_category', $campaign_term->slug)) echo 'is-active'; ?>">
+                  <a href="<?php echo esc_url(get_term_link($campaign_term)); ?>"><?php echo $campaign_term->name; ?></a>
+                </li>
+            <?php endforeach;
+            endif; ?>
+          </ul>
 
-      <div class="page-campaign__wrapper">
-        <ul class="page-campaign__items">
-          <?php if (have_posts()) :
-            while (have_posts()) :
-              the_post(); ?>
+        </div>
+
+
+        <div class="page-campaign__wrapper">
+        <?php if (have_posts()) : ?>
+          <ul class="page-campaign__items">
+            <?php while (have_posts()) : the_post(); ?>
               <li class="page-campaign__item campaign-card">
                 <div class="campaign-card__item">
                   <div class="campaign-card__img">
@@ -81,18 +86,29 @@
                   </div>
                 </div>
               </li>
-          <?php endwhile;
-          endif; ?>
-        </ul>
-      </div>
-
-      <div class="pagenavi">
-        <div class="pagenavi__inner">
-          <!-- WP-PageNaviで出力される部分 ここから -->
-          <?php wp_pagenavi(); ?>
-          <!-- WP-PageNaviで出力される部分 ここまで -->
+            <?php endwhile; ?>
+          </ul>
         </div>
-      </div>
+
+        <div class="pagenavi">
+          <div class="pagenavi__inner">
+            <!-- WP-PageNaviで出力される部分 ここから -->
+            <?php wp_pagenavi(); ?>
+            <!-- WP-PageNaviで出力される部分 ここまで -->
+          </div>
+        </div>
+      <?php else : ?>
+        <p class="non-message">
+        <?php
+          if (is_tax('campaign_category')) {
+            $term = get_queried_object();
+            echo esc_html($term->name) . 'の投稿はありません';
+          } else {
+            echo '投稿はありません';
+          }
+        ?>
+        </p>
+      <?php endif; ?>
     </div>
   </section>
 
