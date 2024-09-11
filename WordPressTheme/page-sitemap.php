@@ -19,9 +19,9 @@
       <div class="sp-nav__list-box">
         <p class="sp-nav__list-category"><a href="<?php echo $campaign; ?>">キャンペーン</a></p>
         <ul class="sp-nav__list-items">
-          <li class="sp-nav__list-item"><a href="<?php echo add_query_arg('campaign_category', 'license', $campaign); ?>">ライセンス講習</a></li>
-          <li class="sp-nav__list-item"><a href="<?php echo add_query_arg('campaign_category', 'experience', $campaign); ?>">体験ダイビング</a></li>
-          <li class="sp-nav__list-item"><a href="<?php echo add_query_arg('campaign_category', 'fundiving', $campaign); ?>">ファンダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $campaign_license; ?>">ライセンス講習</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $campaign_experience; ?>">体験ダイビング</a></li>
+          <li class="sp-nav__list-item"><a href="<?php echo $campaign_fundiving; ?>">ファンダイビング</a></li>
         </ul>
 
       </div>
