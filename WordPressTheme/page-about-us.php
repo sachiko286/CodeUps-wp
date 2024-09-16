@@ -53,22 +53,10 @@
     </div>
   </section>
 
-  <?php
-  $fields = SCF::get('gallery');
-  $has_image = false;
-
-  // 各フィールドをチェックして、少なくとも1つの画像が存在するかを確認
-  if ($fields && !empty($fields)) {
-    foreach ($fields as $field) {
-      if (!empty($field['gallery-img1'])) {
-        $has_image = true;
-        break; // 1つでも画像が見つかればループを抜ける
-      }
-    }
-  }
-  ?>
-
-  <?php if ($has_image) : ?> <!-- 画像が存在する場合のみセクションを表示 -->
+  <?php $fields = SCF::get('gallery'); ?>
+  
+  <!-- 画像が存在する場合のみギャラリーセクションを表示 -->
+  <?php if ($fields[0]['gallery-img1']) ://最初の画像があるかどうか ?>
 
     <section class="gallery top-gallery">
       <div class="gallery__modal js-overlay"></div>

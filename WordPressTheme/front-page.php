@@ -14,32 +14,68 @@
           <div class="fv__slide swiper-slide">
             <div class="fv__slide-image swiper-img">
               <picture>
-                <source srcset="<?php the_field('pc_fv1'); ?>" media="(min-width: 768px)">
-                <img src="<?php the_field('sp_fv1'); ?>" alt="fv画像1">
+                <?php if (get_field('pc_fv1')): ?>
+                  <source srcset="<?php the_field('pc_fv1'); ?>" media="(min-width: 768px)">
+                <?php else : ?>
+                  <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/pc-fv1.jpg" media="(min-width: 768px)">
+                <?php endif; ?>
+
+                <?php if (get_field('sp_fv1')): ?>
+                  <img src="<?php the_field('sp_fv1'); ?>" alt="fv画像1">
+                <?php else : ?>
+                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/spx-fv1.jpg" alt="fv画像1">
+                <?php endif; ?>
               </picture>
             </div>
           </div>
           <div class="fv__slide swiper-slide">
             <div class="fv__slide-image swiper-img">
               <picture>
-                <source srcset="<?php the_field('pc_fv2'); ?>" media="(min-width: 768px)">
-                <img src="<?php the_field('sp_fv2'); ?>" alt="fv画像2">
+                <?php if (get_field('pc_fv2')): ?>
+                  <source srcset="<?php the_field('pc_fv2'); ?>" media="(min-width: 768px)">
+                <?php else : ?>
+                  <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/pc-fv2.jpg" media="(min-width: 768px)">
+                <?php endif; ?>
+
+                <?php if (get_field('sp_fv2')): ?>
+                  <img src="<?php the_field('sp_fv2'); ?>" alt="2">
+                <?php else : ?>
+                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/spx-fv2.jpg" alt="fv画像2">
+                <?php endif; ?>
               </picture>
             </div>
           </div>
           <div class="fv__slide swiper-slide">
             <div class="fv__slide-image swiper-img">
               <picture>
-                <source srcset="<?php the_field('pc_fv3'); ?>" media="(min-width: 768px)">
-                <img src="<?php the_field('sp_fv3'); ?>" alt="fv画像3">
+                <?php if (get_field('pc_fv3')): ?>
+                  <source srcset="<?php the_field('pc_fv3'); ?>" media="(min-width: 768px)">
+                <?php else : ?>
+                  <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/pc-fv3.jpg" media="(min-width: 768px)">
+                <?php endif; ?>
+
+                <?php if (get_field('sp_fv3')): ?>
+                  <img src="<?php the_field('sp_fv3'); ?>" alt="fv画像3">
+                <?php else : ?>
+                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/sp-fv3.jpg" alt="fv画像3">
+                <?php endif; ?>
               </picture>
             </div>
           </div>
           <div class="fv__slide swiper-slide">
             <div class="fv__slide-image swiper-img">
               <picture>
-                <source srcset="<?php the_field('pc_fv4'); ?>" media="(min-width: 768px)">
-                <img src="<?php the_field('sp_fv4'); ?>" alt="fv画像4">
+                <?php if (get_field('pc_fv4')): ?>
+                  <source srcset="<?php the_field('pc_fv4'); ?>" media="(min-width: 768px)">
+                <?php else : ?>
+                  <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/common/pc-fv4.jpg" media="(min-width: 768px)">
+                <?php endif; ?>
+
+                <?php if (get_field('sp_fv4')): ?>
+                  <img src="<?php the_field('sp_fv4'); ?>" alt="fv画像4">
+                <?php else : ?>
+                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/spx-fv4.jpg" alt="fv画像4">
+                <?php endif; ?>
               </picture>
             </div>
           </div>
@@ -298,103 +334,142 @@
         <p class="section-header__engtitle">Price</p>
         <h2 class="section-header__jatitle">料金一覧</h2>
       </div>
-      <!-- ライセンス料金表 -->
-      <?php $licenses = SCF::get('license-table', 26); ?>
-      <!-- 空でない値だけをフィルタリング -->
-      <?php $filtered_licenses = array_filter($licenses, function ($license) {
-        return !empty($license['course1']) && !empty($license['price1']);
-      }); ?>
-
-      <!-- 体験ダイビング料金表 -->
-      <?php $experiences = SCF::get('experience-table', 26); ?>
-      <!-- 空でない値だけをフィルタリング -->
-      <?php $filtered_experiences = array_filter($experiences, function ($experience) {
-        return !empty($experience['course2']) && !empty($experience['price2']);
-      }); ?>
-
-      <!-- ファンダイビング料金表 -->
-      <?php $funs = SCF::get('fundiving-table', 26); ?>
-      <!-- 空でない値だけをフィルタリング -->
-      <?php $filtered_funs = array_filter($funs, function ($fun) {
-        return !empty($fun['course3']) && !empty($fun['price3']);
-      }); ?>
-
-      <!-- スペシャルダイビング料金表 -->
-      <?php $specials = SCF::get('specialdiving-table', 26); ?>
-      <!-- 空でない値だけをフィルタリング -->
-      <?php $filtered_specials = array_filter($specials, function ($special) {
-        return !empty($special['course4']) && !empty($special['price4']);
-      }); ?>
 
       <!-- いずれかの料金表が空でない場合に表示 -->
-      <?php if (!empty($filtered_licenses) || !empty($filtered_experiences) || !empty($filtered_funs) || !empty($filtered_specials)) : ?>
-        <div class="price__wrapper">
-          <div class="price__image  colorbox">
-            <picture>
-              <source srcset="<?php echo get_theme_file_uri() . "/assets/images/common/price-pc.jpg"; ?>" media="(min-width: 768px)">
-              <img src="<?php echo get_theme_file_uri() . "/assets/images/common/price-sp.jpg"; ?>" alt="かめの写真">
-            </picture>
-          </div>
-          <div class="price__content">
+      <div class="price__wrapper">
+        <div class="price__image  colorbox">
+          <picture>
+            <source srcset="<?php echo get_theme_file_uri() . "/assets/images/common/price-pc.jpg"; ?>" media="(min-width: 768px)">
+            <img src="<?php echo get_theme_file_uri() . "/assets/images/common/price-sp.jpg"; ?>" alt="かめの写真">
+          </picture>
+        </div>
+        <div class="price__content">
 
-            <!-- ライセンス料金表の表示 -->
-            <?php if (!empty($filtered_licenses)) : ?>
-              <div class="price__item">
-                <h3 class="price__subtitle">ライセンス講習</h3>
-                <?php foreach ($filtered_licenses as $license) : ?>
+          <!-- ライセンス料金表の表示 -->
+          <?php $licenses = SCF::get('license-table', 26); ?>
+          <?php $has_license_data = false; ?>
+          <!-- 表示可能(コース名と金額の入力がどちらも空でない)な金額表があるか確認(price-table__contentとエラーメッセージの表示・非表示に関する処理に必要） -->
+          <?php foreach ($licenses as $license) : ?>
+            <?php if (!empty($license['course1']) && !empty($license['price1'])) : //表示可能(コース名と金額の入力がどちらも空でない)な金額表があるか
+            ?>
+              <?php $has_license_data = true; // 表示可能な金額表が見つかるとtrueに変更
+              ?>
+              <?php break; // 1つでも表示可能な金額表が見つかればループを終了 (無駄にループを回すのを避けるため)
+              ?>
+            <?php endif; ?>
+          <?php endforeach; ?>
+          <?php if ($has_license_data) : //タイトル部分のみ残らないようにここから条件分岐 
+          ?>
+            <div class="price__item">
+              <h3 class="price__subtitle">ライセンス講習</h3>
+              <?php foreach ($licenses as $license) : ?>
+                <?php if (!empty($license['course1']) && !empty($license['price1'])) : //コース名と金額の入力がどちらも空でない金額表があるか 
+                ?>
                   <dl class="price__menu">
                     <dt class="price__course"><?php echo esc_html($license['course1']); ?></dt>
                     <dd class="price__fee"><?php echo esc_html($license['price1']); ?></dd>
                   </dl>
-                <?php endforeach; ?>
-              </div>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            </div>
             <?php endif; ?>
 
+
             <!-- 体験ダイビング料金表の表示 -->
-            <?php if (!empty($filtered_experiences)) : ?>
+            <?php $experiences = SCF::get('experience-table', 26); ?>
+            <?php $has_experience_data = false; ?>
+            <!-- 表示可能(コース名と金額の入力がどちらも空でない)な金額表があるか確認(price-table__contentとエラーメッセージの表示・非表示に関する処理に必要） -->
+            <?php foreach ($experiences as $experience) : ?>
+              <?php if (!empty($experience['course2']) && !empty($experience['price2'])) : //表示可能(コース名と金額の入力がどちらも空でない)な金額表があるか 
+              ?>
+                <?php $has_experience_data = true;  // 表示可能な金額表が見つかるとtrueに変更 
+                ?>
+                <?php break; // 1つでも表示可能な金額表が見つかればループを終了 (無駄にループを回すのを避けるため) 
+                ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php if ($has_experience_data) : //タイトル部分のみ残らないようにここから条件分岐 
+            ?>
               <div class="price__item">
                 <h3 class="price__subtitle">体験ダイビング</h3>
-                <?php foreach ($filtered_experiences as $experience) : ?>
-                  <dl class="price__menu">
-                    <dt class="price__course"><?php echo esc_html($experience['course2']); ?></dt>
-                    <dd class="price__fee"><?php echo esc_html($experience['price2']); ?></dd>
-                  </dl>
+                <?php foreach ($experiences as $experience) : ?>
+                  <?php if (!empty($experience['course2']) && !empty($experience['price2'])) : //コース名と金額の入力がどちらも空でない金額表があるか 
+                  ?>
+                    <dl class="price__menu">
+                      <dt class="price__course"><?php echo esc_html($experience['course2']); ?></dt>
+                      <dd class="price__fee"><?php echo esc_html($experience['price2']); ?></dd>
+                    </dl>
+                  <?php endif; ?>
                 <?php endforeach; ?>
               </div>
             <?php endif; ?>
 
             <!-- ファンダイビング料金表の表示 -->
-            <?php if (!empty($filtered_funs)) : ?>
+            <?php $funs = SCF::get('fundiving-table', 26); ?>
+            <?php $has_fun_data = false; ?>
+            <!-- 表示可能(コース名と金額の入力がどちらも空でない)な金額表があるか確認(price-table__contentとエラーメッセージの表示・非表示に関する処理に必要） -->
+            <?php foreach ($funs as $fun) : ?>
+              <?php if (!empty($fun['course3']) && !empty($fun['price3'])) : //表示可能(コース名と金額の入力がどちらも空でない)な金額表があるか
+              ?>
+                <?php $has_fun_data = true; // 表示可能な金額表が見つかるとtrueに変更
+                ?>
+                <?php break; // 1つでも表示可能な金額表が見つかればループを終了 (無駄にループを回すのを避けるため)
+                ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php if ($has_fun_data) : //タイトル部分のみ残らないようにここから条件分岐 
+            ?>
               <div class="price__item">
                 <h3 class="price__subtitle">ファンダイビング</h3>
-                <?php foreach ($filtered_funs as $fun) : ?>
-                  <dl class="price__menu">
-                    <dt class="price__course"><?php echo esc_html($fun['course3']); ?></dt>
-                    <dd class="price__fee"><?php echo esc_html($fun['price3']); ?></dd>
-                  </dl>
+                <?php foreach ($funs as $fun) : ?>
+                  <?php if (!empty($fun['course3']) && !empty($fun['price3'])) : //コース名と金額の入力がどちらも空でない金額表があるか 
+                  ?>
+                    <dl class="price__menu">
+                      <dt class="price__course"><?php echo esc_html($fun['course3']); ?></dt>
+                      <dd class="price__fee"><?php echo esc_html($fun['price3']); ?></dd>
+                    </dl>
+                  <?php endif; ?>
                 <?php endforeach; ?>
               </div>
             <?php endif; ?>
 
             <!-- スペシャルダイビング料金表の表示 -->
-            <?php if (!empty($filtered_specials)) : ?>
+            <?php $specials = SCF::get('specialdiving-table', 26); ?>
+            <?php $has_special_data = false; ?>
+            <!-- 表示可能(コース名と金額の入力がどちらも空でない)な金額表があるか確認(price-table__contentとエラーメッセージの表示・非表示に関する処理に必要） -->
+            <?php foreach ($specials as $special) : ?>
+              <?php if (!empty($special['course4']) && !empty($special['price4'])) : //表示可能(コース名と金額の入力がどちらも空でない)な金額表があるか 
+              ?>
+                <?php $has_special_data = true; // 表示可能な金額表が見つかるとtrueに変更 
+                ?>
+                <?php break; // 1つでも表示可能な金額表が見つかればループを終了 (無駄にループを回すのを避けるため) 
+                ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php if ($has_special_data) : //タイトル部分のみ残らないようにここから条件分岐 
+            ?>
               <div class="price__item">
                 <h3 class="price__subtitle">スペシャルダイビング</h3>
-                <?php foreach ($filtered_specials as $special) : ?>
-                  <dl class="price__menu">
-                    <dt class="price__course"><?php echo esc_html($special['course4']); ?></dt>
-                    <dd class="price__fee"><?php echo esc_html($special['price4']); ?></dd>
-                  </dl>
+                <?php foreach ($specials as $special) : ?>
+                  <?php if (!empty($special['course4']) && !empty($special['price4'])) : //コース名と金額の入力がどちらも空でない金額表があるか 
+                  ?>
+                    <dl class="price__menu">
+                      <dt class="price__course"><?php echo esc_html($special['course4']); ?></dt>
+                      <dd class="price__fee"><?php echo esc_html($special['price4']); ?></dd>
+                    </dl>
+                  <?php endif; ?>
                 <?php endforeach; ?>
               </div>
             <?php endif; ?>
 
-          </div>
+            <?php if (!$has_license_data && !$has_experience_data && !$has_fun_data && !$has_special_data) : ?>
+              <p class="non-message non-message--top">準備中です</p>
+            <?php endif; ?>
         </div>
-      <?php else : ?>
-        <!-- すべての料金表が空の場合 -->
-        <p class="non-message non-message--top">準備中です</p>
-      <?php endif; ?>
+      </div>
     </div>
     <div class="price__button">
       <a href="<?php echo $price; ?>" class="button slide">View more<span class="button__arrow"></span></a>

@@ -306,11 +306,15 @@ function my_custom_menu_order($menu_order)
 add_filter('custom_menu_order', 'my_custom_menu_order');
 add_filter('menu_order', 'my_custom_menu_order');
 
+
 /*----------- 「外観＞メニュー」を表示させる ------------*/
+
 add_action('after_setup_theme', 'register_menu');
 function register_menu()
 {
     register_nav_menu('primary', __('Primary Menu', 'theme-slug'));
 }
+
+
 
 

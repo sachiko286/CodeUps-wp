@@ -11,32 +11,36 @@
   <?php get_template_part('parts/breadcrumb') ?>
 
   <section class="page-faq top-page-faq">
-    <?php
-    // FAQデータの取得
-    $faqs = SCF::get('faq'); ?>
-    <?php
-    // FAQが存在するか確認し、条件に合う項目だけをフィルタリング
-    $filtered_faqs = array_filter($faqs, function ($faq) {
-      return !empty($faq['question']) && !empty($faq['answer']);
-    }); ?>
-
     <div class="page-faq__inner inner">
-      <!-- フィルタリングされたFAQが存在するか -->
-      <?php if (!empty($filtered_faqs)) : ?>
+      <?php $faqs = SCF::get('faq'); ?>
+
+      <?php $has_faq = false; ?>
+
+      <!-- 表示可能(Q&Aどちらも空でない)なQ&Aがあるか確認 。(Q&Aが全て空の場合エラーメッセージを出すために必要な処理)-->
+      <?php foreach ($faqs as $faq) : ?>
+        <?php if (!empty($faq['question']) && !empty($faq['answer'])) : //表示可能(Q&Aどちらも空でない)Q&Aがあるか ?>
+          <?php $has_faq = true;  // 表示可能なQ&Aが見つかるとtrueに変更 ?>
+          <?php break; // 1つでも表示可能なQ&Aが見つかればループを終了 (無駄にループを回すのを避けるため) ?>
+        <?php endif; ?>
+      <?php endforeach; ?>
+
+      <?php if ($has_faq) : //表示可能なQ&Aがあれば表示、なければエラーメッセージを表示 ?>
         <ul class="page-faq__list faq-list">
-          <?php foreach ($filtered_faqs as $faq) : ?>
-            <li class="faq-list__item">
-              <h3 class="faq-list__item-question js-faq-question">
-                <?php echo esc_html($faq['question']); ?>
-              </h3>
-              <p class="faq-list__item-answer">
-                <?php echo esc_html($faq['answer']); ?>
-              </p>
-            </li>
+          <?php foreach ($faqs as $faq) : ?>
+            <?php if (!empty($faq['question']) && !empty($faq['answer'])) : //Q&Aどちらも空でないQ&Aがあれば表示 ?>
+              <li class="faq-list__item">
+                <h3 class="faq-list__item-question js-faq-question">
+                  <?php echo esc_html($faq['question']); ?>
+                </h3>
+                <p class="faq-list__item-answer">
+                  <?php echo esc_html($faq['answer']); ?>
+                </p>
+              </li>
+            <?php endif; ?>
           <?php endforeach; ?>
         </ul>
       <?php else : ?>
-        <p  class="non-message">準備中です。</p>
+        <p class="non-message">準備中です。</p>
       <?php endif; ?>
     </div>
   </section>
