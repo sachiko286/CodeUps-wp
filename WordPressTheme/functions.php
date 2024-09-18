@@ -316,5 +316,132 @@ function register_menu()
 }
 
 
+/*----------- ダッシュボードカスタマイズ ------------*/
+
+function add_dashboard_widgets()
+{
+    wp_add_dashboard_widget(
+        'quick_action_dashboard_widget', // ウィジェットのスラッグ名
+        '新規投稿', // ウィジェットに表示するタイトル
+        'dashboard_widget_function' // 実行する関数
+    );
+
+    // 新しいウィジェットを追加する場合
+    wp_add_dashboard_widget(
+        'new_dashboard_widget', // 新しいウィジェットのスラッグ名
+        'その他編集', // ウィジェットに表示するタイトル
+        'new_dashboard_widget_function' // 実行する関数
+    );
+}
+add_action('wp_dashboard_setup', 'add_dashboard_widgets');
+
+function dashboard_widget_function()
+{
+?>
+    <ul class="quick-action">
+        <?php if (current_user_can('administrator')) : ?>
+
+            <li>
+                <a href="<?php echo admin_url() . 'post-new.php'; ?>" target="_blank" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    ブログ新規作成
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo admin_url() . 'post-new.php?post_type=campaign'; ?>" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    キャンペーン新規作成
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo admin_url() . 'post-new.php?post_type=voice'; ?>" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    お客様の声新規作成
+                </a>
+            </li>
+        <?php endif; ?>
+    </ul>
+<?php
+}
+
+function new_dashboard_widget_function()
+{
+?>
+    <ul class="quick-action">
+        <?php if (current_user_can('administrator')) : ?>
+
+            <li>
+                <a href="<?php echo admin_url() . 'post.php?post=26&action=edit'; ?>" target="_blank" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    料金一覧
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo admin_url() . 'post.php?post=24&action=edit'; ?>" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    よくある質問
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo admin_url() . 'post.php?post=30&action=edit'; ?>" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    ギャラリー
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo admin_url() . 'post.php?post=10&action=edit'; ?>" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    トップページFV画像
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo admin_url() . 'post.php?post=16&action=edit'; ?>" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    利用規約
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo admin_url() . 'post.php?post=14&action=edit'; ?>" class="quick-action-button">
+                    <span class="dashicons-before dashicons-admin-customizer"></span>
+                    プライバシーポリシー
+                </a>
+            </li>
+        <?php endif; ?>
+    </ul>
+<?php
+}
+
+/*----------- ダッシュボードカスタマイズCSS ------------*/
+function enqueue_dashboard_styles()
+{
+    wp_enqueue_style('dashboard_styles', get_template_directory_uri() . '/assets/css/dashboard.css');
+}
+add_action('admin_print_styles-index.php', 'enqueue_dashboard_styles');
+
+
+
+// サムネイルカラム追加（カスタム投稿にも対応）
+function customize_manage_posts_columns($columns) {
+    $columns['thumbnail'] = __('Thumbnail');
+    return $columns;
+}
+add_filter( 'manage_posts_columns', 'customize_manage_posts_columns' );
+add_filter( 'manage_campaign_posts_columns', 'customize_manage_posts_columns' ); // カスタム投稿用
+add_filter( 'manage_voice_posts_columns', 'customize_manage_posts_columns' ); // カスタム投稿用
+
+
+// サムネイル画像表示（カスタム投稿にも対応）
+function customize_manage_posts_custom_column($column_name, $post_id) {
+    if ( 'thumbnail' == $column_name) {
+        $thum = get_the_post_thumbnail($post_id, 'small', array( 'style'=>'width:100px;height:auto;' ));
+    } if ( isset($thum) && $thum ) {
+        echo $thum;
+    } else {
+        echo __('None');
+    }
+}
+add_action( 'manage_posts_custom_column', 'customize_manage_posts_custom_column', 10, 2 );
+add_action( 'manage_campaign_posts_custom_column', 'customize_manage_posts_custom_column', 10, 2 ); // カスタム投稿用
+add_action( 'manage_voice_posts_custom_column', 'customize_manage_posts_custom_column', 10, 2 ); // カスタム投稿用
 
 

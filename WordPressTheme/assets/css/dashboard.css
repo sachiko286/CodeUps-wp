@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.quick-action a {
+  padding: 20px;
+  background-color: #e6e6e6;
+  display: inline-block;
+  width: 220px;
+  font-size: 18px;
+}
+
+.quick-action a:hover {
+  opacity: 0.6;
+}
+
+#quick_action_dashboard_widget {
+  
+}
