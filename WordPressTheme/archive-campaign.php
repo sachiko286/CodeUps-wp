@@ -25,7 +25,7 @@
             $campaign_terms = get_terms(array(
               'taxonomy' => 'campaign_category',
               'hide_empty' => false, // 投稿がなくてもカテゴリーを表示する
-              'orderby' => 'description',// カテゴリーの並び順
+              'orderby' => 'description', // カテゴリーの並び順
             ));
             // キャンペーンカテゴリーが存在するかどうかをチェック
             if ($campaign_terms && !is_wp_error($campaign_terms)) :
@@ -62,22 +62,20 @@
                     <p class="campaign-card__text campaign-card__text--sub">全部コミコミ(お一人様)</p>
                     <div class="campaign-card__price campaign-card__price--sub">
                       <!-- get_field の結果を変数に代入して使用 -->
-                      <?php $price_1 = get_field('price_1'); ?>
-                      <?php if ($price_1) : ?>
-                        <p class="campaign-card__price-original"><span><?php echo esc_html($price_1); ?></span></p>
-                      <?php endif; ?>
-                      <?php $price_2 = get_field('price_2'); ?>
-                      <?php if ($price_2) : ?>
-                        <p class="campaign-card__price-discount campaign-card__price-discount--sub"><?php echo esc_html($price_2); ?></p>
+                      <?php $campaign_price = get_field('campaign_price'); ?>
+                      <?php if ($campaign_price && $campaign_price['price_1'] && $campaign_price['price_2']) : ?>
+                        <p class="campaign-card__price-original"><span>&yen;<?php echo number_format($campaign_price['price_1']); ?></span></p>
+                        <p class="campaign-card__price-discount campaign-card__price-discount--sub">&yen;<?php echo number_format($campaign_price['price_2']); ?></p>
                       <?php endif; ?>
                     </div>
                   </div>
                   <div class="campaign__wrapper u-desktop">
                     <div class="campaign__text"><?php the_content(); ?></div>
-                    <?php $period = get_field('period'); ?>
-                    <?php if ($period) : ?>
-                      <p class="campaign__date"><?php echo esc_html($period); ?></p>
+                    <?php $campaign_period = get_field('campaign_period'); ?>
+                    <?php if ($campaign_period && $campaign_period['period_start'] && $campaign_period['period_end']) : ?>
+                      <p class="campaign__date"><?php echo esc_html($campaign_period['period_start']); ?> &#045; <?php echo esc_html($campaign_period['period_end']); ?></p>
                     <?php endif; ?>
+
                     <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
                     <div class="campaign__info-button">
                       <a href="<?php echo $contact; ?>" class="button slide">Contact us<span class="button__arrow"></span></a>

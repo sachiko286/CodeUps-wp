@@ -63,21 +63,19 @@
                     <p class="campaign-card__text campaign-card__text--sub">全部コミコミ(お一人様)</p>
                     <div class="campaign-card__price campaign-card__price--sub">
                       <!-- get_field の結果を変数に代入して使用 -->
-                      <?php $price_1 = get_field('price_1'); ?>
-                      <?php if ($price_1) : ?>
-                        <p class="campaign-card__price-original"><span><?php echo esc_html($price_1); ?></span></p>
-                      <?php endif; ?>
-                      <?php $price_2 = get_field('price_2'); ?>
-                      <?php if ($price_2) : ?>
-                        <p class="campaign-card__price-discount campaign-card__price-discount--sub"><?php echo esc_html($price_2); ?></p>
+                      <?php $campaign_price = get_field('campaign_price'); ?>
+                      <?php if ($campaign_price && $campaign_price['price_1'] && $campaign_price['price_2']) : ?>
+                        <p class="campaign-card__price-original"><span>&yen;<?php echo number_format($campaign_price['price_1']); ?></span></p>
+                        <p class="campaign-card__price-discount campaign-card__price-discount--sub">&yen;<?php echo number_format($campaign_price['price_2']); ?></p>
                       <?php endif; ?>
                     </div>
                   </div>
                   <div class="campaign__wrapper u-desktop">
                     <div class="campaign__text"><?php the_content(); ?></div>
-                    <?php $period = get_field('period'); ?>
-                    <?php if ($period) : ?>
-                      <p class="campaign__date"><?php echo esc_html($period); ?></p>
+                    <?php $period_start = get_field('period_start'); ?>
+                    <?php $period_end = get_field('period_end'); ?>
+                    <?php if ($period_start && $period_end) : ?>
+                      <p class="campaign__date"><?php echo esc_html($period_start); ?> &#045; <?php echo esc_html($period_end); ?></p>
                     <?php endif; ?>
                     <p class="campaign__info-text">ご予約・お問い合わせはコチラ</p>
                     <div class="campaign__info-button">

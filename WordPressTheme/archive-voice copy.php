@@ -44,16 +44,12 @@
                   <div class="voice-card__header">
                     <div class="voice-card__lead">
                       <div class="voice-card__meta">
-                        <?php
-                        $voice_group = get_field('voice_group');
-                        if (isset($voice_group['voice_meta_group'])) {
-                          $voice_meta_group = $voice_group['voice_meta_group'];
-                          $voice_age = isset($voice_meta_group['voice_age']) ? $voice_meta_group['voice_age'] : '';
-                          $voice_gender = isset($voice_meta_group['voice_gender']) ? $voice_meta_group['voice_gender'] : '';
-                        }
-                        ?>
-
-                        <p class="voice-card__age"><?php if ($voice_age) : ?><?php echo $voice_age; ?><?php endif; ?><?php if ($voice_gender) : ?>&lpar;<?php echo $voice_gender; ?>&rpar;<?php endif; ?></p>
+                        <?php $voice_setting = get_field('voice_setting'); ?>
+                        <?php $voice_age = $voice_setting['voice_age']; ?>
+                        <?php $voice_gender = $voice_setting['voice_gender']; ?>
+                        <?php if ($voice_age) : ?>
+                          <p class="voice-card__age"><?php echo $voice_age; ?>&lpar;<?php echo $voice_gender; ?>&rpar;</p>
+                        <?php endif; ?>
 
                         <!-- get_the_terms の結果を変数に代入し、最初のカテゴリー名を表示 -->
                         <?php $voice_category = get_the_terms(get_the_ID(), 'voice_category'); ?>
@@ -72,14 +68,7 @@
                     </div>
                   </div>
                   <div class="voice-card__text">
-                    <?php
-                    $voice_content= get_field('voice_content');
-                      if (!empty($voice_content)) {
-                        echo '<div class="voice-content">';
-                        echo nl2br(esc_html($voice_content)); // テキストのエスケープ処理と改行の変換
-                        echo '</div>';
-                      }
-                    ?>
+                    <?php the_content(); ?>
                   </div>
                 </div>
               </li>

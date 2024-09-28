@@ -1,9 +1,12 @@
 "use strict";
 
+function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-only"); }
 jQuery(function ($) {
   // この中であればWordpressでも「$」が使用可能になる
 
-  //ハンバーガーメニュー
+  //===========================================================
+  //  ハンバーガーメニュー
+  //===========================================================
   $(function () {
     $(".js-hamburger").on("click", function () {
       $(this).toggleClass("is-open"); //ボタンの開閉
@@ -17,7 +20,7 @@ jQuery(function ($) {
       closeDrawer();
     });
 
-    // resizeイベント　ウインドウ幅が広がるとドロワーメニューが閉じる
+    // resizeイベントウインドウ幅が広がるとドロワーメニューが閉じる
     $(window).on('resize', function () {
       if (window.matchMedia("(min-width: 768px)").matches) {
         closeDrawer();
@@ -32,7 +35,9 @@ jQuery(function ($) {
 
     // });
 
-    // Fvスライダー
+    //===========================================================
+    //  Fvスライダー（swiper）
+    //===========================================================
     var mv_swiper = new Swiper(".js-fv-swiper", {
       loop: true,
       speed: 2000,
@@ -46,7 +51,9 @@ jQuery(function ($) {
       }
     });
 
-    // キャンペーンスライダー（swiper）
+    //===========================================================
+    //  キャンペーンスライダー（swiper）
+    //===========================================================
     var mySwiper = new Swiper('.js-campaign-swiper', {
       //名前を変える
       loop: true,
@@ -76,7 +83,9 @@ jQuery(function ($) {
       }
     });
 
-    //トップへ戻るボタン
+    //===========================================================
+    //  トップへ戻るボタン
+    //===========================================================
     // $(function () {
     var pagetop = $(".js-page-top");
     pagetop.hide(); //最初はボタンを非表示
@@ -96,7 +105,7 @@ jQuery(function ($) {
       return false;
     });
 
-    //フッター手前で止まるボタン
+    //フッター手前で止まる
     $(".js-page-top").hide();
     $(window).on("scroll", function () {
       var scrollHeight = $(document).height(); //ドキュメントの高さ
@@ -117,8 +126,9 @@ jQuery(function ($) {
       }
     });
     // }); 
-
-    // 背景色の後に画像が表示されるアニメーション
+    //===========================================================
+    //  背景色の後に画像が表示されるアニメーション
+    //===========================================================
     // $(function () {
     //要素の取得とスピードの設定
     var box = $('.colorbox'),
@@ -147,14 +157,15 @@ jQuery(function ($) {
               'width': '0%'
             }, speed);
           });
-          counter = 1;
+          1, _readOnlyError("counter");
         }
       });
     });
-
     // });
 
-    // モーダル
+    //===========================================================
+    //  モーダル
+    //===========================================================
     var scrollPos;
     $(".js-photo").click(function () {
       var windowWidth = $(window).width();
@@ -176,24 +187,28 @@ jQuery(function ($) {
       return false;
     });
 
-    //アコーディオンfqa
+    //===========================================================
+    // アコーディオン FAQ
+    //===========================================================
     $('.js-faq-question').on('click', function () {
       $(this).next().slideToggle(300);
       $(this).toggleClass('is-open');
     });
 
-    //アコーディオンarchive
+    //===========================================================
+    //  アコーディオン voiceサイドバーアーカイブ
+    //===========================================================
     $('.js-archive').on('click', function () {
       $(this).next('.js-mouths').slideToggle(300);
       $(this).toggleClass('is-open');
     });
 
-    //別ページから特定のフィルターがかかった状態へリンク
+    //===========================================================
+    //  別ページから特定のフィルターがかかった状態へリンク
+    //===========================================================
     //フィルター、タブ切り替え
     $(document).ready(function () {
       // 変数を要素をセット
-      // var $filter = $('.filter-content__list [data-filter]');
-      // var    $item = $('.filter-content__items [data-item]');
       var $tabMenu = $('.js-tab-menu'); // タブメニュー要素の定義
       var $tabContent = $('.js-tab-content'); // タブコンテンツ要素の定義
 
@@ -222,6 +237,10 @@ jQuery(function ($) {
         $('#' + tab).addClass('is-active');
       }
     });
+
+    //===========================================================
+    //  contactフォーム エラーチェック
+    //===========================================================
     $(document).ready(function () {
       $('#js-submit').click(function () {
         // 必須フィールドを取得
@@ -290,6 +309,7 @@ jQuery(function ($) {
       function setErrorStyle(element) {
         element.addClass('error');
       }
+      a;
       function resetErrorStyles() {
         $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');
       }

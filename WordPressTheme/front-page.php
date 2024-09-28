@@ -288,25 +288,43 @@
                 <div class="voice-card__header">
                   <div class="voice-card__lead">
                     <div class="voice-card__meta">
-                      <?php $age = get_field('age'); ?>
-                      <?php if ($age) : ?>
-                        <p class="voice-card__age"><?php echo $age; ?></p>
-                      <?php endif; ?>
-                      <p class="voice-card__category"><?php echo get_the_terms(get_the_ID(), 'voice_category')[0]->name; ?></p>
+                    <?php
+                        $voice_group = get_field('voice_group');
+                        if (isset($voice_group['voice_meta_group'])) {
+                          $voice_meta_group = $voice_group['voice_meta_group'];
+                          $voice_age = isset($voice_meta_group['voice_age']) ? $voice_meta_group['voice_age'] : '';
+                          $voice_gender = isset($voice_meta_group['voice_gender']) ? $voice_meta_group['voice_gender'] : '';
+                        }
+                        ?>
+
+                        <p class="voice-card__age"><?php if ($voice_age) : ?><?php echo $voice_age; ?><?php endif; ?><?php if ($voice_gender) : ?>&lpar;<?php echo $voice_gender; ?>&rpar;<?php endif; ?></p>
+
+
+                        <!-- get_the_terms の結果を変数に代入し、最初のカテゴリー名を表示 -->
+                        <?php $voice_category = get_the_terms(get_the_ID(), 'voice_category'); ?>
+                        <?php if (!empty($voice_category)) : ?>
+                          <p class="voice-card__category"><?php echo esc_html($voice_category[0]->name); ?></p>
+                        <?php endif; ?>
+                      </div>
+                      <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
                     </div>
-                    <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
+                    <div class="voice-card__img colorbox">
+                      <?php if (get_the_post_thumbnail()) : ?>
+                        <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php echo $voice_age; ?><?php echo $voice_gender; ?>のアイキャッチ画像">
+                      <?php else : ?>
+                        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                      <?php endif; ?>
+                    </div>
                   </div>
-                  <div class="voice-card__img colorbox">
-                    <?php if (get_the_post_thumbnail()) : ?>
-                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php echo $age; ?>のアイキャッチ画像">
-                    <?php else : ?>
-                      <img src="<?php echo get_theme_file_uri() . "/assets/images/common/noimage.jpg"; ?>" alt="noimage">
-                    <?php endif; ?>
-                  </div>
-                </div>
                 <div class="voice-card__text voice-card__text--top">
-                  <?php echo get_the_content(); //文字数制限
-                  ?>
+                <?php
+                    $voice_content= get_field('voice_content');
+                      if (!empty($voice_content)) {
+                        echo '<div class="voice-content">';
+                        echo nl2br(esc_html($voice_content)); // テキストのエスケープ処理と改行の変換
+                        echo '</div>';
+                      }
+                    ?>
                 </div>
               </div>
             </li>

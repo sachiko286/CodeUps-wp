@@ -3,7 +3,9 @@
 jQuery(function ($) {
     // この中であればWordpressでも「$」が使用可能になる
 
-    //ハンバーガーメニュー
+    //===========================================================
+    //  ハンバーガーメニュー
+    //===========================================================
     $(function () {
         $(".js-hamburger").on("click", function () {
             $(this).toggleClass("is-open"); //ボタンの開閉
@@ -17,7 +19,7 @@ jQuery(function ($) {
             closeDrawer();
         });
 
-        // resizeイベント　ウインドウ幅が広がるとドロワーメニューが閉じる
+        // resizeイベントウインドウ幅が広がるとドロワーメニューが閉じる
         $(window).on('resize', function () {
             if (window.matchMedia("(min-width: 768px)").matches) {
                 closeDrawer();
@@ -32,8 +34,10 @@ jQuery(function ($) {
 
         // });
 
-        // Fvスライダー
-        var mv_swiper = new Swiper(".js-fv-swiper", {
+        //===========================================================
+        //  Fvスライダー（swiper）
+        //===========================================================
+        const mv_swiper = new Swiper(".js-fv-swiper", {
             loop: true,
             speed: 2000,
             effect: "fade",
@@ -46,8 +50,10 @@ jQuery(function ($) {
             }
         });
 
-        // キャンペーンスライダー（swiper）
-        var mySwiper = new Swiper('.js-campaign-swiper', {
+        //===========================================================
+        //  キャンペーンスライダー（swiper）
+        //===========================================================
+        const mySwiper = new Swiper('.js-campaign-swiper', {
             //名前を変える
             loop: true,
             loopAdditionalSlides: 1,
@@ -76,9 +82,11 @@ jQuery(function ($) {
             }
         });
 
-        //トップへ戻るボタン
+        //===========================================================
+        //  トップへ戻るボタン
+        //===========================================================
         // $(function () {
-        var pagetop = $(".js-page-top");
+        const pagetop = $(".js-page-top");
         pagetop.hide(); //最初はボタンを非表示
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
@@ -96,12 +104,12 @@ jQuery(function ($) {
             return false;
         });
 
-        //フッター手前で止まるボタン
+        //フッター手前で止まる
         $(".js-page-top").hide();
         $(window).on("scroll", function () {
-            var scrollHeight = $(document).height(); //ドキュメントの高さ
-            var scrollPosition = $(window).height() + $(window).scrollTop(); //現在の位置
-            var footHeight = $("footer").innerHeight(); //フッターの高さ
+            const scrollHeight = $(document).height(); //ドキュメントの高さ
+            const scrollPosition = $(window).height() + $(window).scrollTop(); //現在の位置
+            const footHeight = $("footer").innerHeight(); //フッターの高さ
             if (scrollHeight - scrollPosition <= footHeight) {
                 //ドキュメントの高さと現在の位置の差がフッターの高さ以下のとき
                 $(".js-page-top").css({
@@ -117,19 +125,20 @@ jQuery(function ($) {
             }
         });
         // }); 
-
-        // 背景色の後に画像が表示されるアニメーション
+        //===========================================================
+        //  背景色の後に画像が表示されるアニメーション
+        //===========================================================
         // $(function () {
         //要素の取得とスピードの設定
-        var box = $('.colorbox'),
+        const box = $('.colorbox'),
             speed = 400;
 
         //.colorboxの付いた全ての要素に対して下記の処理を行う
         box.each(function () {
             $(this).append('<div class="color"></div>');
-            var color = $(this).find($('.color')),
+            const color = $(this).find($('.color')),
                 image = $(this).find('img');
-            var counter = 0;
+            const counter = 0;
             image.css('opacity', '0');
             color.css('width', '0%');
             //inviewを使って背景色が画面に現れたら処理をする
@@ -151,13 +160,14 @@ jQuery(function ($) {
                 }
             });
         });
-
         // });
 
-        // モーダル
-        var scrollPos;
+        //===========================================================
+        //  モーダル
+        //===========================================================
+        let scrollPos;
         $(".js-photo").click(function () {
-            var windowWidth = $(window).width();
+            const windowWidth = $(window).width();
 
             // スマホサイズでない場合のみモーダルウィンドウを表示
             if (windowWidth > 767) {
@@ -176,30 +186,34 @@ jQuery(function ($) {
             return false;
         });
 
-        //アコーディオンfqa
+        //===========================================================
+        // アコーディオン FAQ
+        //===========================================================
         $('.js-faq-question').on('click', function () {
             $(this).next().slideToggle(300);
             $(this).toggleClass('is-open');
         });
 
-        //アコーディオンarchive
+        //===========================================================
+        //  アコーディオン voiceサイドバーアーカイブ
+        //===========================================================
         $('.js-archive').on('click', function () {
             $(this).next('.js-mouths').slideToggle(300);
             $(this).toggleClass('is-open');
         });
 
-        //別ページから特定のフィルターがかかった状態へリンク
+        //===========================================================
+        //  別ページから特定のフィルターがかかった状態へリンク
+        //===========================================================
         //フィルター、タブ切り替え
         $(document).ready(function () {
             // 変数を要素をセット
-            // var $filter = $('.filter-content__list [data-filter]');
-            // var    $item = $('.filter-content__items [data-item]');
-            var $tabMenu = $('.js-tab-menu'); // タブメニュー要素の定義
-            var $tabContent = $('.js-tab-content'); // タブコンテンツ要素の定義
+            const $tabMenu = $('.js-tab-menu'); // タブメニュー要素の定義
+            const $tabContent = $('.js-tab-content'); // タブコンテンツ要素の定義
 
             // URLのパラメータを取得する関数
             function getParameterByName(name) {
-                var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+                const match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
                 return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
             }
 
@@ -208,12 +222,12 @@ jQuery(function ($) {
                 $tabMenu.removeClass('is-active');
                 $tabContent.removeClass('is-active');
                 $(this).addClass('is-active');
-                var number = $(this).data("number");
+                const number = $(this).data("number");
                 $('#' + number).addClass('is-active');
             });
 
             // タブのURLパラメータを取得
-            var tab = getParameterByName('tab');
+            const tab = getParameterByName('tab');
             if (tab) {
                 // タブを切り替え
                 $tabMenu.removeClass('is-active');
@@ -223,27 +237,29 @@ jQuery(function ($) {
             }
         });
 
-
+        //===========================================================
+        //  contactフォーム エラーチェック
+        //===========================================================
         $(document).ready(function () {
             $('#js-submit').click(function () {
 
                 // 必須フィールドを取得
-                var nameField = $('#name');
-                var mailField = $('#mail');
-                var phoneField = $('#phone');
-                var categoryFields = $('input[name="category_1[]"]');
-                var messageField = $('#message');
-                var privacyCheck = $('input[name="privacyCheck_1[]"]');
+                let nameField = $('#name');
+                let mailField = $('#mail');
+                let phoneField = $('#phone');
+                let categoryFields = $('input[name="category_1[]"]');
+                let messageField = $('#message');
+                let privacyCheck = $('input[name="privacyCheck_1[]"]');
 
                 // エラーメッセージを非表示にする
-                var errorElement = $('.form__error');
+                let errorElement = $('.form__error');
                 errorElement.hide();
 
                 // 入力フィールドのエラースタイルをリセット
                 resetErrorStyles();
 
                 // バリデーションフラグ
-                var isValid = true;
+                let isValid = true;
 
                 // バリデーションチェック
                 if (!nameField.val().trim()) {
@@ -275,7 +291,7 @@ jQuery(function ($) {
                 if (!isValid) {
                     errorElement.show();
                     // パンくずに「お問い合わせエラー」を追加
-                    var breadcrumbInner = $('.breadcrumb__inner');
+                    let breadcrumbInner = $('.breadcrumb__inner');
                     if (breadcrumbInner.find('.error-breadcrumb').length === 0) {
                         breadcrumbInner.append(' &gt; <span class="error-breadcrumb">お問い合わせエラー</span>');
                     }
@@ -283,7 +299,7 @@ jQuery(function ($) {
                     // エラーがなければ、エラーパンくずを削除
                     $('.error-breadcrumb').remove();
                     // フォームのIDを指定
-                    var form = document.querySelector('form.wpcf7-form');
+                    let form = document.querySelector('form.wpcf7-form');
 
                     if (form) {
                         // フォーム送信をトリガー
@@ -294,7 +310,7 @@ jQuery(function ($) {
 
             function setErrorStyle(element) {
                 element.addClass('error');
-            }
+            }a
 
             function resetErrorStyles() {
                 $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');
