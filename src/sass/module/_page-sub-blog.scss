@@ -71,7 +71,12 @@
   }
 }
 
-
+.page-sub-blog__body h1,
+.page-sub-blog__body h2,
+.page-sub-blog__body h3,
+.page-sub-blog__body h4,
+.page-sub-blog__body h5,
+.page-sub-blog__body h6,
 .page-sub-blog__body p {
   margin-top: rem(24);
   @include mq(md) {

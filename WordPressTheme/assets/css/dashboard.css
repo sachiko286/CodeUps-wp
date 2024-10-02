@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+.quick-action {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* .quick-action li {
+  display: inline-block;
+} */
+
 .quick-action a {
   padding: 20px;
   background-color: #e6e6e6;
@@ -8,9 +20,14 @@
   font-size: 18px;
 }
 
+
 .quick-action a:hover {
   opacity: 0.6;
 }
 #quick_action_dashboard_widget {
   
+}
+
+.dashicons-admin-customizer--icon::before {
+  content: "\f163";
 }

@@ -20,8 +20,12 @@
           <h3 class="about-us__sub-title">Dive into<br>the Ocean</h3>
           <div class="about-us__body">
             <p class="about-us__text">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります
+            <?php
+              $about_content = get_field('about_content');
+              if (!empty($about_content)) {
+                echo nl2br(esc_html($about_content)); // テキストのエスケープ処理と改行の変換
+              }
+              ?>
             </p>
           </div>
         </div>
@@ -44,8 +48,12 @@
           <h3 class="about-us__sub-title">Dive into<br>the Ocean</h3>
           <div class="about-us__body">
             <p class="about-us__text">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
+              <?php
+              $about_content = get_field('about_content');
+              if (!empty($about_content)) {
+                echo nl2br(esc_html($about_content)); // テキストのエスケープ処理と改行の変換
+              }
+              ?>
             </p>
           </div>
         </div>
@@ -54,9 +62,10 @@
   </section>
 
   <?php $fields = SCF::get('gallery'); ?>
-  
+
   <!-- 画像が存在する場合のみギャラリーセクションを表示 -->
-  <?php if ($fields[0]['gallery-img1']) ://最初の画像があるかどうか ?>
+  <?php if ($fields[0]['gallery-img1']) : //最初の画像があるかどうか 
+  ?>
 
     <section class="gallery top-gallery">
       <div class="gallery__modal js-overlay"></div>

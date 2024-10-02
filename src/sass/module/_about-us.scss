@@ -65,8 +65,9 @@
   @include mq(md) {
       display: flex;
       max-width: rem(840);
+      width: 100%;
       position: absolute;
-      bottom: rem(222);
+      top: rem(160);
       right: rem(40);
       z-index: 3;
       // margin-top: rem(0);

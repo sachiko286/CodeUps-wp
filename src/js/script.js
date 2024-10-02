@@ -128,7 +128,7 @@ jQuery(function ($) {
         //===========================================================
         //  背景色の後に画像が表示されるアニメーション
         //===========================================================
-        // $(function () {
+        $(function () {
         //要素の取得とスピードの設定
         const box = $('.colorbox'),
             speed = 400;
@@ -138,7 +138,7 @@ jQuery(function ($) {
             $(this).append('<div class="color"></div>');
             const color = $(this).find($('.color')),
                 image = $(this).find('img');
-            const counter = 0;
+            let counter = 0;
             image.css('opacity', '0');
             color.css('width', '0%');
             //inviewを使って背景色が画面に現れたら処理をする
@@ -160,7 +160,7 @@ jQuery(function ($) {
                 }
             });
         });
-        // });
+        });
 
         //===========================================================
         //  モーダル
@@ -310,7 +310,7 @@ jQuery(function ($) {
 
             function setErrorStyle(element) {
                 element.addClass('error');
-            }a
+            }
 
             function resetErrorStyles() {
                 $('.form__input.error, .form__textarea.error, .form__checkbox.error, .form__privacyCheck-wrapper.error').removeClass('error');

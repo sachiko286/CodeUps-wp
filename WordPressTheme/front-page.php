@@ -117,28 +117,21 @@
                     </div>
                     <div class="campaign-card__body">
                       <div class="campaign-card__category">
-                        <p>
-                          <?php
-                          $terms = get_the_terms(get_the_ID(), 'campaign_category');
-                          if ($terms && !is_wp_error($terms)) {
-                            echo esc_html($terms[0]->name);
-                          }
-                          ?>
-                        </p>
+                        <?php $campaign_category = get_the_terms(get_the_ID(), 'campaign_category'); ?>
+                        <?php if (!empty($campaign_category)) : ?>
+                          <p><?php echo esc_html($campaign_category[0]->name); ?></p>
+                        <?php endif; ?>
                       </div>
                       <h3 class="campaign-card__title"><?php the_title(); ?></h3>
                       <p class="campaign-card__text">全部コミコミ(お一人様)</p>
                       <div class="campaign-card__price">
-                        <?php $price_1 = get_field('price_1'); ?>
-                        <?php if ($price_1) : ?>
+                        <?php $campaign_price = get_field('campaign_price'); ?>
+                        <?php if ($campaign_price && $campaign_price['price_1'] && $campaign_price['price_2']) : ?>
                           <p class="campaign-card__price-original">
-                            <span><?php echo esc_html($price_1); ?></span>
+                            <span>&yen;<?php echo number_format($campaign_price['price_1']); ?></span>
                           </p>
-                        <?php endif; ?>
-                        <?php $price_2 = get_field('price_2'); ?>
-                        <?php if ($price_2) : ?>
                           <p class="campaign-card__price-discount">
-                            <?php echo esc_html($price_2); ?>
+                            &yen;<?php echo number_format($campaign_price['price_2']); ?>
                           </p>
                         <?php endif; ?>
                       </div>
@@ -179,8 +172,12 @@
           <h3 class="about-us__sub-title">Dive into<br>the Ocean</h3>
           <div class="about-us__body">
             <p class="about-us__text">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
+            <?php
+              $about_content = get_field('about_content',30);
+              if (!empty($about_content)) {
+                echo nl2br(esc_html($about_content)); // テキストのエスケープ処理と改行の変換
+              }
+              ?>
             </p>
             <div class="about-us__button">
               <a href="<?php echo $aboutus; ?>" class="button slide">View more<span class="button__arrow"></span></a>
@@ -246,7 +243,7 @@
                     <time datetime="<?php the_time('c'); ?>" class="blog-card__date"><?php the_time('Y.m/d'); ?></time>
                     <p class="blog-card__title"><?php the_title(); ?></p>
                     <div class="blog-card__text blog-card__text--top">
-                      <?php echo wp_trim_words(get_the_content(), 88, '…'); ?>
+                      <?php echo get_the_content(); ?>
                     </div>
                   </div>
                 </div>
@@ -288,43 +285,43 @@
                 <div class="voice-card__header">
                   <div class="voice-card__lead">
                     <div class="voice-card__meta">
-                    <?php
-                        $voice_group = get_field('voice_group');
-                        if (isset($voice_group['voice_meta_group'])) {
-                          $voice_meta_group = $voice_group['voice_meta_group'];
-                          $voice_age = isset($voice_meta_group['voice_age']) ? $voice_meta_group['voice_age'] : '';
-                          $voice_gender = isset($voice_meta_group['voice_gender']) ? $voice_meta_group['voice_gender'] : '';
-                        }
-                        ?>
+                      <?php
+                      $voice_group = get_field('voice_group');
+                      if (isset($voice_group['voice_meta_group'])) {
+                        $voice_meta_group = $voice_group['voice_meta_group'];
+                        $voice_age = isset($voice_meta_group['voice_age']) ? $voice_meta_group['voice_age'] : '';
+                        $voice_gender = isset($voice_meta_group['voice_gender']) ? $voice_meta_group['voice_gender'] : '';
+                      }
+                      ?>
 
-                        <p class="voice-card__age"><?php if ($voice_age) : ?><?php echo $voice_age; ?><?php endif; ?><?php if ($voice_gender) : ?>&lpar;<?php echo $voice_gender; ?>&rpar;<?php endif; ?></p>
+                      <p class="voice-card__age"><?php if ($voice_age) : ?><?php echo $voice_age; ?><?php endif; ?><?php if ($voice_gender) : ?>&lpar;<?php echo $voice_gender; ?>&rpar;<?php endif; ?></p>
 
 
-                        <!-- get_the_terms の結果を変数に代入し、最初のカテゴリー名を表示 -->
-                        <?php $voice_category = get_the_terms(get_the_ID(), 'voice_category'); ?>
-                        <?php if (!empty($voice_category)) : ?>
-                          <p class="voice-card__category"><?php echo esc_html($voice_category[0]->name); ?></p>
-                        <?php endif; ?>
-                      </div>
-                      <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
-                    </div>
-                    <div class="voice-card__img colorbox">
-                      <?php if (get_the_post_thumbnail()) : ?>
-                        <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php echo $voice_age; ?><?php echo $voice_gender; ?>のアイキャッチ画像">
-                      <?php else : ?>
-                        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                      <!-- get_the_terms の結果を変数に代入し、最初のカテゴリー名を表示 -->
+                      <?php $voice_category = get_the_terms(get_the_ID(), 'voice_category'); ?>
+                      <?php if (!empty($voice_category)) : ?>
+                        <p class="voice-card__category"><?php echo esc_html($voice_category[0]->name); ?></p>
                       <?php endif; ?>
                     </div>
+                    <h3 class="voice-card__subtitle"><?php the_title(); ?></h3>
                   </div>
+                  <div class="voice-card__img colorbox">
+                    <?php if (get_the_post_thumbnail()) : ?>
+                      <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php echo $voice_age; ?><?php echo $voice_gender; ?>のアイキャッチ画像">
+                    <?php else : ?>
+                      <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/noimage.jpg" alt="noimage">
+                    <?php endif; ?>
+                  </div>
+                </div>
                 <div class="voice-card__text voice-card__text--top">
-                <?php
-                    $voice_content= get_field('voice_content');
-                      if (!empty($voice_content)) {
-                        echo '<div class="voice-content">';
-                        echo nl2br(esc_html($voice_content)); // テキストのエスケープ処理と改行の変換
-                        echo '</div>';
-                      }
-                    ?>
+                  <?php
+                  $voice_content = get_field('voice_content');
+                  if (!empty($voice_content)) {
+                    echo '<div class="voice-content">';
+                    echo nl2br(esc_html($voice_content)); // テキストのエスケープ処理と改行の変換
+                    echo '</div>';
+                  }
+                  ?>
                 </div>
               </div>
             </li>

@@ -354,23 +354,12 @@ function register_menu()
 function add_dashboard_widgets()
 {
     wp_add_dashboard_widget(
-        'blog_dashboard_widget', // ウィジェットのスラッグ名
-        'ブログ', // ウィジェットに表示するタイトル
-        'blog_dashboard_widget_function' // 実行する関数
+        'quick_action_dashboard_widget', // ウィジェットのスラッグ名
+        '新規投稿', // ウィジェットに表示するタイトル
+        'dashboard_widget_function' // 実行する関数
     );
 
-    wp_add_dashboard_widget(
-        'campaign_dashboard_widget', // ウィジェットのスラッグ名
-        'キャンペーン', // ウィジェットに表示するタイトル
-        'campaign_dashboard_widget_function' // 実行する関数
-    );
-
-    wp_add_dashboard_widget(
-        'voice_dashboard_widget', // ウィジェットのスラッグ名
-        'お客様の声', // ウィジェットに表示するタイトル
-        'voice_dashboard_widget_function' // 実行する関数
-    );
-
+    // 新しいウィジェットを追加する場合
     wp_add_dashboard_widget(
         'new_dashboard_widget', // 新しいウィジェットのスラッグ名
         'その他編集', // ウィジェットに表示するタイトル
@@ -379,59 +368,22 @@ function add_dashboard_widgets()
 }
 add_action('wp_dashboard_setup', 'add_dashboard_widgets');
 
-function blog_dashboard_widget_function()
+function dashboard_widget_function()
 {
 ?>
     <ul class="quick-action">
         <?php if (current_user_can('administrator')) : ?>
+
             <li>
-                <a href="<?php echo admin_url() . 'edit.php'; ?>" class="quick-action-button">
-                    <span class="dashicons-before dashicons-admin-customizer dashicons-admin-customizer--icon"></span>
-                    ブログ一覧
-                </a>
-            </li>
-            <li>
-                <a href="<?php echo admin_url() . 'post-new.php'; ?>" class="quick-action-button">
+                <a href="<?php echo admin_url() . 'post-new.php'; ?>" target="_blank" class="quick-action-button">
                     <span class="dashicons-before dashicons-admin-customizer"></span>
                     ブログ新規作成
-                </a>
-            </li>
-        <?php endif; ?>
-    </ul>
-<?php
-}
-
-function campaign_dashboard_widget_function()
-{
-?>
-    <ul class="quick-action">
-        <?php if (current_user_can('administrator')) : ?>
-            <li>
-                <a href="<?php echo admin_url() . 'edit.php?post_type=campaign'; ?>" class="quick-action-button">
-                    <span class="dashicons-before dashicons-admin-customizer dashicons-admin-customizer--icon"></span>
-                    キャンペーン一覧
                 </a>
             </li>
             <li>
                 <a href="<?php echo admin_url() . 'post-new.php?post_type=campaign'; ?>" class="quick-action-button">
                     <span class="dashicons-before dashicons-admin-customizer"></span>
                     キャンペーン新規作成
-                </a>
-            </li>
-        <?php endif; ?>
-    </ul>
-<?php
-}
-
-function voice_dashboard_widget_function()
-{
-?>
-    <ul class="quick-action">
-        <?php if (current_user_can('administrator')) : ?>
-            <li>
-                <a href="<?php echo admin_url() . 'edit.php?post_type=voice'; ?>" class="quick-action-button">
-                    <span class="dashicons-before dashicons-admin-customizer dashicons-admin-customizer--icon"></span>
-                    お客様の声一覧
                 </a>
             </li>
             <li>
@@ -466,7 +418,7 @@ function new_dashboard_widget_function()
             <li>
                 <a href="<?php echo admin_url() . 'post.php?post=30&action=edit'; ?>" class="quick-action-button">
                     <span class="dashicons-before dashicons-admin-customizer"></span>
-                    私たちについて
+                    ギャラリー
                 </a>
             </li>
             <li>
@@ -517,7 +469,7 @@ add_filter('manage_voice_posts_columns', 'customize_manage_posts_columns'); // �
 function customize_manage_posts_custom_column($column_name, $post_id)
 {
     if ('thumbnail' == $column_name) {
-        $thum = get_the_post_thumbnail($post_id, 'small', array('style' => 'width:100px;height:75px;object-fit: cover;'));
+        $thum = get_the_post_thumbnail($post_id, 'small', array('style' => 'width:100px;height:70px;'));
     }
     if (isset($thum) && $thum) {
         echo $thum;
@@ -532,108 +484,127 @@ add_action('manage_voice_posts_custom_column', 'customize_manage_posts_custom_co
 /*================================================================
     カスタムフィールドのテキストを投稿タイトルとして反映
 ================================================================*/
+// タイトルを更新する関数
+function update_post_title($post_id, $new_title) {
+    if (empty($new_title)) return;
+
+    // 一時的にフックを解除して無限ループを防ぐ
+    remove_action('save_post', 'auto_title');
+    wp_update_post(array(
+        'ID' => $post_id,
+        'post_title' => $new_title,
+        'post_name' => sanitize_title($new_title),
+    ));
+    add_action('save_post', 'auto_title');
+}
+
 // 自動タイトル設定
-function auto_title($post_id)
-{
-    // 投稿タイプ判定
+function auto_title($post_id) {
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+
     $post_type = get_post_type($post_id);
-
-    // 'voice' の場合の処理
     if ($post_type == 'voice') {
-        // 必要な情報の取得
-        $voice_group = get_field('voice_group', $post_id);
-        if ($voice_group) {
-            $voice_meta_group = $voice_group['voice_meta_group']; // 'voice_meta_group' フィールドの値を取得
-            if ($voice_meta_group) {
-                $sub_title = $voice_meta_group['voice_title']; // 'voice_title' フィールドの値を取得
-
-                // タイトルの生成
-                $post_title = $sub_title;
-                if (!empty($post_title)) { // タイトルが空でない場合
-                    $post_name = sanitize_title($post_title); // スラッグの生成
-
-                    // 投稿情報の設定
-                    $post = array(
-                        'ID' => $post_id,
-                        'post_name' => $post_name,
-                        'post_title' => $post_title
-                    );
-
-                    // フックを一時的に解除して無限ループを防止
-                    remove_action('save_post', 'auto_title');
-
-                    // 投稿情報の更新
-                    wp_update_post($post);
-
-                    // フックを再追加
-                    add_action('save_post', 'auto_title');
-                }
-            }
-        }
-    }
-
-    // 'campaign' の場合の処理
-    elseif ($post_type == 'campaign') {
-        // campaign_title フィールドから値を取得
-        $campaign_title = get_field('campaign_title', $post_id);
-
-        if (!empty($campaign_title)) { // タイトルが空でない場合
-            $post_name = sanitize_title($campaign_title); // スラッグの生成
-
-            // 投稿情報の設定
-            $post = array(
-                'ID' => $post_id,
-                'post_name' => $post_name,
-                'post_title' => $campaign_title
-            );
-
-            // フックを一時的に解除して無限ループを防止
-            remove_action('save_post', 'auto_title');
-
-            // 投稿情報の更新
-            wp_update_post($post);
-
-            // フックを再追加
-            add_action('save_post', 'auto_title');
-        }
+        $voice_title = get_field('voice_group', $post_id)['voice_meta_group']['voice_title'] ?? '';
+        update_post_title($post_id, $voice_title);
+    } elseif ($post_type == 'campaign') {
+        $campaign_title = get_field('campaign_title', $post_id) ?? '';
+        update_post_title($post_id, $campaign_title);
     }
 }
 
 // 投稿が保存される際に自動でタイトルを設定
 add_action('save_post', 'auto_title');
 
+
 /*================================================================
     カスタムフィールドの画像をアイキャッチとして反映
 ================================================================*/
-function acf_set_featured_image($post_id)
-{
-    // 投稿タイプが 'voice' または 'campaign' の場合
+function acf_set_featured_image($post_id) {
     $post_type = get_post_type($post_id);
-    if ($post_type !== 'voice' && $post_type !== 'campaign') {
-        return;
-    }
 
-    if ($post_type === 'voice') {
-        // voice の場合、グループフィールドから画像を取得
-        $voice_group = get_field('voice_group', $post_id);
-        if ($voice_group) {
-            $image_id = $voice_group['voice_img']; // voice の画像フィールド
-        }
-    } elseif ($post_type === 'campaign') {
-        // campaign の場合、画像フィールドを直接取得
-        $image_id = get_field('campaign_img', $post_id); // campaign の画像フィールド
-    }
+    // 'voice' または 'campaign' 以外は処理しない
+    if ($post_type !== 'voice' && $post_type !== 'campaign') return;
 
-    // 画像が存在する場合はアイキャッチ画像を設定、存在しない場合はアイキャッチ画像を削除
-    if (isset($image_id) && $image_id) {
-        set_post_thumbnail($post_id, $image_id);
-    } else {
-        delete_post_thumbnail($post_id);
-    }
+    // 画像を取得
+    $image_id = ($post_type === 'voice') 
+        ? get_field('voice_group', $post_id)['voice_img'] ?? ''  // voice の画像
+        : get_field('campaign_img', $post_id);                    // campaign の画像
+
+    // 画像があればアイキャッチ画像を設定、なければ削除
+    $image_id ? set_post_thumbnail($post_id, $image_id) : delete_post_thumbnail($post_id);
 }
 
 // 投稿が保存される際にアイキャッチ画像を設定
 add_action('save_post', 'acf_set_featured_image');
+
+/*================================================================
+    カスタムフィールドのカテゴリを投稿カテゴリとして反映
+================================================================*/
+add_action('save_post', 'set_custom_taxonomy_from_acf');
+
+function set_custom_taxonomy_from_acf($post_id)
+{
+    // 自動保存や下書きの場合は処理をスキップ
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // 投稿タイプが 'voice' かチェック
+    if (get_post_type($post_id) !== 'voice') {
+        return;
+    }
+
+    // ACFからグループフィールド内のカスタムフィールドの値を取得
+    $voice_info = get_field('voice_group', $post_id);
+    $custom_category = !empty($voice_info['voice_meta_group']['custom_category']) ? $voice_info['voice_meta_group']['custom_category'] : '';
+
+    // デバッグ用のログ出力
+    error_log('Custom Category: ' . print_r($custom_category, true));
+
+    // カスタムフィールドの値が空でない場合
+    if (!empty($custom_category)) {
+        // タクソノミー（voice_category）が存在するかチェック
+        $term = term_exists($custom_category, 'voice_category');
+
+        if (!$term) {
+            // タクソノミーが存在しない場合は新しく作成
+            $term = wp_insert_term($custom_category, 'voice_category');
+        }
+
+        // 投稿にタクソノミーを追加
+        if (!is_wp_error($term)) {
+            wp_set_post_terms($post_id, array($term['term_id']), 'voice_category', false);
+        } else {
+            // エラーが発生した場合はログに記録
+            error_log($term->get_error_message());
+        }
+    }
+}
+
+/*================================================================
+    投稿カテゴリを追加した場合カスタムフィールドにも追加される
+================================================================*/
+add_filter('acf/load_field/name=custom_category', 'populate_custom_category_with_voice_category');
+
+function populate_custom_category_with_voice_category($field)
+{
+    // voice_category タクソノミーからすべての項目を取得
+    $terms = get_terms(array(
+        'taxonomy' => 'voice_category',
+        'hide_empty' => false, // 空のタクソノミーも含む
+    ));
+
+    // 取得した項目を ACF フィールドの選択肢に追加
+    if (!is_wp_error($terms) && !empty($terms)) {
+        $field['choices'] = array(); // 選択肢を初期化
+
+        foreach ($terms as $term) {
+            $field['choices'][$term->slug] = $term->name;
+        }
+    }
+
+    return $field;
+}
 
 /*================================================================
     VOICE投稿ページの幅の変更を設定
@@ -645,33 +616,24 @@ function custom_admin_styles()
     if (($screen->post_type === 'voice' || $screen->post_type === 'campaign') && $screen->base === 'post') {
         echo '<style>
             /* voice投稿ページの追加スタイル */
-            #post-body-content {
-            margin-bottom: 0;
-            }
             #wpbody {
                 max-width: 1200px; /* 幅を適宜変更 */
                 margin: 0 auto; /* 中央に配置する */
             }
-
-            #poststuff .voi_img img {
+            #poststuff .testimg .image-wrap {
+                max-width: 100% !important;
+            }
+            #poststuff .testimg img {
                 aspect-ratio: 180 / 140;
+                height: 100%;
                 object-fit: cover;
-
+                width: 100%;
+                height: 280px;
+                width: auto;
             }
             /* キャンペーン投稿ページの追加スタイル */
             .post-type-campaign #wpbody {
                 /* 追加のスタイルをここに記述 */
-            }
-
-                        .post-type-campaign .acf-image-uploader {
-                display: flex;
-                justify-content: center;
-            }
-                
-            #poststuff .cam_img img {
-                aspect-ratio: 333 / 233;
-                object-fit: cover;
-                width: 100%;
             }
 
         </style>';

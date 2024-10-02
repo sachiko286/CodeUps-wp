@@ -129,15 +129,14 @@
                   <p class="campaign-card__title campaign-card__title--aside"><?php the_title(); ?></p>
                   <p class="campaign-card__text campaign-card__text--aside">全部コミコミ(お一人様)</p>
                   <div class="campaign-card__price campaign-card__price--aside">
-                    <?php $price_1 = get_field('price_1'); ?>
-                    <?php if ($price_1) : ?>
+                    <?php $campaign_price = get_field('campaign_price'); ?>
+                    <?php if ($campaign_price && $campaign_price['price_1'] && $campaign_price['price_2']) : ?>
                       <p class="campaign-card__price-original campaign-card__price-original--aside">
-                        <span><?php echo esc_html($price_1); ?></span>
+                        <span>&yen;<?php echo number_format($campaign_price['price_1']); ?></span>
                       </p>
-                    <?php endif; ?>
-                    <?php $price_2 = get_field('price_2'); ?>
-                    <?php if ($price_2) : ?>
-                      <p class="campaign-card__price-discount campaign-card__price-discount--aside"><?php echo esc_html($price_2); ?></p>
+                      <p class="campaign-card__price-discount campaign-card__price-discount--aside">
+                        &yen;<?php echo number_format($campaign_price['price_2']); ?>
+                      </p>
                     <?php endif; ?>
                   </div>
                 </div>

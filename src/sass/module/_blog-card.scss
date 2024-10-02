@@ -55,32 +55,20 @@
 
 .blog-card__text {
   margin-top: rem(16);
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* 5行に制限 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   @include mq(md) {
       margin-top: rem(15);
   }
 }
 
-.blog-card__text--top {
-  display: -webkit-box;
-  -webkit-line-clamp: 5; /* 7行に制限 */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
 
-
-// .blog-card:hover {
-//   opacity: 0.9;
-// }
-.blog-card--hover-scale:hover {
-  opacity: 1;
-}
-.blog-card--hover-scale:hover img {
-  transform: scale(1.1);
-}
 
 .blog-card:hover {
   opacity: 1;
 }
-.blog-card:hover img {
+.blog-card:hover .blog-card__img img {
   transform: scale(1.1);
 }

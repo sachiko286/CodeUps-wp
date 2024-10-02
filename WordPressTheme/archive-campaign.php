@@ -70,7 +70,15 @@
                     </div>
                   </div>
                   <div class="campaign__wrapper u-desktop">
-                    <div class="campaign__text"><?php the_content(); ?></div>
+                    <div class="campaign__text">
+                      <?php
+                      $campaign_content = get_field('campaign_content');
+                      if (!empty($campaign_content)) {
+                        echo nl2br(esc_html($campaign_content)); // テキストのエスケープ処理と改行の変換
+                      }
+                      ?>
+                    </div>
+
                     <?php $campaign_period = get_field('campaign_period'); ?>
                     <?php if ($campaign_period && $campaign_period['period_start'] && $campaign_period['period_end']) : ?>
                       <p class="campaign__date"><?php echo esc_html($campaign_period['period_start']); ?> &#045; <?php echo esc_html($campaign_period['period_end']); ?></p>

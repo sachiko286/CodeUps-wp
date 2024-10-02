@@ -613,29 +613,18 @@ a {
 }
 
 .blog-card__text {
-	margin-top: 1rem;
-}
-
-.blog-card__text--top {
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 5; /* 7行に制限 */
+	-webkit-line-clamp: 5; /* 5行に制限 */
 	display: -webkit-box;
+	margin-top: 1rem;
 	overflow: hidden;
-}
-
-.blog-card--hover-scale:hover {
-	opacity: 1;
-}
-
-.blog-card--hover-scale:hover img {
-	transform: scale(1.1);
 }
 
 .blog-card:hover {
 	opacity: 1;
 }
 
-.blog-card:hover img {
+.blog-card:hover .blog-card__img img {
 	transform: scale(1.1);
 }
 
@@ -2269,6 +2258,12 @@ html.is-fixed {
 	padding-bottom: 0.1875rem;
 }
 
+.page-sub-blog__body h1,
+.page-sub-blog__body h2,
+.page-sub-blog__body h3,
+.page-sub-blog__body h4,
+.page-sub-blog__body h5,
+.page-sub-blog__body h6,
 .page-sub-blog__body p {
 	margin-top: 1.5rem;
 }
@@ -3095,11 +3090,12 @@ html {
 }
 
 .about-us__content {
-	bottom: 13.875rem;
 	display: flex;
 	max-width: 52.5rem;
 	position: absolute;
 	right: 2.5rem;
+	top: 10rem;
+	width: 100%;
 	z-index: 3;
 }
 
@@ -3848,6 +3844,12 @@ html {
 	padding-bottom: 0;
 }
 
+.page-sub-blog__body h1,
+.page-sub-blog__body h2,
+.page-sub-blog__body h3,
+.page-sub-blog__body h4,
+.page-sub-blog__body h5,
+.page-sub-blog__body h6,
 .page-sub-blog__body p {
 	margin-top: 2.5rem;
 }
